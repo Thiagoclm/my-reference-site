@@ -1,0 +1,71 @@
+---
+// src/components/SaintOfTheDay.astro
+const { saint } = Astro.props;
+---
+<section class="py-12">
+    <div class="inline-block mb-6">
+        <h2 class="text-sm font-bold text-blue-400 uppercase tracking-wider">Devoção</h2>
+    </div>
+    
+    <h3 class="text-3xl md:text-4xl font-serif font-bold mb-8 text-white">Santo do Dia</h3>
+    
+    <div class="bg-gray-900 border border-gray-800 rounded-xl overflow-hidden">
+        <div class="md:flex">
+            <!-- Imagem -->
+            <div class="md:w-1/3 flex-shrink-0 bg-gray-800 flex flex-col items-center justify-center">
+                <img 
+                    src={saint.image}
+                    alt={saint.name}
+                    class="w-full h-full object-contain p-4"
+                    loading="lazy"
+                />
+                {saint.imageCredit && (
+                    <div class="w-full px-4 py-3 bg-gray-950 text-center border-t border-gray-700">
+                        <p class="text-xs text-gray-500 leading-relaxed">
+                            <span class="text-blue-400 font-semibold">{saint.imageCredit.title}</span><br/>
+                            <span class="text-gray-600">Artista: {saint.imageCredit.artist}</span><br/>
+                            <span class="text-gray-600">Estilo: {saint.imageCredit.style}</span>
+                        </p>
+                    </div>
+                )}
+            </div>
+            
+            <!-- Conteúdo -->
+            <div class="p-8 md:w-2/3 flex flex-col justify-center">
+                <div class="mb-4">
+                    <p class="text-sm font-bold text-blue-400 uppercase tracking-wider mb-2">
+                        {saint.feastDay && `Festa: ${saint.feastDay}`}
+                    </p>
+                    <h4 class="text-4xl font-serif font-bold text-white mb-2">
+                        {saint.name}
+                    </h4>
+                    <p class="text-gray-400 text-sm">
+                        {saint.title && `${saint.title}`}
+                    </p>
+                </div>
+                
+                <div class="space-y-4 mb-6">
+                    {saint.history && saint.history.map((paragraph, index) => (
+                        <p key={index} class="text-gray-300 leading-relaxed">
+                            {paragraph}
+                        </p>
+                    ))}
+                </div>
+                
+                {saint.attributes && (
+                    <div class="pt-6 border-t border-gray-800">
+                        <p class="text-sm font-semibold text-blue-400 mb-3">Atributos e Devoções:</p>
+                        <ul class="space-y-2">
+                            {saint.attributes.map((attr) => (
+                                <li key={attr} class="flex items-start">
+                                    <span class="text-blue-400 mr-3 mt-0.5">✦</span>
+                                    <span class="text-gray-300">{attr}</span>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                )}
+            </div>
+        </div>
+    </div>
+</section>

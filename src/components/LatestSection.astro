@@ -1,0 +1,51 @@
+---
+// src/components/LatestSection.astro
+const { items } = Astro.props;
+---
+<section id="latest" class="py-12 border-t border-gray-800">
+    <div class="inline-block mb-6">
+        <h2 class="text-sm font-bold text-blue-400 uppercase tracking-wider">Mais Recentes</h2>
+    </div>
+    
+    <h3 class="text-3xl md:text-4xl font-serif font-bold mb-8 text-white">Últimas Publicações</h3>
+    
+    <div class="space-y-6">
+        {items && items.map((item, index) => (
+            <a href={item.link} class="group block pb-6 border-b border-gray-800 last:border-b-0">
+                <div class="flex gap-6">
+                    {item.image && (
+                        <div class="flex-shrink-0 w-32 h-32 rounded-lg overflow-hidden bg-gray-800 hidden sm:block">
+                            <img 
+                                src={item.image}
+                                alt={item.title}
+                                class="w-full h-full object-cover group-hover:opacity-90 transition"
+                                loading="lazy"
+                            />
+                        </div>
+                    )}
+                    <div class="flex-1 min-w-0">
+                        <p class="text-xs font-bold text-blue-400 uppercase tracking-wider mb-2">
+                            {item.type || 'Artigo'}
+                        </p>
+                        <h4 class="text-xl font-semibold line-clamp-2 text-white group-hover:text-blue-400 transition mb-2">
+                            {item.title}
+                        </h4>
+                        <p class="text-sm text-gray-400 line-clamp-2 mb-3">
+                            {item.summary}
+                        </p>
+                        <div class="flex items-center justify-between text-xs text-gray-500">
+                            <span>{item.author && `Por ${item.author}`}</span>
+                            <span>{item.date && new Date(item.date).toLocaleDateString('pt-BR')}</span>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        ))}
+    </div>
+
+    <div class="mt-8">
+        <a href="/artigos" class="inline-block bg-blue-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-blue-700 transition">
+            Ver Todos os Artigos →
+        </a>
+    </div>
+</section>

@@ -1,0 +1,185 @@
+---
+// src/components/SearchBar.astro
+---
+<div class="flex items-center gap-2">
+    <button 
+        id="searchButton"
+        class="text-gray-300 hover:text-white transition p-2"
+        aria-label="Abrir busca"
+        title="Buscar (Ctrl+K)"
+    >
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+        </svg>
+    </button>
+
+    <!-- Search Modal -->
+    <div 
+        id="searchModal" 
+        class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-start justify-center pt-20"
+    >
+        <div class="bg-gray-900 border border-gray-800 rounded-xl shadow-xl w-full max-w-2xl mx-4 overflow-hidden">
+            <!-- Search Input -->
+            <div class="p-6 border-b border-gray-800">
+                <div class="flex items-center gap-3">
+                    <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                    </svg>
+                    <input 
+                        id="searchInput"
+                        type="text"
+                        placeholder="Buscar artigos, recursos, santos..."
+                        class="w-full bg-gray-900 text-white text-lg focus:outline-none placeholder-gray-500"
+                        autocomplete="off"
+                    />
+                    <button 
+                        id="closeSearch"
+                        class="text-gray-400 hover:text-white transition"
+                        aria-label="Fechar busca"
+                    >
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Search Results -->
+            <div id="searchResults" class="max-h-96 overflow-y-auto">
+                <div class="p-6 text-center text-gray-400">
+                    <p>Comece a digitar para buscar...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    #searchModal:not(.hidden) {
+        display: flex;
+    }
+
+    #searchResults {
+        scrollbar-width: thin;
+        scrollbar-color: rgba(59, 130, 246, 0.5) rgba(17, 24, 39, 1);
+    }
+
+    #searchResults::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    #searchResults::-webkit-scrollbar-track {
+        background: rgba(17, 24, 39, 1);
+    }
+
+    #searchResults::-webkit-scrollbar-thumb {
+        background: rgba(59, 130, 246, 0.5);
+        border-radius: 3px;
+    }
+
+    #searchResults::-webkit-scrollbar-thumb:hover {
+        background: rgba(59, 130, 246, 0.7);
+    }
+</style>
+
+<script>
+    // Pagefind Search Integration
+    const searchButton = document.getElementById('searchButton');
+    const searchModal = document.getElementById('searchModal');
+    const closeSearch = document.getElementById('closeSearch');
+    const searchInput = document.getElementById('searchInput');
+    const searchResults = document.getElementById('searchResults');
+
+    let pagefind: any = null;
+
+    // Initialize Pagefind
+    async function initPagefind() {
+        if (typeof window !== 'undefined' && !pagefind) {
+            try {
+                pagefind = await (window as any).pagefind;
+                if (!pagefind) {
+                    console.log('Pagefind not initialized. It will be available after build.');
+                }
+            } catch (e) {
+                console.log('Pagefind not available in development mode. Will work after build.');
+            }
+        }
+    }
+
+    // Open/Close search modal
+    searchButton?.addEventListener('click', () => {
+        searchModal.classList.remove('hidden');
+        searchInput?.focus();
+        initPagefind();
+    });
+
+    closeSearch?.addEventListener('click', () => {
+        searchModal.classList.add('hidden');
+        searchInput!.value = '';
+        searchResults!.innerHTML = '<div class="p-6 text-center text-gray-400"><p>Comece a digitar para buscar...</p></div>';
+    });
+
+    // Close on Escape
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            searchModal.classList.add('hidden');
+        }
+        // Open search with Ctrl+K or Cmd+K
+        if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+            e.preventDefault();
+            searchModal.classList.remove('hidden');
+            searchInput?.focus();
+            initPagefind();
+        }
+    });
+
+    // Close modal when clicking outside
+    searchModal?.addEventListener('click', (e) => {
+        if (e.target === searchModal) {
+            searchModal.classList.add('hidden');
+        }
+    });
+
+    // Search functionality
+    searchInput?.addEventListener('input', async (e) => {
+        const query = (e.target as HTMLInputElement).value.trim();
+
+        if (!query) {
+            searchResults!.innerHTML = '<div class="p-6 text-center text-gray-400"><p>Comece a digitar para buscar...</p></div>';
+            return;
+        }
+
+        if (!pagefind) {
+            await initPagefind();
+        }
+
+        if (!pagefind) {
+            searchResults!.innerHTML = '<div class="p-6 text-center text-gray-400"><p>Busca disponível apenas após build da produção.</p></div>';
+            return;
+        }
+
+        try {
+            const results = await pagefind.search(query);
+            
+            if (results.results.length === 0) {
+                searchResults!.innerHTML = '<div class="p-6 text-center text-gray-400"><p>Nenhum resultado encontrado para "<strong>' + query + '</strong>"</p></div>';
+                return;
+            }
+
+            let html = '';
+            for (const result of results.results) {
+                const data = await result.data();
+                html += `
+                    <a href="${data.url}" class="block px-6 py-4 border-b border-gray-800 hover:bg-gray-800 transition">
+                        <h3 class="text-white font-semibold mb-1">${data.title}</h3>
+                        <p class="text-gray-400 text-sm line-clamp-2">${data.excerpt}</p>
+                    </a>
+                `;
+            }
+            searchResults!.innerHTML = html;
+        } catch (error) {
+            console.error('Erro na busca:', error);
+            searchResults!.innerHTML = '<div class="p-6 text-center text-gray-400"><p>Erro ao buscar. Tente novamente.</p></div>';
+        }
+    });
+</script>

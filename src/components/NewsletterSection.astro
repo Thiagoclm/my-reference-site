@@ -1,0 +1,28 @@
+---
+// src/components/NewsletterSection.astro
+---
+<section class="py-12 bg-gradient-to-r from-blue-900 to-blue-800 rounded-xl">
+    <div class="max-w-2xl mx-auto px-6 text-center">
+        <h2 class="text-3xl font-serif font-bold mb-3 text-white">Fique Atualizado</h2>
+        <p class="text-gray-200 mb-6">
+            Inscreva-se para receber as recomendações mais recentes diretamente no seu email.
+        </p>
+        <form class="flex gap-2 flex-col sm:flex-row">
+            <input 
+                type="email"
+                placeholder="Seu email..."
+                required
+                class="flex-1 px-4 py-3 rounded-lg border border-gray-700 bg-gray-900 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            />
+            <button 
+                type="submit"
+                class="bg-white text-blue-900 px-6 py-3 rounded-lg font-medium hover:bg-gray-100 transition whitespace-nowrap"
+            >
+                Inscrever-se
+            </button>
+        </form>
+        <p class="text-xs text-gray-300 mt-3">
+            Sem spam. Você pode se desinscrever a qualquer momento.
+        </p>
+    </div>
+</section>

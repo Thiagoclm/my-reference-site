@@ -1,0 +1,134 @@
+---
+import Layout from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
+import FeaturedSection from '../components/FeaturedSection.astro';
+import LatestSection from '../components/LatestSection.astro';
+import NewsletterSection from '../components/NewsletterSection.astro';
+import SaintOfTheDay from '../components/SaintOfTheDay.astro';
+
+// Exemplo de dados. Você pode carregar do seu sistema de conteúdo depois
+const featuredItems = [
+    {
+        title: "Como Aprofundar sua Fé",
+        type: "Artigo",
+        author: "Thiago",
+        image: "/assets/cover-example.jpg",
+        link: "/recurso/exemplo-livro",
+    },
+    {
+        title: "Catholicism: Uma Jornada ao Coração da Fé",
+        type: "Livro",
+        author: "Bishop Robert Barron",
+        image: "https://bookstore.wordonfire.org/cdn/shop/files/2508_Catholicism_2nd-Edition_A__SQUARE-1000x1000_MT-2.jpg?v=1758313508&width=500",
+        link: "/livros/catholicism",
+    },
+    {
+        title: "Palavra do Dia - Evangelho",
+        type: "Leitura",
+        author: "Vatican News",
+        image: "/assets/four_evangelists.jpg",
+        link: "/palavra-do-dia",
+    },
+];
+
+const latestItems = [
+    {
+        title: "Livro exemplo",
+        type: "Artigo",
+        author: "Thiago",
+        date: new Date().toISOString(),
+        summary: "Uma descrição detalhada sobre o tema abordado neste artigo interessante.",
+        image: "/assets/cover-example.jpg",
+        link: "/recurso/exemplo-livro",
+    },
+    {
+        title: "Outro Recurso Importante",
+        type: "Recurso",
+        author: "Thiago",
+        date: new Date(Date.now() - 86400000).toISOString(),
+        summary: "Explore este recurso valioso que pode enriquecer sua jornada espiritual.",
+        image: "/assets/cover-example.jpg",
+        link: "#",
+    },
+    {
+        title: "Mais um Título Relevante",
+        type: "Artigo",
+        author: "Thiago",
+        date: new Date(Date.now() - 172800000).toISOString(),
+        summary: "Conheça as perspectivas mais recentes sobre este importante tópico.",
+        image: "/assets/cover-example.jpg",
+        link: "#",
+    },
+];
+
+const saintOfTheDay = {
+    name: "São José",
+    title: "Esposo da Virgem Maria, Protetor da Igreja",
+    feastDay: "19 de Março",
+    image: "/assets/saint-joseph.jpg",
+    imageCredit: {
+        title: "Saint Joseph with the child Jesus",
+        artist: "Bartolomé Esteban Perez Murillo (1618 - 1682)",
+        style: "Baroque"
+    },
+    history: [
+        "São José foi o protetor e padrasto de Jesus Cristo, escolhido por Deus para cuidar de sua Mãe e de seu Filho. Embora poucos detalhes sobre sua vida nos sejam conhecidos através dos Evangelhos, a Tradição da Igreja nos revela um homem de profunda fé e virtude.",
+        "Descendente da linhagem real de Davi, José era carpinteiro de profissão, um trabalho respeitável e dignificado. Sua vida foi marcada pelo trabalho, dedicação e entrega total à vontade de Deus. Casado com Maria, viveu em Nazaré mantendo a Sagrada Família com seu labor honesto.",
+        "Como protetor da Sagrada Família, José demonstrou seu amor através de atos concretos: protegeu Maria de qualquer acusação injusta, educou Jesus nos costumes judeus e nas habilidades de um carpinteiro, e fugiu para o Egito para salvar o Menino Jesus da perseguição de Herodes.",
+        "A morte de São José é cercada de amor de Jesus e Maria. Considerado protetor dos moribundos, invocamos sua intercessão para obter uma boa morte. A Igreja celebra sua festa no dia 19 de Março, quando recordamos suas virtudes de castidade, obediência e justiça."
+    ],
+    attributes: [
+        "Protetor da Igreja Católica",
+        "Padroeiro dos trabalhadores",
+        "Intercessor dos moribundos",
+        "Modelo de paternidade responsável",
+        "Exemplo de humildade e silêncio contemplativo",
+        "Protetor da Sagrada Família e do lar cristão"
+    ]
+};
+---
+
+<Layout title="Página Inicial">
+    <!-- Hero Section -->
+    <Hero 
+        title="Curadorias e Leituras Recomendadas" 
+        subtitle="Uma seleção cuidadosa de artigos, livros e vídeos para enriquecer seu conhecimento e fé." 
+        image="/assets/cover-example.jpg" 
+    />
+
+    <!-- Featured Section -->
+    <FeaturedSection items={featuredItems} />
+
+    <!-- Saint of the Day Section -->
+    <SaintOfTheDay saint={saintOfTheDay} />
+
+    <!-- Newsletter Section -->
+    <NewsletterSection />
+
+    <!-- Latest Section -->
+    <LatestSection items={latestItems} />
+
+    <!-- Call to Action Section -->
+    <section class="py-12 border-t border-gray-800">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="bg-gray-900 p-8 rounded-lg border border-gray-800">
+                <h3 class="text-2xl font-serif font-bold mb-4 text-white">Explore Recursos</h3>
+                <p class="text-gray-300 mb-6">
+                    Navegue por nossa coleção organizada de livros, artigos e recomendações selecionados com cuidado.
+                </p>
+                <a href="#recursos" class="text-blue-400 font-medium hover:text-blue-300 transition">
+                    Ver Todos os Recursos →
+                </a>
+            </div>
+            <div class="bg-blue-900 p-8 rounded-lg border border-blue-800">
+                <h3 class="text-2xl font-serif font-bold mb-4 text-white">Declaração de Missão</h3>
+                <p class="text-gray-300 mb-6">
+                    Saiba mais sobre nossa missão de iluminar a harmonia entre a Razão e a Fé, conectando ciência e espiritualidade católica.
+                </p>
+                <a href="/missao" class="text-blue-400 font-medium hover:text-blue-300 transition">
+                    Leia Nossa Missão →
+                </a>
+            </div>
+        </div>
+    </section>
+</Layout>

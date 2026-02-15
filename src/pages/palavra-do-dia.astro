@@ -1,0 +1,142 @@
+---
+// src/pages/palavra-do-dia.astro
+import Layout from '../layouts/Base.astro';
+---
+
+<Layout title="Palavra do Dia">
+    <div class="max-w-4xl mx-auto">
+        <!-- Header -->
+        <div class="mb-12">
+            <div class="inline-block mb-6">
+                <h2 class="text-sm font-bold text-blue-400 uppercase tracking-wider">Leitura Diária</h2>
+            </div>
+            <h1 class="text-4xl md:text-5xl font-serif font-bold text-white mb-4">Palavra do Dia</h1>
+            <p class="text-xl text-gray-300">
+                O Evangelho de cada dia trazido diretamente do Vaticano. Medite a Palavra de Deus e aprofunde sua fé.
+            </p>
+        </div>
+
+        <!-- Daily Gospel Container -->
+        <div class="bg-gray-900 border border-gray-800 rounded-xl overflow-hidden mb-12">
+            <!-- Header Info -->
+            <div class="bg-gradient-to-r from-blue-900 to-blue-800 p-8 text-center">
+                <p class="text-blue-200 text-sm mb-2">
+                    Data de hoje: <span class="font-semibold">{new Date().toLocaleDateString('pt-BR', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</span>
+                </p>
+                <h2 class="text-2xl font-serif font-bold text-white">
+                    O Evangelho Segundo o Vaticano News
+                </h2>
+            </div>
+
+            <!-- Content -->
+            <div class="p-8">
+                <div class="space-y-8">
+                    <!-- Reading Sections -->
+                    <div class="border-l-4 border-blue-400 pl-6 py-4">
+                        <h3 class="text-blue-400 font-bold uppercase text-sm mb-3 tracking-wider">Primeira Leitura</h3>
+                        <p class="text-gray-400 text-sm mb-4 italic">
+                            Acesse o Vatican News para ver a leitura completa do dia
+                        </p>
+                    </div>
+
+                    <div class="border-l-4 border-blue-400 pl-6 py-4">
+                        <h3 class="text-blue-400 font-bold uppercase text-sm mb-3 tracking-wider">Segunda Leitura</h3>
+                        <p class="text-gray-400 text-sm mb-4 italic">
+                            Acesse o Vatican News para ver a leitura completa do dia
+                        </p>
+                    </div>
+
+                    <div class="border-l-4 border-green-400 pl-6 py-4 bg-gray-800 rounded-r-lg">
+                        <h3 class="text-green-400 font-bold uppercase text-sm mb-3 tracking-wider">✦ Evangelho do Dia</h3>
+                        <p class="text-gray-300 mb-4">
+                            "Venho que a minha alegria esteja em vós, e a vossa alegria seja completa." 
+                            <span class="text-gray-400 text-sm italic block mt-2">— João 15:11</span>
+                        </p>
+                        <p class="text-gray-400 text-sm">
+                            Para conhecer o Evangelho completo de hoje, clique no botão abaixo.
+                        </p>
+                    </div>
+
+                    <div class="border-l-4 border-blue-400 pl-6 py-4">
+                        <h3 class="text-blue-400 font-bold uppercase text-sm mb-3 tracking-wider">Reflexão - Palavras do Papa</h3>
+                        <p class="text-gray-400 text-sm mb-4 italic">
+                            Meditações do Santo Padre sobre o Evangelho do dia
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CTA to Vatican News -->
+        <section class="bg-gradient-to-r from-green-900 to-green-800 rounded-xl p-10 text-center mb-12">
+            <h2 class="text-3xl font-serif font-bold text-white mb-4">
+                Leia o Evangelho Completo
+            </h2>
+            <p class="text-green-100 mb-8 text-lg">
+                Acesse o Vatican News para a leitura completa de hoje, incluindo a Primeira Leitura, Segunda Leitura, Evangelho, e as Palavras do Papa.
+            </p>
+            <a 
+                href="https://www.vaticannews.va/pt/palavra-do-dia.html"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-block bg-white text-green-900 px-8 py-4 rounded-lg font-bold hover:bg-gray-100 transition text-lg"
+            >
+                → Ir para Vatican News - Palavra do Dia
+            </a>
+        </section>
+
+        <!-- Why Read Daily Gospel -->
+        <section class="mb-12">
+            <h2 class="text-3xl font-serif font-bold text-white mb-8">Por que ler a Palavra do Dia?</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-gray-900 border border-gray-800 p-6 rounded-lg">
+                    <h3 class="text-blue-400 font-bold text-lg mb-4">✦ Crescimento Espiritual</h3>
+                    <p class="text-gray-300 leading-relaxed">
+                        Meditando diariamente a Palavra de Deus, você aprofunda sua relação com Cristo e cresce em fé.
+                    </p>
+                </div>
+                <div class="bg-gray-900 border border-gray-800 p-6 rounded-lg">
+                    <h3 class="text-blue-400 font-bold text-lg mb-4">✦ Força para o Dia</h3>
+                    <p class="text-gray-300 leading-relaxed">
+                        A Palavra de Deus oferece consolo, sabedoria e esperança para enfrentar os desafios diários.
+                    </p>
+                </div>
+                <div class="bg-gray-900 border border-gray-800 p-6 rounded-lg">
+                    <h3 class="text-blue-400 font-bold text-lg mb-4">✦ Comunhão Eclesial</h3>
+                    <p class="text-gray-300 leading-relaxed">
+                        Ao ler a mesma Palavra do dia, você se une a milhões de católicos ao redor do mundo.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- About this Section -->
+        <section class="bg-gray-900 border border-gray-800 rounded-lg p-8">
+            <h2 class="text-2xl font-serif font-bold text-white mb-4">Sobre esta Seção</h2>
+            <p class="text-gray-300 leading-relaxed mb-4">
+                "Palavra do Dia" leva você ao Evangelho diário da Santa Igreja Católica. Cada dia, um novo ensinamento de Jesus Cristo e uma reflexão do Papa para guiar sua jornada espiritual.
+            </p>
+            <p class="text-gray-300 leading-relaxed">
+                As leituras e reflexões são atualizado diariamente pelo <strong className="text-white">Vatican News</strong>, o portal oficial de notícias da Santa Sé. Acesse o link acima para a leitura completa, incluindo:
+            </p>
+            <ul class="mt-4 space-y-2 text-gray-300">
+                <li class="flex items-start">
+                    <span class="text-blue-400 mr-3 mt-1">•</span>
+                    <span><strong>Primeira Leitura:</strong> Do Antigo Testamento ou Atos dos Apóstolos</span>
+                </li>
+                <li class="flex items-start">
+                    <span class="text-blue-400 mr-3 mt-1">•</span>
+                    <span><strong>Segunda Leitura:</strong> Das Cartas Apostólicas</span>
+                </li>
+                <li class="flex items-start">
+                    <span class="text-blue-400 mr-3 mt-1">•</span>
+                    <span><strong>Evangelho do Dia:</strong> De um dos quatro evangelistas</span>
+                </li>
+                <li class="flex items-start">
+                    <span class="text-blue-400 mr-3 mt-1">•</span>
+                    <span><strong>Palavras do Papa:</strong> Uma reflexão do Papa sobre o Evangelho</span>
+                </li>
+            </ul>
+        </section>
+    </div>
+</Layout>

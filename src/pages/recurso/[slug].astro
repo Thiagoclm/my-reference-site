@@ -1,0 +1,64 @@
+---
+const {slug} = Astro.params;
+layout: '../../layouts/Base.astro'
+title: slug
+import Base from '../../layouts/Base.astro';
+import fs from 'fs';
+import path from 'path';
+import MarkdownIt from 'markdown-it';
+import matter from 'gray-matter';
+
+const md = new MarkdownIt();
+
+export async function getStaticPaths() {
+    const contentPath = path.resolve('./content');
+    const paths = [];
+
+    function walk(dir) {
+        for (const f of fs.readdirSync(dir)) {
+            const full = path.join(dir, f);
+            if (fs.statSync(full).isDirectory()) {
+                walk(full);
+            } else if (f.endsWith('.md')) {
+                const slug = path.basename(f, '.md');
+                paths.push({ params: { slug } });
+            }
+        }
+    }
+    walk(contentPath);
+    return paths;
+}
+
+const contentPath = path.resolve('./content');
+
+function findFile(slug){
+    const walk = (dir)=>{
+        for (const f of fs.readdirSync(dir)){
+            const full = path.join(dir,f);
+            if (fs.statSync(full).isDirectory()){
+                const r=walk(full);
+                if (r) return r;
+            } else if (f === `${slug}.md`){
+                return full;
+            }
+        }
+        return null;
+    }
+    return walk(contentPath);
+}
+
+const file = findFile(slug);
+let html = '<p>Recurso não encontrado.</p>';
+let cover = '';
+if (file){
+    const fileContent = fs.readFileSync(file,'utf-8');
+    const { data, content } = matter(fileContent);
+    html = md.render(content);
+    cover = data.cover || '';
+}
+---
+
+<article class="prose py-8">
+    {cover && <img src={cover} alt="Cover" class="w-full h-64 object-cover mb-4" />}
+    <div set:html={html} />
+</article>

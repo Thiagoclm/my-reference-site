@@ -1,0 +1,37 @@
+---
+// src/components/FeaturedSection.astro
+const { items } = Astro.props;
+---
+<section id="featured" class="py-12">
+    <div class="inline-block mb-6">
+        <h2 class="text-sm font-bold text-blue-400 uppercase tracking-wider">Destaque</h2>
+    </div>
+    
+    <h3 class="text-3xl md:text-4xl font-serif font-bold mb-8 text-white">Conteúdo em Destaque</h3>
+    
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {items && items.map((item) => (
+            <a href={item.link} class="group block">
+                <div class="mb-4 rounded-lg overflow-hidden bg-gray-800 flex items-center justify-center h-72">
+                    <img 
+                        src={item.image || '/assets/cover-example.jpg'} 
+                        alt={item.title}
+                        class="w-full h-full object-cover group-hover:opacity-90 transition"
+                        loading="lazy"
+                    />
+                </div>
+                <div class="space-y-2">
+                    <p class="text-xs font-bold text-blue-400 uppercase tracking-wider">
+                        {item.type || 'Artigo'}
+                    </p>
+                    <h4 class="text-lg font-semibold line-clamp-2 text-white group-hover:text-blue-400 transition">
+                        {item.title}
+                    </h4>
+                    <p class="text-sm text-gray-400">
+                        {item.author && `Por ${item.author}`}
+                    </p>
+                </div>
+            </a>
+        ))}
+    </div>
+</section>
