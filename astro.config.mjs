@@ -3,7 +3,7 @@ import mdx from '@astrojs/mdx';
 import pagefind from 'astro-pagefind';
 
 export default defineConfig({
-    site: 'https://thiagoclm.github.io/myreferencesite',
-    base: '/myreferencesite/',
+    site: 'https://thiagoclm.github.io/website',
+    base: '/website/',
     integrations: [mdx(), pagefind()],
 });
