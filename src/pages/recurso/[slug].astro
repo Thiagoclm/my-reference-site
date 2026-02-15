@@ -49,8 +49,7 @@ function findFile(slug){
 
 const file = findFile(slug);
 let html = '<p>Recurso não encontrado.</p>';
-let cover = '';
-if (file){
+let cover = '';const base = import.meta.env.BASE_URL;if (file){
     const fileContent = fs.readFileSync(file,'utf-8');
     const { data, content } = matter(fileContent);
     html = md.render(content);
@@ -59,6 +58,6 @@ if (file){
 ---
 
 <article class="prose py-8">
-    {cover && <img src={cover} alt="Cover" class="w-full h-64 object-cover mb-4" />}
+    {cover && <img src={`${base}${cover.startsWith('/') ? cover.slice(1) : cover}`} alt="Cover" class="w-full h-64 object-cover mb-4" />}
     <div set:html={html} />
 </article>

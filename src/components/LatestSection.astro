@@ -1,6 +1,7 @@
 ---
 // src/components/LatestSection.astro
 const { items } = Astro.props;
+const base = import.meta.env.BASE_URL;
 ---
 <section id="latest" class="py-12 border-t border-gray-800">
     <div class="inline-block mb-6">
@@ -11,12 +12,12 @@ const { items } = Astro.props;
     
     <div class="space-y-6">
         {items && items.map((item, index) => (
-            <a href={item.link.startsWith('http') ? item.link : `/${item.link}`} class="group block pb-6 border-b border-gray-800 last:border-b-0">
+            <a href={item.link.startsWith('http') || item.link.startsWith('#') ? item.link : `${base}${item.link}`} class="group block pb-6 border-b border-gray-800 last:border-b-0">
                 <div class="flex gap-6">
                     {item.image && (
                         <div class="flex-shrink-0 w-32 h-32 rounded-lg overflow-hidden bg-gray-800 hidden sm:block">
                             <img 
-                                src={item.image.startsWith('http') ? item.image : `/${item.image}`}
+                                src={item.image.startsWith('http') ? item.image : `${base}${item.image}`}
                                 alt={item.title}
                                 class="w-full h-full object-cover group-hover:opacity-90 transition"
                                 loading="lazy"
@@ -44,7 +45,7 @@ const { items } = Astro.props;
     </div>
 
     <div class="mt-8">
-        <a href="{Astro.site.base}/artigos" class="inline-block bg-blue-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-blue-700 transition">
+        <a href={`${base}artigos`} class="inline-block bg-blue-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-blue-700 transition">
             Ver Todos os Artigos →
         </a>
     </div>

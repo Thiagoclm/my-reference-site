@@ -1,6 +1,7 @@
 ---
 // src/components/Footer.astro
 const currentYear = new Date().getFullYear();
+const base = import.meta.env.BASE_URL;
 ---
 <footer class="bg-gray-950 text-gray-200 py-12 border-t border-gray-800">
     <div class="max-w-6xl mx-auto px-6">
@@ -19,7 +20,7 @@ const currentYear = new Date().getFullYear();
                 <ul class="space-y-2 text-sm">
                     <li><a href="#artigos" class="text-gray-400 hover:text-white transition">Artigos</a></li>
                     <li><a href="#recursos" class="text-gray-400 hover:text-white transition">Recursos</a></li>
-                    <li><a href="/palavra-do-dia" class="text-gray-400 hover:text-white transition">Palavra do Dia</a></li>
+                    <li><a href={`${base}palavra-do-dia`} class="text-gray-400 hover:text-white transition">Palavra do Dia</a></li>
                     <li><a href="#latest" class="text-gray-400 hover:text-white transition">Mais Recentes</a></li>
                 </ul>
             </div>
@@ -28,9 +29,9 @@ const currentYear = new Date().getFullYear();
             <div>
                 <h4 class="text-white font-semibold text-sm mb-4">Links</h4>
                 <ul class="space-y-2 text-sm">
-                    <li><a href="{Astro.site.base}/missao" class="text-gray-400 hover:text-white transition">Declaração de Missão</a></li>
-                    <li><a href="{Astro.site.base}/contato" class="text-gray-400 hover:text-white transition">Contato</a></li>
-                    <li><a href="{Astro.site.base}/privacidade" class="text-gray-400 hover:text-white transition">Privacidade</a></li>
+                    <li><a href={`${base}missao`} class="text-gray-400 hover:text-white transition">Declaração de Missão</a></li>
+                    <li><a href={`${base}contato`} class="text-gray-400 hover:text-white transition">Contato</a></li>
+                    <li><a href={`${base}privacidade`} class="text-gray-400 hover:text-white transition">Privacidade</a></li>
                 </ul>
             </div>
 

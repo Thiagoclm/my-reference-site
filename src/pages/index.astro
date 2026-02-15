@@ -6,6 +6,8 @@ import LatestSection from '../components/LatestSection.astro';
 import NewsletterSection from '../components/NewsletterSection.astro';
 import SaintOfTheDay from '../components/SaintOfTheDay.astro';
 
+const base = import.meta.env.BASE_URL;
+
 // Exemplo de dados. Você pode carregar do seu sistema de conteúdo depois
 const featuredItems = [
     {
@@ -20,7 +22,7 @@ const featuredItems = [
         type: "Livro",
         author: "Bishop Robert Barron",
         image: "https://bookstore.wordonfire.org/cdn/shop/files/2508_Catholicism_2nd-Edition_A__SQUARE-1000x1000_MT-2.jpg?v=1758313508&width=500",
-        link: "/livros/catholicism",
+        link: "livros/catholicism",
     },
     {
         title: "Palavra do Dia - Evangelho",
@@ -47,7 +49,7 @@ const latestItems = [
         author: "Thiago",
         date: new Date(Date.now() - 86400000).toISOString(),
         summary: "Explore este recurso valioso que pode enriquecer sua jornada espiritual.",
-        image: "/assets/cover-example.jpg",
+        image: "assets/cover-example.jpg",
         link: "#",
     },
     {
@@ -56,7 +58,7 @@ const latestItems = [
         author: "Thiago",
         date: new Date(Date.now() - 172800000).toISOString(),
         summary: "Conheça as perspectivas mais recentes sobre este importante tópico.",
-        image: "/assets/cover-example.jpg",
+        image: "assets/cover-example.jpg",
         link: "#",
     },
 ];
@@ -65,7 +67,7 @@ const saintOfTheDay = {
     name: "São José",
     title: "Esposo da Virgem Maria, Protetor da Igreja",
     feastDay: "19 de Março",
-    image: "/assets/saint-joseph.jpg",
+    image: `${base}assets/saint-joseph.jpg`,
     imageCredit: {
         title: "Saint Joseph with the child Jesus",
         artist: "Bartolomé Esteban Perez Murillo (1618 - 1682)",
@@ -93,7 +95,7 @@ const saintOfTheDay = {
     <Hero 
         title="Curadorias e Leituras Recomendadas" 
         subtitle="Uma seleção cuidadosa de artigos, livros e vídeos para enriquecer seu conhecimento e fé." 
-        image="/assets/cover-example.jpg" 
+        image={`${base}assets/cover-example.jpg`} 
     />
 
     <!-- Featured Section -->
@@ -125,7 +127,7 @@ const saintOfTheDay = {
                 <p class="text-gray-300 mb-6">
                     Saiba mais sobre nossa missão de iluminar a harmonia entre a Razão e a Fé, conectando ciência e espiritualidade católica.
                 </p>
-                <a href="/missao" class="text-blue-400 font-medium hover:text-blue-300 transition">
+                <a href={`${base}missao`} class="text-blue-400 font-medium hover:text-blue-300 transition">
                     Leia Nossa Missão →
                 </a>
             </div>
