@@ -36,7 +36,7 @@ Katholikos is a dark-themed Catholic reference site similar to wordonfire.org, d
 - [ ] Create saint detail pages
 
 ### Search & Discovery
-- [ ] Implement Pagefind integration for full-text search
+- ✅ Implement Pagefind integration for full-text search
 - [ ] Add search results page
 - [ ] Create archive by date/month
 - [ ] Build topic/category browsing pages
