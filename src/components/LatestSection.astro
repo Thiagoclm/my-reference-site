@@ -11,12 +11,12 @@ const { items } = Astro.props;
     
     <div class="space-y-6">
         {items && items.map((item, index) => (
-            <a href={item.link.startsWith('http') ? item.link : `/website/${item.link}`} class="group block pb-6 border-b border-gray-800 last:border-b-0">
+            <a href={item.link.startsWith('http') ? item.link : `/${item.link}`} class="group block pb-6 border-b border-gray-800 last:border-b-0">
                 <div class="flex gap-6">
                     {item.image && (
                         <div class="flex-shrink-0 w-32 h-32 rounded-lg overflow-hidden bg-gray-800 hidden sm:block">
                             <img 
-                                src={item.image.startsWith('http') ? item.image : `/website/${item.image}`}
+                                src={item.image.startsWith('http') ? item.image : `/${item.image}`}
                                 alt={item.title}
                                 class="w-full h-full object-cover group-hover:opacity-90 transition"
                                 loading="lazy"
