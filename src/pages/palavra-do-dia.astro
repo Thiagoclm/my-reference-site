@@ -21,7 +21,7 @@ import Layout from '../layouts/Base.astro';
             <!-- Header Info -->
             <div class="bg-gradient-to-r from-blue-900 to-blue-800 p-8 text-center">
                 <p class="text-blue-200 text-sm mb-2">
-                    Data de hoje: <span class="font-semibold">{new Date().toLocaleDateString('pt-BR', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</span>
+                    Data de hoje: <span id="data-hoje" class="font-semibold">carregando...</span>
                 </p>
                 <h2 class="text-2xl font-serif font-bold text-white">
                     O Evangelho Segundo o Vaticano News
@@ -140,3 +140,15 @@ import Layout from '../layouts/Base.astro';
         </section>
     </div>
 </Layout>
+
+<script>
+    const el = document.getElementById('data-hoje');
+    if (el) {
+        el.textContent = new Date().toLocaleDateString('pt-BR', {
+            weekday: 'long',
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+        });
+    }
+</script>
