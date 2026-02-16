@@ -1,0 +1,162 @@
+---
+// src/pages/livros/index.astro
+import Layout from '../../layouts/Base.astro';
+
+const base = import.meta.env.BASE_URL;
+
+// All book recommendations — add new books here
+const books = [
+    {
+        title: "Catholicism",
+        subtitle: "A Journey to the Heart of the Faith (Second Edition)",
+        author: "Bishop Robert Barron",
+        image: "https://bookstore.wordonfire.org/cdn/shop/files/2508_Catholicism_2nd-Edition_A__SQUARE-1000x1000_MT-2.jpg?v=1758313508&width=500",
+        link: "catholicism",
+        tags: ["Teologia", "Fé Católica", "Evangelização"],
+        summary: "Uma exploração profunda e bela da fé católica, percorrendo desde a Encarnação até os sacramentos, santos, oração e os novíssimos. O Bispo Barron apresenta a Igreja ao mundo com clareza, inteligência e paixão.",
+        price: "$23.96",
+        originalPrice: "$29.95",
+        buyLink: "https://bookstore.wordonfire.org/products/catholicism",
+    },
+];
+---
+
+<Layout title="Livros — Recomendações de Leitura">
+    <div class="max-w-6xl mx-auto">
+        <!-- Header -->
+        <div class="mb-12">
+            <div class="inline-block mb-6">
+                <h2 class="text-sm font-bold text-blue-400 uppercase tracking-wider">Biblioteca</h2>
+            </div>
+            <h1 class="text-4xl md:text-5xl font-serif font-bold text-white mb-4">Livros Recomendados</h1>
+            <p class="text-xl text-gray-300 max-w-3xl">
+                Uma seleção curada de livros essenciais para aprofundar sua fé, expandir seu conhecimento teológico e enriquecer sua vida espiritual.
+            </p>
+        </div>
+
+        <!-- Stats -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
+            <div class="bg-gray-900 border border-gray-800 rounded-lg p-5 text-center">
+                <p class="text-3xl font-bold text-blue-400">{books.length}</p>
+                <p class="text-sm text-gray-400 mt-1">Livros Recomendados</p>
+            </div>
+            <div class="bg-gray-900 border border-gray-800 rounded-lg p-5 text-center">
+                <p class="text-3xl font-bold text-blue-400">{[...new Set(books.map(b => b.author))].length}</p>
+                <p class="text-sm text-gray-400 mt-1">Autores</p>
+            </div>
+            <div class="bg-gray-900 border border-gray-800 rounded-lg p-5 text-center">
+                <p class="text-3xl font-bold text-blue-400">{[...new Set(books.flatMap(b => b.tags))].length}</p>
+                <p class="text-sm text-gray-400 mt-1">Categorias</p>
+            </div>
+            <div class="bg-gray-900 border border-gray-800 rounded-lg p-5 text-center">
+                <p class="text-3xl font-bold text-green-400">✦</p>
+                <p class="text-sm text-gray-400 mt-1">Curadoria Católica</p>
+            </div>
+        </div>
+
+        <!-- Book List -->
+        <div class="space-y-8 mb-16">
+            {books.map((book) => (
+                <article class="bg-gray-900 border border-gray-800 rounded-xl overflow-hidden hover:border-gray-700 transition group">
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-0">
+                        <!-- Cover -->
+                        <div class="md:col-span-1">
+                            <a href={`${base}livros/${book.link}`}>
+                                <img
+                                    src={book.image.startsWith('http') ? book.image : `${base}${book.image}`}
+                                    alt={book.title}
+                                    class="w-full h-64 md:h-full object-cover group-hover:scale-105 transition duration-500"
+                                />
+                            </a>
+                        </div>
+
+                        <!-- Details -->
+                        <div class="md:col-span-3 p-6 md:p-8 flex flex-col justify-between">
+                            <div>
+                                <!-- Tags -->
+                                <div class="flex flex-wrap gap-2 mb-4">
+                                    {book.tags.map((tag: string) => (
+                                        <span class="bg-blue-900 text-blue-300 text-xs font-semibold px-3 py-1 rounded-full">
+                                            {tag}
+                                        </span>
+                                    ))}
+                                </div>
+
+                                <!-- Title -->
+                                <a href={`${base}livros/${book.link}`} class="block">
+                                    <h2 class="text-2xl md:text-3xl font-serif font-bold text-white mb-2 group-hover:text-blue-400 transition">
+                                        {book.title}
+                                    </h2>
+                                </a>
+                                <p class="text-gray-400 font-serif italic mb-1">{book.subtitle}</p>
+                                <p class="text-sm text-gray-500 mb-4">por <span class="text-gray-300 font-semibold">{book.author}</span></p>
+
+                                <!-- Summary -->
+                                <p class="text-gray-300 leading-relaxed mb-6">
+                                    {book.summary}
+                                </p>
+                            </div>
+
+                            <!-- Actions -->
+                            <div class="flex flex-wrap items-center gap-4">
+                                <a
+                                    href={`${base}livros/${book.link}`}
+                                    class="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition text-sm"
+                                >
+                                    Ver Resenha Completa →
+                                </a>
+                                {book.buyLink && (
+                                    <a
+                                        href={book.buyLink}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        class="border border-gray-700 text-gray-300 px-6 py-3 rounded-lg font-semibold hover:border-gray-500 hover:text-white transition text-sm"
+                                    >
+                                        Comprar {book.price}
+                                        {book.originalPrice && (
+                                            <span class="text-gray-500 line-through ml-2 text-xs">{book.originalPrice}</span>
+                                        )}
+                                    </a>
+                                )}
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            ))}
+        </div>
+
+        <!-- Empty state / Coming soon -->
+        <section class="bg-gray-900 border border-gray-800 border-dashed rounded-xl p-12 text-center mb-12">
+            <p class="text-4xl mb-4">📚</p>
+            <h3 class="text-xl font-serif font-bold text-white mb-3">Mais livros em breve</h3>
+            <p class="text-gray-400 max-w-md mx-auto">
+                Estamos constantemente curadando novas recomendações de leitura. Volte regularmente para descobrir obras transformadoras sobre a fé católica.
+            </p>
+        </section>
+
+        <!-- Why Read -->
+        <section class="mb-12">
+            <h2 class="text-3xl font-serif font-bold text-white mb-8">Por que Ler Estes Livros?</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-gray-900 border border-gray-800 p-6 rounded-lg">
+                    <h3 class="text-blue-400 font-bold text-lg mb-4">✦ Aprofundar a Fé</h3>
+                    <p class="text-gray-300 leading-relaxed">
+                        Cada livro é selecionado por sua capacidade de iluminar a riqueza e profundidade da tradição católica, ajudando você a compreender melhor o que a Igreja ensina e por quê.
+                    </p>
+                </div>
+                <div class="bg-gray-900 border border-gray-800 p-6 rounded-lg">
+                    <h3 class="text-blue-400 font-bold text-lg mb-4">✦ Autores Confiáveis</h3>
+                    <p class="text-gray-300 leading-relaxed">
+                        Priorizamos autores reconhecidos pela ortodoxia de seus ensinamentos, fiéis ao Magistério da Igreja e comprometidos com a Nova Evangelização.
+                    </p>
+                </div>
+                <div class="bg-gray-900 border border-gray-800 p-6 rounded-lg">
+                    <h3 class="text-blue-400 font-bold text-lg mb-4">✦ Formação Integral</h3>
+                    <p class="text-gray-300 leading-relaxed">
+                        De teologia a espiritualidade, de história a apologética — nossa seleção abrange todas as dimensões da formação católica.
+                    </p>
+                </div>
+            </div>
+        </section>
+    </div>
+</Layout>
