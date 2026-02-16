@@ -96,7 +96,9 @@
     async function initPagefind() {
         if (typeof window !== 'undefined' && !pagefind) {
             try {
-                pagefind = await (window as any).pagefind;
+                const base = import.meta.env.BASE_URL || '/';
+                pagefind = await import(/* @vite-ignore */ `${base}pagefind/pagefind.js`);
+                await pagefind.init();
                 if (!pagefind) {
                     console.log('Pagefind not initialized. It will be available after build.');
                 }
