@@ -44,7 +44,7 @@ Katholikos is a dark-themed Catholic reference site similar to wordonfire.org, d
 ### Pages to Create
 - [ ] About page (/sobre)
 - [ ] Contact page (/contato)
-- [ ] Articles listing page (/artigos)
+- ✅ Articles listing page (/artigos)
 - [ ] Resources listing page (/recursos)
 - [ ] Privacy policy page
 - [ ] Terms and conditions page
