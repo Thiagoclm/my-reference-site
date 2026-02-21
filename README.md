@@ -25,15 +25,15 @@ Katholikos is a dark-themed Catholic reference site similar to wordonfire.org, d
 ### Content Management
 - [ ] Create content folder structure for articles, reflections, videos, podcasts
 - [ ] Set up markdown frontmatter schema for articles (title, author, date, tags, featured)
-- [ ] Implement category/tag system
+- [x] Implement category/tag system
 - [ ] Create article listing page with filtering
 - [ ] Build individual article template page
 
 ### Saint of the Day
-- [ ] Create database/collection of saints with images and histories
-- [ ] Implement dynamic saint selection (daily rotation)
+- [x] Create database/collection of saints with images and histories
+- [x] Implement dynamic saint selection (daily rotation)
 - [ ] Add more saint entries (currently only example with Saint Joseph)
-- [ ] Create saint detail pages
+- [x] Create saint detail pages
 
 ### Search & Discovery
 - ✅ Implement Pagefind integration for full-text search
@@ -46,7 +46,7 @@ Katholikos is a dark-themed Catholic reference site similar to wordonfire.org, d
 - [ ] Contact page (/contato)
 - ✅ Articles listing page (/artigos)
 - [ ] Resources listing page (/recursos)
-- [ ] Privacy policy page
+- [x] Privacy policy page
 - [ ] Terms and conditions page
 
 ## 🚀 Content Backlog
@@ -137,24 +137,42 @@ src/
 │   ├── NewsletterSection.astro
 │   ├── SaintOfTheDay.astro
 │   └── CardResource.astro
+├── data/
+│   ├── articles.ts
+│   └── saints.ts
 ├── layouts/
 │   └── Base.astro
+├── lib/
+│   └── content-browse.ts
 ├── pages/
+│   ├── artigos/
+│   │   ├── index.astro
+│   │   └── santo-alberto-magno.astro
+│   ├── categorias/
+│   │   ├── [categoria].astro
+│   │   └── index.astro
 │   ├── index.astro
+│   ├── livros/
+│   │   ├── catholicism.astro
+│   │   ├── imitacao-de-cristo.astro
+│   │   └── index.astro
+│   ├── missao.astro
+│   ├── palavra-do-dia.astro
+│   ├── privacidade.astro
 │   └── recurso/
 │       └── [slug].astro
+│   └── santos/
+│       ├── [month]/
+│       │   └── [day].astro
+│       └── index.astro
 ├── styles/
 │   └── global.css
 └── env.d.ts
 
 content/
-├── artigos/
+├── .gitkeep
 ├── recursos/
 │   └── livros/
-│       └── exemplo-livro.md
-├── reflexoes/
-├── videos/
-└── podcasts/
 
 public/
 └── assets/
@@ -198,4 +216,4 @@ Katholikos is dedicated to proclaiming Christ in culture through shared Catholic
 
 ---
 
-**Last Updated:** February 15, 2026
+**Last Updated:** February 21, 2026
