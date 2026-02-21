@@ -1,22 +1,9 @@
 ---
 // src/pages/artigos/index.astro
 import Layout from '../../layouts/Base.astro';
+import { articles } from '../../data/articles';
 
 const base = import.meta.env.BASE_URL;
-
-// All articles — add new articles here
-const articles = [
-    {
-        title: "Santo Alberto Magno: Bispo e Doutor da Igreja",
-        subtitle: "O grande mestre dominicano e mentor de São Tomás de Aquino",
-        author: "Katholikos",
-        image: "assets/st_albert_magnus.jpg",
-        link: "santo-alberto-magno",
-        tags: ["Santos", "Dominicanos", "Doutores da Igreja"],
-        date: "15 de Novembro",
-        summary: "Conheça a vida do grande mestre dominicano que recebeu o título de 'Magno'. Mentor de São Tomás de Aquino, foi canonizado em 1931 e declarado Padroeiro dos cultores de Ciências naturais por Pio XII.",
-    },
-];
 ---
 
 <Layout title="Artigos — Reflexões e Estudos">

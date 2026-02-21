@@ -1,0 +1,43 @@
+---
+import Layout from '../../../layouts/Base.astro';
+import SaintOfTheDay from '../../../components/SaintOfTheDay.astro';
+import { getAllSaintDays, getSaintForDay } from '../../../data/saints';
+
+const base = import.meta.env.BASE_URL;
+
+export function getStaticPaths() {
+    return getAllSaintDays().map((entry) => ({
+        params: {
+            month: String(entry.month).padStart(2, '0'),
+            day: String(entry.day).padStart(2, '0'),
+        },
+    }));
+}
+
+const monthParam = Number(Astro.params.month);
+const dayParam = Number(Astro.params.day);
+const entry = getSaintForDay(monthParam, dayParam);
+
+const saint = {
+    ...entry.saint,
+    image: `${base}${entry.saint.image.startsWith('/') ? entry.saint.image.slice(1) : entry.saint.image}`,
+};
+---
+
+<Layout title={`Santos — ${String(entry.day).padStart(2, '0')}/${String(entry.month).padStart(2, '0')}`}>
+    <div class="max-w-6xl mx-auto">
+        <div class="mb-6">
+            <a href={`${base}santos`} class="text-sm text-blue-400 hover:text-blue-300 transition">← Voltar para Santos</a>
+        </div>
+
+        {entry.isPlaceholder && (
+            <section class="bg-blue-900 border border-blue-800 rounded-lg p-5 mb-8">
+                <p class="text-blue-100 text-sm">
+                    Conteúdo completo deste dia ainda em preparação. Esta página já está reservada no calendário e será atualizada com a biografia oficial do santo.
+                </p>
+            </section>
+        )}
+
+        <SaintOfTheDay saint={saint} />
+    </div>
+</Layout>

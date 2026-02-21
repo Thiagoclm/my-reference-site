@@ -1,0 +1,70 @@
+---
+import Layout from '../../layouts/Base.astro';
+import { getAllSaintDays, getSaintForDay } from '../../data/saints';
+
+const base = import.meta.env.BASE_URL;
+const allDays = getAllSaintDays();
+const todaysDate = new Date();
+const today = getSaintForDay(todaysDate.getMonth() + 1, todaysDate.getDate());
+const joseph = getSaintForDay(3, 19);
+const monthNames = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
+const daysByMonth = monthNames.map((name, monthIndex) => ({
+    name,
+    month: monthIndex + 1,
+    days: allDays.filter((entry) => entry.month === monthIndex + 1),
+}));
+---
+
+<Layout title="Santos">
+    <div class="max-w-6xl mx-auto">
+        <div class="mb-12">
+            <div class="inline-block mb-6">
+                <h2 class="text-sm font-bold text-blue-400 uppercase tracking-wider">Devoção</h2>
+            </div>
+            <h1 class="text-4xl md:text-5xl font-serif font-bold text-white mb-4">Santos</h1>
+            <p class="text-xl text-gray-300 max-w-3xl">
+                Calendário diário com páginas dedicadas à vida dos santos. Cada data do ano possui uma rota própria.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+            <a href={`${base}santos/${String(today.month).padStart(2, '0')}/${String(today.day).padStart(2, '0')}`} class="bg-gray-900 border border-gray-800 rounded-xl p-6 hover:border-gray-700 transition">
+                <p class="text-sm uppercase tracking-wider text-blue-400 mb-2">Santo de hoje</p>
+                <h2 class="text-2xl font-serif font-bold text-white mb-2">{today.saint.name}</h2>
+                <p class="text-gray-400 mb-4">{today.saint.feastDay}</p>
+                <p class="text-blue-400 font-semibold text-sm">Abrir página do dia →</p>
+            </a>
+
+            <a href={`${base}santos/03/19`} class="bg-gray-900 border border-gray-800 rounded-xl p-6 hover:border-gray-700 transition">
+                <p class="text-sm uppercase tracking-wider text-blue-400 mb-2">Exemplo completo</p>
+                <h2 class="text-2xl font-serif font-bold text-white mb-2">{joseph.saint.name}</h2>
+                <p class="text-gray-400 mb-4">{joseph.saint.feastDay}</p>
+                <p class="text-blue-400 font-semibold text-sm">Ver biografia de São José →</p>
+            </a>
+        </div>
+
+        <section class="mb-12">
+            <h2 class="text-3xl font-serif font-bold text-white mb-6">Calendário dos Santos</h2>
+            <p class="text-gray-400 mb-8">Cada dia é fixo no calendário anual e leva para a página correspondente do santo do dia.</p>
+
+            <div class="space-y-8">
+                {daysByMonth.map((monthGroup) => (
+                    <div class="bg-gray-900 border border-gray-800 rounded-xl p-6">
+                        <h3 class="text-2xl font-serif font-bold text-white mb-4">{monthGroup.name}</h3>
+                        <div class="grid grid-cols-7 sm:grid-cols-10 md:grid-cols-12 gap-2">
+                            {monthGroup.days.map((entry) => (
+                                <a
+                                    href={`${base}santos/${String(entry.month).padStart(2, '0')}/${String(entry.day).padStart(2, '0')}`}
+                                    class="text-center px-2 py-2 rounded border border-gray-800 text-gray-300 hover:border-blue-500 hover:text-white transition text-sm"
+                                    title={`${String(entry.day).padStart(2, '0')}/${String(entry.month).padStart(2, '0')} — ${entry.saint.name}`}
+                                >
+                                    {String(entry.day).padStart(2, '0')}
+                                </a>
+                            ))}
+                        </div>
+                    </div>
+                ))}
+            </div>
+        </section>
+    </div>
+</Layout>

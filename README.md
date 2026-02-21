@@ -39,7 +39,7 @@ Katholikos is a dark-themed Catholic reference site similar to wordonfire.org, d
 - ✅ Implement Pagefind integration for full-text search
 - [ ] Add search results page
 - [ ] Create archive by date/month
-- [ ] Build topic/category browsing pages
+- [x] Build topic/category browsing pages
 
 ### Pages to Create
 - [ ] About page (/sobre)
