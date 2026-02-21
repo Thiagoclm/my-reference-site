@@ -1,0 +1,78 @@
+---
+import Layout from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
+
+const base = import.meta.env.BASE_URL;
+---
+
+<Layout title="Privacidade">
+    <Hero 
+        title="Política de Privacidade" 
+        subtitle="Como coletamos, usamos e protegemos seus dados" 
+        image={`${base}assets/cover-example.jpg`} 
+    />
+
+    <div class="max-w-3xl mx-auto">
+        <section class="mb-10">
+            <p class="text-sm text-gray-400 mb-4">Última atualização: 21 de fevereiro de 2026</p>
+            <p class="text-gray-300 leading-relaxed">
+                Esta Política de Privacidade descreve como o Katholikos coleta, utiliza e protege as informações dos usuários ao navegar em nosso site.
+                Ao utilizar este site, você concorda com os termos descritos nesta política.
+            </p>
+        </section>
+
+        <section class="mb-10">
+            <h2 class="text-2xl font-serif font-bold mb-4 text-white">1. Informações coletadas</h2>
+            <p class="text-gray-300 leading-relaxed mb-4">
+                Podemos coletar informações fornecidas voluntariamente por você, como nome e email em formulários de contato ou inscrição.
+                Também podemos coletar dados de navegação de forma automática, como páginas visitadas, tipo de navegador e endereço IP.
+            </p>
+        </section>
+
+        <section class="mb-10">
+            <h2 class="text-2xl font-serif font-bold mb-4 text-white">2. Uso das informações</h2>
+            <p class="text-gray-300 leading-relaxed mb-4">
+                As informações coletadas são utilizadas para:
+            </p>
+            <ul class="list-disc pl-6 text-gray-300 space-y-2">
+                <li>Melhorar a experiência de navegação no site;</li>
+                <li>Responder mensagens e solicitações enviadas por usuários;</li>
+                <li>Enviar atualizações de conteúdo, quando houver consentimento.</li>
+            </ul>
+        </section>
+
+        <section class="mb-10">
+            <h2 class="text-2xl font-serif font-bold mb-4 text-white">3. Compartilhamento de dados</h2>
+            <p class="text-gray-300 leading-relaxed">
+                Não vendemos nem compartilhamos seus dados pessoais com terceiros, exceto quando necessário para o funcionamento técnico do site,
+                cumprimento de obrigações legais ou mediante seu consentimento explícito.
+            </p>
+        </section>
+
+        <section class="mb-10">
+            <h2 class="text-2xl font-serif font-bold mb-4 text-white">4. Cookies</h2>
+            <p class="text-gray-300 leading-relaxed">
+                Podemos utilizar cookies para melhorar a navegação, analisar o tráfego e personalizar conteúdos. Você pode desativar cookies nas configurações
+                do seu navegador, mas algumas funcionalidades do site podem ser afetadas.
+            </p>
+        </section>
+
+        <section class="mb-10">
+            <h2 class="text-2xl font-serif font-bold mb-4 text-white">5. Segurança</h2>
+            <p class="text-gray-300 leading-relaxed">
+                Adotamos medidas razoáveis para proteger seus dados contra acesso não autorizado, alteração, divulgação ou destruição indevida.
+                No entanto, nenhum método de transmissão ou armazenamento eletrônico é totalmente seguro.
+            </p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl font-serif font-bold mb-4 text-white">6. Seus direitos</h2>
+            <p class="text-gray-300 leading-relaxed mb-4">
+                Você pode solicitar atualização, correção ou exclusão de seus dados pessoais, quando aplicável, entrando em contato conosco.
+            </p>
+            <p class="text-gray-300 leading-relaxed">
+                Em caso de dúvidas sobre esta política, use os canais de contato indicados no site.
+            </p>
+        </section>
+    </div>
+</Layout>

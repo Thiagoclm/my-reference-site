@@ -1,6 +1,84 @@
 ---
 // src/pages/palavra-do-dia.astro
 import Layout from '../layouts/Base.astro';
+
+const rssUrl = 'https://www.vaticannews.va/pt/palavra-do-dia.rss.xml';
+
+const fallbackHtml = '<p>Não foi possível carregar automaticamente. Use o botão abaixo para abrir a leitura completa no Vatican News.</p>';
+
+const findFirstItemDescription = (rss) => {
+    const itemMatch = rss.match(/<item>[\s\S]*?<description><!\[CDATA\[([\s\S]*?)\]\]><\/description>[\s\S]*?<\/item>/i);
+    if (!itemMatch || !itemMatch[1]) return '';
+    return itemMatch[1].trim();
+};
+
+const splitReadings = (descriptionHtml) => {
+    if (!descriptionHtml) {
+        return {
+            primeiraLeituraHtml: fallbackHtml,
+            segundaLeituraHtml: '<p>Segunda leitura não disponível para hoje.</p>',
+            reflexaoHtml: fallbackHtml,
+        };
+    }
+
+    const gospelMarker = /<p>\s*Proclama[\s\S]*?Evangelho[\s\S]*?<\/p>/i;
+    const gospelStart = descriptionHtml.search(gospelMarker);
+
+    let beforeGospel = descriptionHtml;
+    let gospelAndAfter = '';
+
+    if (gospelStart !== -1) {
+        beforeGospel = descriptionHtml.slice(0, gospelStart);
+        gospelAndAfter = descriptionHtml.slice(gospelStart);
+    }
+
+    const secondMarker = /<p>\s*Segunda Leitura\s*<\/p>/i;
+    const secondStart = beforeGospel.search(secondMarker);
+
+    let primeiraLeituraHtml = beforeGospel.trim();
+    let segundaLeituraHtml = '<p>Segunda leitura não disponível para hoje.</p>';
+
+    if (secondStart !== -1) {
+        primeiraLeituraHtml = beforeGospel.slice(0, secondStart).trim();
+        segundaLeituraHtml = beforeGospel.slice(secondStart).replace(secondMarker, '').trim() || '<p>Segunda leitura não disponível para hoje.</p>';
+    }
+
+    const paragraphMatches = [...gospelAndAfter.matchAll(/<p>[\s\S]*?<\/p>/gi)].map((m) => m[0]);
+    const nonEmptyParagraphs = paragraphMatches.filter((paragraphHtml) => {
+        const text = paragraphHtml
+            .replace(/<br\s*\/?\s*>/gi, ' ')
+            .replace(/<[^>]+>/g, ' ')
+            .replace(/&nbsp;/gi, ' ')
+            .replace(/\s+/g, ' ')
+            .trim();
+        return text.length > 0;
+    });
+    const reflexaoHtml = nonEmptyParagraphs.length > 0 ? nonEmptyParagraphs[nonEmptyParagraphs.length - 1] : fallbackHtml;
+
+    return {
+        primeiraLeituraHtml: primeiraLeituraHtml || fallbackHtml,
+        segundaLeituraHtml,
+        reflexaoHtml,
+    };
+};
+
+let primeiraLeituraHtml = fallbackHtml;
+let segundaLeituraHtml = '<p>Segunda leitura não disponível para hoje.</p>';
+let reflexaoHtml = fallbackHtml;
+
+try {
+    const response = await fetch(rssUrl);
+    if (response.ok) {
+        const rss = await response.text();
+        const descriptionHtml = findFirstItemDescription(rss);
+        const parsed = splitReadings(descriptionHtml);
+        primeiraLeituraHtml = parsed.primeiraLeituraHtml;
+        segundaLeituraHtml = parsed.segundaLeituraHtml;
+        reflexaoHtml = parsed.reflexaoHtml;
+    }
+} catch {
+    // Mantém conteúdo de fallback
+}
 ---
 
 <Layout title="Palavra do Dia">
@@ -34,16 +112,12 @@ import Layout from '../layouts/Base.astro';
                     <!-- Reading Sections -->
                     <div class="border-l-4 border-blue-400 pl-6 py-4">
                         <h3 class="text-blue-400 font-bold uppercase text-sm mb-3 tracking-wider">Primeira Leitura</h3>
-                        <p class="text-gray-400 text-sm mb-4 italic">
-                            Acesse o Vatican News para ver a leitura completa do dia
-                        </p>
+                        <div class="text-gray-300 mb-4 space-y-3 [&_p]:leading-relaxed" set:html={primeiraLeituraHtml}></div>
                     </div>
 
                     <div class="border-l-4 border-blue-400 pl-6 py-4">
                         <h3 class="text-blue-400 font-bold uppercase text-sm mb-3 tracking-wider">Segunda Leitura</h3>
-                        <p class="text-gray-400 text-sm mb-4 italic">
-                            Acesse o Vatican News para ver a leitura completa do dia
-                        </p>
+                        <div class="text-gray-300 mb-4 space-y-3 [&_p]:leading-relaxed" set:html={segundaLeituraHtml}></div>
                     </div>
 
                     <div class="border-l-4 border-green-400 pl-6 py-4 bg-gray-800 rounded-r-lg">
@@ -59,9 +133,7 @@ import Layout from '../layouts/Base.astro';
 
                     <div class="border-l-4 border-blue-400 pl-6 py-4">
                         <h3 class="text-blue-400 font-bold uppercase text-sm mb-3 tracking-wider">Reflexão - Palavras do Papa</h3>
-                        <p class="text-gray-400 text-sm mb-4 italic">
-                            Meditações do Santo Padre sobre o Evangelho do dia
-                        </p>
+                        <div class="text-gray-300 mb-4 space-y-3 [&_p]:leading-relaxed" set:html={reflexaoHtml}></div>
                     </div>
                 </div>
             </div>
@@ -143,6 +215,7 @@ import Layout from '../layouts/Base.astro';
 
 <script>
     const el = document.getElementById('data-hoje');
+
     if (el) {
         el.textContent = new Date().toLocaleDateString('pt-BR', {
             weekday: 'long',
