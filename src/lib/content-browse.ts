@@ -31,6 +31,10 @@ const slugify = (value: string) =>
         .replace(/^-+|-+$/g, '');
 
 const walkMarkdownFiles = (dir: string, files: string[] = []) => {
+    if (!fs.existsSync(dir)) {
+        return files;
+    }
+
     for (const item of fs.readdirSync(dir)) {
         const fullPath = path.join(dir, item);
         if (fs.statSync(fullPath).isDirectory()) {
@@ -43,7 +47,7 @@ const walkMarkdownFiles = (dir: string, files: string[] = []) => {
 };
 
 export const getBrowseEntries = (): BrowseEntry[] => {
-    const files = walkMarkdownFiles(contentRoot);
+    const files = fs.existsSync(contentRoot) ? walkMarkdownFiles(contentRoot) : [];
 
     const markdownEntries: BrowseEntry[] = files.map((file) => {
         const rel = path.relative(contentRoot, file);
