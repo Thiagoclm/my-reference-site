@@ -26,8 +26,8 @@ Katholikos is a dark-themed Catholic reference site similar to wordonfire.org, d
 - [ ] Create content folder structure for articles, reflections, videos, podcasts
 - [ ] Set up markdown frontmatter schema for articles (title, author, date, tags, featured)
 - [x] Implement category/tag system
-- [ ] Create article listing page with filtering
-- [ ] Build individual article template page
+- [x] Create article listing page with filtering
+- [x] Build individual article template page
 
 ### Saint of the Day
 - [x] Create database/collection of saints with images and histories
@@ -85,8 +85,8 @@ Katholikos is a dark-themed Catholic reference site similar to wordonfire.org, d
 - [ ] Dark mode toggle (already dark by default, but add light mode option)
 - [ ] Mobile menu hamburger for navigation
 - [ ] Image optimization and lazy loading
-- [ ] Breadcrumb navigation
-- [ ] Smooth scroll animations
+- [x] Breadcrumb navigation
+- [x] Smooth scroll animations
 - [ ] Loading skeletons for content
 
 ### SEO & Analytics

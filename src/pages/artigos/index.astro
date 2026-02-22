@@ -4,6 +4,7 @@ import Layout from '../../layouts/Base.astro';
 import { articles } from '../../data/articles';
 
 const base = import.meta.env.BASE_URL;
+const uniqueTags = [...new Set(articles.flatMap((article) => article.tags))].sort((a, b) => a.localeCompare(b));
 ---
 
 <Layout title="Artigos — Reflexões e Estudos">
@@ -39,10 +40,41 @@ const base = import.meta.env.BASE_URL;
             </div>
         </div>
 
+        <!-- Filters -->
+        <section class="bg-gray-900 border border-gray-800 rounded-xl p-6 mb-8">
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-4">
+                <h2 class="text-lg font-bold text-white">Filtrar Artigos</h2>
+                <p id="filter-count" class="text-sm text-gray-400">Mostrando {articles.length} de {articles.length}</p>
+            </div>
+            <div class="flex flex-wrap gap-2" id="article-filters">
+                <button
+                    type="button"
+                    class="article-filter-btn bg-blue-600 text-white px-3 py-1.5 rounded-full text-sm font-semibold"
+                    data-tag="all"
+                    aria-pressed="true"
+                >
+                    Todos
+                </button>
+                {uniqueTags.map((tag) => (
+                    <button
+                        type="button"
+                        class="article-filter-btn bg-gray-800 text-gray-300 px-3 py-1.5 rounded-full text-sm font-semibold hover:bg-gray-700 transition"
+                        data-tag={tag.toLowerCase()}
+                        aria-pressed="false"
+                    >
+                        {tag}
+                    </button>
+                ))}
+            </div>
+        </section>
+
         <!-- Article List -->
-        <div class="space-y-8 mb-16">
+        <div class="space-y-8 mb-16" id="article-list">
             {articles.map((article) => (
-                <article class="bg-gray-900 border border-gray-800 rounded-xl overflow-hidden hover:border-gray-700 transition group">
+                <article
+                    class="article-item bg-gray-900 border border-gray-800 rounded-xl overflow-hidden hover:border-gray-700 transition group"
+                    data-tags={article.tags.map((tag) => tag.toLowerCase()).join('|')}
+                >
                     <div class="grid grid-cols-1 md:grid-cols-4 gap-0">
                         <!-- Image -->
                         <div class="md:col-span-1">
@@ -101,6 +133,7 @@ const base = import.meta.env.BASE_URL;
                 </article>
             ))}
         </div>
+        <p id="no-results" class="hidden text-gray-400 text-center mb-12">Nenhum artigo encontrado para este filtro.</p>
 
         <!-- Coming soon -->
         <section class="bg-gray-900 border border-gray-800 border-dashed rounded-xl p-12 text-center mb-12">
@@ -137,3 +170,54 @@ const base = import.meta.env.BASE_URL;
         </section>
     </div>
 </Layout>
+
+<script>
+    const filterButtons = Array.from(document.querySelectorAll('.article-filter-btn'));
+    const articleItems = Array.from(document.querySelectorAll('.article-item'));
+    const filterCount = document.getElementById('filter-count');
+    const noResults = document.getElementById('no-results');
+
+    const setActiveButton = (selectedTag) => {
+        filterButtons.forEach((button) => {
+            const isActive = button.getAttribute('data-tag') === selectedTag;
+            button.setAttribute('aria-pressed', String(isActive));
+
+            if (isActive) {
+                button.classList.remove('bg-gray-800', 'text-gray-300', 'hover:bg-gray-700');
+                button.classList.add('bg-blue-600', 'text-white');
+                return;
+            }
+
+            button.classList.remove('bg-blue-600', 'text-white');
+            button.classList.add('bg-gray-800', 'text-gray-300', 'hover:bg-gray-700');
+        });
+    };
+
+    const applyFilter = (selectedTag) => {
+        let visibleCount = 0;
+
+        articleItems.forEach((article) => {
+            const tagList = (article.getAttribute('data-tags') || '').split('|').filter(Boolean);
+            const shouldShow = selectedTag === 'all' || tagList.includes(selectedTag);
+
+            article.classList.toggle('hidden', !shouldShow);
+            if (shouldShow) visibleCount += 1;
+        });
+
+        if (filterCount) {
+            filterCount.textContent = `Mostrando ${visibleCount} de ${articleItems.length}`;
+        }
+
+        if (noResults) {
+            noResults.classList.toggle('hidden', visibleCount !== 0);
+        }
+    };
+
+    filterButtons.forEach((button) => {
+        button.addEventListener('click', () => {
+            const selectedTag = button.getAttribute('data-tag') || 'all';
+            setActiveButton(selectedTag);
+            applyFilter(selectedTag);
+        });
+    });
+</script>

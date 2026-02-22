@@ -3,7 +3,18 @@
 import '../styles/global.css'
 import Navbar from '../components/Navbar.astro'
 import Footer from '../components/Footer.astro'
+import Breadcrumbs from '../components/Breadcrumbs.astro'
 const { title } = Astro.props;
+
+const baseUrl = import.meta.env.BASE_URL;
+const currentPathname = Astro.url.pathname;
+const baseSegment = baseUrl.replace(/^\/+|\/+$/g, '');
+const pathSegments = currentPathname.split('/').filter(Boolean);
+const relativeSegments = baseSegment && pathSegments[0] === baseSegment
+    ? pathSegments.slice(1)
+    : pathSegments;
+const relativePath = relativeSegments.join('/');
+const showBreadcrumbs = relativePath.length > 0;
 ---
 <!doctype html>
 <html lang="pt-BR">
@@ -19,6 +30,7 @@ const { title } = Astro.props;
     <body class="bg-black text-white">
         <Navbar />
         <main class="max-w-6xl mx-auto px-6 py-8">
+            {showBreadcrumbs && <Breadcrumbs path={relativePath} baseUrl={baseUrl} currentTitle={title} />}
             <slot />
         </main>
         <Footer />

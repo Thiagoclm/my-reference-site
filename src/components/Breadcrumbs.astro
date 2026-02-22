@@ -1,0 +1,60 @@
+---
+const { path = '', baseUrl = '/', currentTitle } = Astro.props;
+
+const labelMap = {
+    artigos: 'Artigos',
+    categorias: 'Categorias',
+    livros: 'Livros',
+    santos: 'Santos',
+    missao: 'Missão',
+    privacidade: 'Privacidade',
+    'palavra-do-dia': 'Palavra do Dia',
+    recurso: 'Recurso',
+};
+
+const formatSegmentLabel = (segment) => {
+    const decoded = decodeURIComponent(segment);
+    const mapped = labelMap[decoded];
+
+    if (mapped) return mapped;
+
+    return decoded
+        .replace(/-/g, ' ')
+        .replace(/\b\w/g, (match) => match.toUpperCase());
+};
+
+const segments = path.split('/').filter(Boolean);
+const crumbs = segments.map((segment, index) => {
+    const href = `${baseUrl}${segments.slice(0, index + 1).join('/')}`;
+
+    return {
+        href,
+        label: formatSegmentLabel(segment),
+    };
+});
+---
+
+<nav aria-label="Breadcrumb" class="mb-6 text-sm text-gray-400">
+    <ol class="flex flex-wrap items-center gap-2">
+        <li>
+            <a href={baseUrl} class="hover:text-white transition">Início</a>
+        </li>
+        {crumbs.map((crumb, index) => {
+            const isLast = index === crumbs.length - 1;
+            const label = isLast && currentTitle ? currentTitle : crumb.label;
+
+            return (
+                <>
+                    <li aria-hidden="true" class="text-gray-600">/</li>
+                    <li>
+                        {isLast ? (
+                            <span class="text-gray-200" aria-current="page">{label}</span>
+                        ) : (
+                            <a href={crumb.href} class="hover:text-white transition">{label}</a>
+                        )}
+                    </li>
+                </>
+            );
+        })}
+    </ol>
+</nav>
