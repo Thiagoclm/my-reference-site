@@ -83,6 +83,41 @@
 </style>
 
 <script>
+    const basePath = (import.meta.env.BASE_URL || '/').replace(/\/+$/, '');
+
+    const escapeHtml = (value) =>
+        String(value ?? '')
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#39;');
+
+    const normalizeUrl = (url) => {
+        if (!url) return '#';
+        const urlString = String(url).trim();
+
+        if (/^https?:\/\//i.test(urlString) || urlString.startsWith('#')) {
+            return urlString;
+        }
+
+        const pathOnly = urlString.replace(/^https?:\/\/[^/]+/i, '');
+        const withoutDotPrefix = pathOnly
+            .replace(/^(\.\/)+/, '')
+            .replace(/^(\.\.\/)+/, '');
+        const normalizedPath = withoutDotPrefix.startsWith('/') ? withoutDotPrefix : `/${withoutDotPrefix}`;
+
+        if (!basePath || basePath === '/') {
+            return normalizedPath;
+        }
+
+        if (normalizedPath === basePath || normalizedPath.startsWith(`${basePath}/`)) {
+            return normalizedPath;
+        }
+
+        return `${basePath}${normalizedPath}`;
+    };
+
     // Pagefind Search Integration
     const searchButton = document.getElementById('searchButton');
     const searchModal = document.getElementById('searchModal');
@@ -171,10 +206,13 @@
             let html = '';
             for (const result of results.results) {
                 const data = await result.data();
+                const title = data?.meta?.title || data?.title || 'Resultado';
+                const excerpt = data?.excerpt || data?.meta?.description || '';
+                const url = normalizeUrl(data?.url);
                 html += `
-                    <a href="${data.url}" class="block px-6 py-4 border-b border-gray-800 hover:bg-gray-800 transition">
-                        <h3 class="text-white font-semibold mb-1">${data.title}</h3>
-                        <p class="text-gray-400 text-sm line-clamp-2">${data.excerpt}</p>
+                    <a href="${escapeHtml(url)}" class="block px-6 py-4 border-b border-gray-800 hover:bg-gray-800 transition">
+                        <h3 class="text-white font-semibold mb-1">${escapeHtml(title)}</h3>
+                        <p class="text-gray-400 text-sm line-clamp-2">${escapeHtml(excerpt || 'Sem descrição disponível.')}</p>
                     </a>
                 `;
             }
