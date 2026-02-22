@@ -17,6 +17,7 @@ const splitReadings = (descriptionHtml) => {
         return {
             primeiraLeituraHtml: fallbackHtml,
             segundaLeituraHtml: '<p>Segunda leitura não disponível para hoje.</p>',
+            evangelhoHtml: fallbackHtml,
             reflexaoHtml: fallbackHtml,
         };
     }
@@ -53,17 +54,29 @@ const splitReadings = (descriptionHtml) => {
             .trim();
         return text.length > 0;
     });
-    const reflexaoHtml = nonEmptyParagraphs.length > 0 ? nonEmptyParagraphs[nonEmptyParagraphs.length - 1] : fallbackHtml;
+
+    let evangelhoHtml = fallbackHtml;
+    let reflexaoHtml = fallbackHtml;
+
+    if (nonEmptyParagraphs.length === 1) {
+        evangelhoHtml = nonEmptyParagraphs[0];
+    } else if (nonEmptyParagraphs.length > 1) {
+        const gospelParagraphs = nonEmptyParagraphs.slice(0, -1);
+        evangelhoHtml = gospelParagraphs.join('\n');
+        reflexaoHtml = nonEmptyParagraphs[nonEmptyParagraphs.length - 1];
+    }
 
     return {
         primeiraLeituraHtml: primeiraLeituraHtml || fallbackHtml,
         segundaLeituraHtml,
+        evangelhoHtml,
         reflexaoHtml,
     };
 };
 
 let primeiraLeituraHtml = fallbackHtml;
 let segundaLeituraHtml = '<p>Segunda leitura não disponível para hoje.</p>';
+let evangelhoHtml = fallbackHtml;
 let reflexaoHtml = fallbackHtml;
 
 try {
@@ -74,6 +87,7 @@ try {
         const parsed = splitReadings(descriptionHtml);
         primeiraLeituraHtml = parsed.primeiraLeituraHtml;
         segundaLeituraHtml = parsed.segundaLeituraHtml;
+        evangelhoHtml = parsed.evangelhoHtml;
         reflexaoHtml = parsed.reflexaoHtml;
     }
 } catch {
@@ -122,13 +136,7 @@ try {
 
                     <div class="border-l-4 border-green-400 pl-6 py-4 bg-gray-800 rounded-r-lg">
                         <h3 class="text-green-400 font-bold uppercase text-sm mb-3 tracking-wider">✦ Evangelho do Dia</h3>
-                        <p class="text-gray-300 mb-4">
-                            "Venho que a minha alegria esteja em vós, e a vossa alegria seja completa." 
-                            <span class="text-gray-400 text-sm italic block mt-2">— João 15:11</span>
-                        </p>
-                        <p class="text-gray-400 text-sm">
-                            Para conhecer o Evangelho completo de hoje, clique no botão abaixo.
-                        </p>
+                        <div class="text-gray-300 mb-4 space-y-3 [&_p]:leading-relaxed" set:html={evangelhoHtml}></div>
                     </div>
 
                     <div class="border-l-4 border-blue-400 pl-6 py-4">
