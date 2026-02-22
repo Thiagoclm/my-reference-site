@@ -208,6 +208,18 @@ The dev server runs at `http://localhost:3000` and hot-reloads on file changes.
 
 Production search indexing is generated with Pagefind using the `--site` option.
 
+### Gregorian chant player
+
+The site includes a global Gregorian chant selector with play/pause and saved preference.
+
+The player starts with ready URL options so users can press play immediately.
+
+It also includes a volume slider, and the selected volume is saved for next visits.
+
+There is also a mute/unmute button, and this preference is persisted as well.
+
+The selected URL is saved in `localStorage` and reused on next visits.
+
 ## 📊 Google Analytics (GA4)
 
 This project is ready for GA4 and only loads analytics when an environment variable is set.

@@ -4,6 +4,7 @@ import '../styles/global.css'
 import Navbar from '../components/Navbar.astro'
 import Footer from '../components/Footer.astro'
 import Breadcrumbs from '../components/Breadcrumbs.astro'
+import ChantPlayer from '../components/ChantPlayer.astro'
 const { title, description, image } = Astro.props;
 
 const baseUrl = import.meta.env.BASE_URL;
@@ -85,6 +86,7 @@ const ogImageUrl = new URL(image || fallbackImagePath, Astro.url).href;
             <slot />
         </main>
         <Footer />
+        <ChantPlayer />
 
         {gaMeasurementId && (
             <div
