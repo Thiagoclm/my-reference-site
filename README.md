@@ -218,6 +218,8 @@ It also includes a volume slider, and the selected volume is saved for next visi
 
 There is also a mute/unmute button, and this preference is persisted as well.
 
+By default, chants play in sequence and loop through the full playlist continuously.
+
 The selected URL is saved in `localStorage` and reused on next visits.
 
 ## 📊 Google Analytics (GA4)
