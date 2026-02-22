@@ -83,7 +83,7 @@ Katholikos is a dark-themed Catholic reference site similar to wordonfire.org, d
 
 ### Design Enhancements
 - [ ] Dark mode toggle (already dark by default, but add light mode option)
-- [ ] Mobile menu hamburger for navigation
+- [x] Mobile menu hamburger for navigation
 - [ ] Image optimization and lazy loading
 - [x] Breadcrumb navigation
 - [x] Smooth scroll animations
