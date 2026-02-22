@@ -3,6 +3,10 @@ export type SaintContent = {
     title: string;
     feastDay: string;
     image: string;
+    sourceLinks?: {
+        label: string;
+        url: string;
+    }[];
     imageCredit?: {
         title: string;
         artist: string;
@@ -11,6 +15,8 @@ export type SaintContent = {
     history: string[];
     attributes: string[];
 };
+
+import { SAINT_NAMES_BY_DATE } from './saints-calendar';
 
 export type SaintDayEntry = {
     key: string;
@@ -39,11 +45,32 @@ const pad2 = (value: number) => String(value).padStart(2, '0');
 
 const formatFeastDay = (month: number, day: number) => `${day} de ${monthNames[month - 1]}`;
 
+const buildSourceLinks = (saintName: string) => [
+    {
+        label: `Wikipedia: ${saintName}`,
+        url: `https://pt.wikipedia.org/w/index.php?search=${encodeURIComponent(saintName)}&title=Especial:Pesquisa&ns0=1`,
+    },
+];
+
+const buildGeneratedSaint = (month: number, day: number, saintName: string): SaintContent => ({
+    name: saintName,
+    title: 'Memória litúrgica do calendário católico',
+    feastDay: formatFeastDay(month, day),
+    image: 'assets/cover-example.jpg',
+    sourceLinks: buildSourceLinks(saintName),
+    history: [
+        `${saintName} é lembrado pela Igreja nesta data no calendário litúrgico.`,
+        'Use os links de referência para conhecer melhor a vida, o testemunho e a devoção relacionados a esta celebração.',
+    ],
+    attributes: ['Memória litúrgica diária', 'Calendário católico 2025', 'Vida e testemunho cristão'],
+});
+
 const defaultSaint = (month: number, day: number): SaintContent => ({
     name: 'Santo do Dia',
     title: 'Biografia em preparação',
     feastDay: formatFeastDay(month, day),
     image: 'assets/cover-example.jpg',
+    sourceLinks: buildSourceLinks(`Santo do dia ${pad2(day)}-${pad2(month)}`),
     history: [
         'Estamos preparando o conteúdo completo deste santo para esta data. Em breve, esta página trará uma biografia detalhada e a espiritualidade própria do dia.',
         'Enquanto isso, permaneça unido à Igreja na oração diária e volte novamente para acompanhar as novas publicações do calendário dos santos.',
@@ -62,6 +89,7 @@ const saintsByDate: Record<string, SaintContent> = {
             artist: 'Bartolomé Esteban Perez Murillo (1618 - 1682)',
             style: 'Baroque',
         },
+        sourceLinks: buildSourceLinks('São José'),
         history: [
             'São José foi o protetor e padrasto de Jesus Cristo, escolhido por Deus para cuidar de sua Mãe e de seu Filho. Embora poucos detalhes sobre sua vida nos sejam conhecidos através dos Evangelhos, a Tradição da Igreja nos revela um homem de profunda fé e virtude.',
             'Descendente da linhagem real de Davi, José era carpinteiro de profissão, um trabalho respeitável e dignificado. Sua vida foi marcada pelo trabalho, dedicação e entrega total à vontade de Deus. Casado com Maria, viveu em Nazaré mantendo a Sagrada Família com seu labor honesto.',
@@ -81,13 +109,14 @@ const saintsByDate: Record<string, SaintContent> = {
 
 export const getSaintForDay = (month: number, day: number): SaintDayEntry => {
     const key = `${pad2(month)}-${pad2(day)}`;
-    const saint = saintsByDate[key] || defaultSaint(month, day);
+    const saintName = SAINT_NAMES_BY_DATE[key];
+    const saint = saintsByDate[key] || (saintName ? buildGeneratedSaint(month, day, saintName) : defaultSaint(month, day));
 
     return {
         key,
         month,
         day,
-        isPlaceholder: !Boolean(saintsByDate[key]),
+        isPlaceholder: !Boolean(saintsByDate[key] || saintName),
         saint,
     };
 };

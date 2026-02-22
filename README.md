@@ -206,6 +206,8 @@ npm run preview
 
 The dev server runs at `http://localhost:3000` and hot-reloads on file changes.
 
+Production search indexing is generated with Pagefind using the `--site` option.
+
 ## 📊 Google Analytics (GA4)
 
 This project is ready for GA4 and only loads analytics when an environment variable is set.

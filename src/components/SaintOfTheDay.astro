@@ -65,6 +65,26 @@ const { saint } = Astro.props;
                         </ul>
                     </div>
                 )}
+
+                {saint.sourceLinks && saint.sourceLinks.length > 0 && (
+                    <div class="pt-6 border-t border-gray-800 mt-6">
+                        <p class="text-sm font-semibold text-blue-400 mb-3">Referências:</p>
+                        <ul class="space-y-2">
+                            {saint.sourceLinks.map((link) => (
+                                <li key={link.url}>
+                                    <a
+                                        href={link.url}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        class="text-sm text-blue-300 hover:text-blue-200 underline underline-offset-4"
+                                    >
+                                        {link.label}
+                                    </a>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                )}
             </div>
         </div>
     </div>
