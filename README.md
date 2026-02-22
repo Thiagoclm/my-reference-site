@@ -92,7 +92,7 @@ Katholikos is a dark-themed Catholic reference site similar to wordonfire.org, d
 ### SEO & Analytics
 - [ ] Add Open Graph meta tags for social sharing
 - [ ] Implement sitemap generation
-- [ ] Add Google Analytics or alternative
+- [x] Add Google Analytics or alternative
 - [ ] Optimize meta descriptions per page
 - [ ] Create robots.txt
 
@@ -205,6 +205,33 @@ npm run preview
 ### Development
 
 The dev server runs at `http://localhost:3000` and hot-reloads on file changes.
+
+## 📊 Google Analytics (GA4)
+
+This project is ready for GA4 and only loads analytics when an environment variable is set.
+Tracking is blocked by default until the visitor accepts analytics in the consent banner.
+
+1. Create a GA4 property in Google Analytics.
+2. Copy your Measurement ID (format: `G-XXXXXXXXXX`).
+3. Add it to your environment:
+
+```bash
+# .env
+PUBLIC_GA_MEASUREMENT_ID=G-XXXXXXXXXX
+```
+
+4. Rebuild/redeploy your site.
+
+### Consent behavior
+- Default: analytics denied.
+- If user clicks **Aceitar**: analytics is enabled and page tracking starts.
+- If user clicks **Recusar**: analytics remains disabled.
+- Consent choice is stored in `localStorage` under `ga_consent_choice`.
+
+You can view stats in GA4 under:
+- **Reports > Realtime**
+- **Reports > Acquisition**
+- **Reports > Engagement > Pages and screens**
 
 ## 📝 License
 

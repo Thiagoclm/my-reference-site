@@ -7,6 +7,8 @@ import Breadcrumbs from '../components/Breadcrumbs.astro'
 const { title } = Astro.props;
 
 const baseUrl = import.meta.env.BASE_URL;
+const gaMeasurementId = import.meta.env.PUBLIC_GA_MEASUREMENT_ID;
+const gaConsentStorageKey = 'ga_consent_choice';
 const currentPathname = Astro.url.pathname;
 const baseSegment = baseUrl.replace(/^\/+|\/+$/g, '');
 const pathSegments = currentPathname.split('/').filter(Boolean);
@@ -26,6 +28,36 @@ const showBreadcrumbs = relativePath.length > 0;
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+        {gaMeasurementId && (
+            <>
+                <script async src={`https://www.googletagmanager.com/gtag/js?id=${gaMeasurementId}`}></script>
+                <script define:vars={{ gaMeasurementId, gaConsentStorageKey }}>
+                    window.dataLayer = window.dataLayer || [];
+                    function gtag(){dataLayer.push(arguments);}
+                    window.gtag = gtag;
+
+                    gtag('js', new Date());
+                    gtag('consent', 'default', {
+                        analytics_storage: 'denied',
+                        ad_storage: 'denied',
+                        ad_user_data: 'denied',
+                        ad_personalization: 'denied',
+                        wait_for_update: 500,
+                    });
+
+                    const savedConsent = localStorage.getItem(gaConsentStorageKey);
+                    if (savedConsent === 'accepted') {
+                        gtag('consent', 'update', {
+                            analytics_storage: 'granted',
+                            ad_storage: 'denied',
+                            ad_user_data: 'denied',
+                            ad_personalization: 'denied',
+                        });
+                        gtag('config', gaMeasurementId);
+                    }
+                </script>
+            </>
+        )}
     </head>
     <body class="bg-black text-white">
         <Navbar />
@@ -34,5 +66,74 @@ const showBreadcrumbs = relativePath.length > 0;
             <slot />
         </main>
         <Footer />
+
+        {gaMeasurementId && (
+            <div
+                id="ga-consent-banner"
+                class="hidden fixed bottom-4 left-4 right-4 md:left-auto md:max-w-md bg-gray-900 border border-gray-700 rounded-lg p-4 shadow-lg z-50"
+                role="dialog"
+                aria-label="Preferências de cookies"
+            >
+                <p class="text-sm text-gray-300 mb-3">
+                    Usamos cookies de análise para entender como o site é utilizado e melhorar sua experiência.
+                </p>
+                <div class="flex gap-2 justify-end">
+                    <button id="ga-consent-reject" class="px-3 py-2 text-sm rounded-md border border-gray-700 text-gray-300 hover:text-white hover:border-gray-500 transition">
+                        Recusar
+                    </button>
+                    <button id="ga-consent-accept" class="px-3 py-2 text-sm rounded-md bg-blue-600 text-white hover:bg-blue-700 transition">
+                        Aceitar
+                    </button>
+                </div>
+            </div>
+        )}
+
+        {gaMeasurementId && (
+            <script define:vars={{ gaMeasurementId, gaConsentStorageKey }}>
+                const banner = document.getElementById('ga-consent-banner');
+                const acceptButton = document.getElementById('ga-consent-accept');
+                const rejectButton = document.getElementById('ga-consent-reject');
+
+                const hideBanner = () => {
+                    banner?.classList.add('hidden');
+                };
+
+                const showBanner = () => {
+                    banner?.classList.remove('hidden');
+                };
+
+                const savedConsent = localStorage.getItem(gaConsentStorageKey);
+                if (!savedConsent) {
+                    showBanner();
+                }
+
+                acceptButton?.addEventListener('click', () => {
+                    localStorage.setItem(gaConsentStorageKey, 'accepted');
+                    if (window.gtag) {
+                        window.gtag('consent', 'update', {
+                            analytics_storage: 'granted',
+                            ad_storage: 'denied',
+                            ad_user_data: 'denied',
+                            ad_personalization: 'denied',
+                        });
+                        window.gtag('config', gaMeasurementId);
+                    }
+                    hideBanner();
+                });
+
+                rejectButton?.addEventListener('click', () => {
+                    localStorage.setItem(gaConsentStorageKey, 'rejected');
+                    if (window.gtag) {
+                        window.gtag('consent', 'update', {
+                            analytics_storage: 'denied',
+                            ad_storage: 'denied',
+                            ad_user_data: 'denied',
+                            ad_personalization: 'denied',
+                        });
+                    }
+                    hideBanner();
+                });
+            </script>
+        )}
     </body>
 </html>
