@@ -74,7 +74,7 @@ Katholikos is a dark-themed Catholic reference site similar to wordonfire.org, d
 - [ ] Newsletter email integration (backend)
 - [ ] Comment system for articles
 - [ ] Social sharing buttons
-- [ ] Reading time calculation for articles
+- [x] Reading time calculation for articles
 - [ ] Table of contents for long articles
 - [ ] Related articles suggestions
 - [ ] RSS feed for articles/reflections
@@ -90,7 +90,7 @@ Katholikos is a dark-themed Catholic reference site similar to wordonfire.org, d
 - [ ] Loading skeletons for content
 
 ### SEO & Analytics
-- [ ] Add Open Graph meta tags for social sharing
+- [x] Add Open Graph meta tags for social sharing
 - [ ] Implement sitemap generation
 - [x] Add Google Analytics or alternative
 - [ ] Optimize meta descriptions per page

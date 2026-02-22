@@ -1,9 +1,11 @@
 ---
 import Layout from '../layouts/Base.astro';
 import Hero from '../components/Hero.astro';
+
+const pageDescription = 'Conheça a missão do Katholikos de integrar razão e fé por meio de conteúdo católico, ciência e espiritualidade.';
 ---
 
-<Layout title="Declaração de Missão">
+<Layout title="Declaração de Missão" description={pageDescription}>
     <Hero 
         title="Declaração de Missão" 
         subtitle="Iluminando a harmonia entre a Razão e a Fé" 

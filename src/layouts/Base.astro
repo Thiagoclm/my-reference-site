@@ -4,7 +4,7 @@ import '../styles/global.css'
 import Navbar from '../components/Navbar.astro'
 import Footer from '../components/Footer.astro'
 import Breadcrumbs from '../components/Breadcrumbs.astro'
-const { title } = Astro.props;
+const { title, description, image } = Astro.props;
 
 const baseUrl = import.meta.env.BASE_URL;
 const gaMeasurementId = import.meta.env.PUBLIC_GA_MEASUREMENT_ID;
@@ -17,14 +17,33 @@ const relativeSegments = baseSegment && pathSegments[0] === baseSegment
     : pathSegments;
 const relativePath = relativeSegments.join('/');
 const showBreadcrumbs = relativePath.length > 0;
+const metaDescription = description || 'Uma curadoria de artigos, livros e recursos para aprofundar sua fé e conhecimento.';
+const pageTitle = title ? `${title} - Katholikos` : 'Katholikos - Artigos, Livros e Recursos';
+const canonicalUrl = Astro.url.href;
+const fallbackImagePath = `${baseUrl}assets/cover-example.jpg`;
+const ogImageUrl = new URL(image || fallbackImagePath, Astro.url).href;
 ---
 <!doctype html>
 <html lang="pt-BR">
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>{title ? `${title} - Katholikos`: 'Katholikos - Artigos, Livros e Recursos'}</title>
-        <meta name="description" content="Uma curadoria de artigos, livros e recursos para aprofundar sua fé e conhecimento." />
+        <title>{pageTitle}</title>
+        <meta name="description" content={metaDescription} />
+        <link rel="canonical" href={canonicalUrl} />
+
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="Katholikos" />
+        <meta property="og:title" content={pageTitle} />
+        <meta property="og:description" content={metaDescription} />
+        <meta property="og:url" content={canonicalUrl} />
+        <meta property="og:image" content={ogImageUrl} />
+
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={pageTitle} />
+        <meta name="twitter:description" content={metaDescription} />
+        <meta name="twitter:image" content={ogImageUrl} />
+
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">

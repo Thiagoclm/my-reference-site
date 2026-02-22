@@ -4,9 +4,10 @@ import { getCategoryGroups } from '../../lib/content-browse';
 
 const base = import.meta.env.BASE_URL;
 const categories = getCategoryGroups();
+const pageDescription = 'Navegue por categorias para encontrar artigos, livros e recursos católicos com mais rapidez.';
 ---
 
-<Layout title="Categorias">
+<Layout title="Categorias" description={pageDescription}>
     <div class="max-w-6xl mx-auto">
         <div class="mb-12">
             <div class="inline-block mb-6">

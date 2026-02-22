@@ -3,9 +3,10 @@ import Layout from '../layouts/Base.astro';
 import Hero from '../components/Hero.astro';
 
 const base = import.meta.env.BASE_URL;
+const pageDescription = 'Política de privacidade do Katholikos: como coletamos, usamos e protegemos seus dados e preferências.';
 ---
 
-<Layout title="Privacidade">
+<Layout title="Privacidade" description={pageDescription}>
     <Hero 
         title="Política de Privacidade" 
         subtitle="Como coletamos, usamos e protegemos seus dados" 

@@ -8,6 +8,7 @@ const todaysDate = new Date();
 const today = getSaintForDay(todaysDate.getMonth() + 1, todaysDate.getDate());
 const joseph = getSaintForDay(3, 19);
 const monthNames = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
+const pageDescription = 'Calendário dos santos com páginas diárias para cada data do ano e destaques de devoção católica.';
 const daysByMonth = monthNames.map((name, monthIndex) => ({
     name,
     month: monthIndex + 1,
@@ -15,7 +16,7 @@ const daysByMonth = monthNames.map((name, monthIndex) => ({
 }));
 ---
 
-<Layout title="Santos">
+<Layout title="Santos" description={pageDescription}>
     <div class="max-w-6xl mx-auto">
         <div class="mb-12">
             <div class="inline-block mb-6">

@@ -1,11 +1,26 @@
 ---
 // src/pages/livros/imitacao-de-cristo.astro
 import Layout from '../../layouts/Base.astro';
+import { getEstimatedReadingTimeLabel } from '../../lib/reading-time';
 
 const base = import.meta.env.BASE_URL;
+const bookMeta = {
+    layoutTitle: 'Imitação de Cristo — Recomendação de Livro',
+    headingTitle: 'A Imitação de Cristo',
+    subtitle: 'O clássico espiritual mais lido depois da Bíblia',
+    description: 'Resenha de A Imitação de Cristo, de Tomás de Kempis, com temas centrais da obra, estrutura e importância espiritual para a vida cristã.',
+    readingSource: `
+A Imitação de Cristo. O clássico espiritual mais lido depois da Bíblia.
+Sobre o Livro. Temas Centrais. Estrutura da Obra.
+O Que Dizem Sobre Esta Obra.
+Sobre o Autor.
+`,
+};
+
+const bookReadTime = getEstimatedReadingTimeLabel(bookMeta.readingSource);
 ---
 
-<Layout title="Imitação de Cristo — Recomendação de Livro">
+<Layout title={bookMeta.layoutTitle} description={bookMeta.description}>
     <div class="max-w-5xl mx-auto">
         <!-- Book Header -->
         <div class="mb-12">
@@ -62,11 +77,12 @@ const base = import.meta.env.BASE_URL;
             <div class="md:col-span-2">
                 <div class="mb-8">
                     <h1 class="text-4xl md:text-5xl font-serif font-bold text-white mb-4">
-                        A Imitação de Cristo
+                        {bookMeta.headingTitle}
                     </h1>
                     <p class="text-2xl text-gray-300 font-serif italic mb-6">
-                        O clássico espiritual mais lido depois da Bíblia
+                        {bookMeta.subtitle}
                     </p>
+                    <p class="text-sm text-gray-500 mb-6">{bookReadTime}</p>
                     <div class="border-l-4 border-blue-400 pl-6 py-4 bg-gray-900 rounded-r-lg">
                         <p class="text-gray-200 text-lg italic">
                             "De que adianta aprender a dialogar sobre a vida de virtude se ela não torna agradável a Deus?"

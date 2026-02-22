@@ -22,9 +22,10 @@ const saint = {
     ...entry.saint,
     image: `${base}${entry.saint.image.startsWith('/') ? entry.saint.image.slice(1) : entry.saint.image}`,
 };
+const pageDescription = `Conheça ${entry.saint.name}, celebrado em ${entry.saint.feastDay}, com biografia e devoção católica.`;
 ---
 
-<Layout title={`Santos — ${String(entry.day).padStart(2, '0')}/${String(entry.month).padStart(2, '0')}`}>
+<Layout title={`Santos — ${String(entry.day).padStart(2, '0')}/${String(entry.month).padStart(2, '0')}`} description={pageDescription}>
     <div class="max-w-6xl mx-auto">
         <div class="mb-6">
             <a href={`${base}santos`} class="text-sm text-blue-400 hover:text-blue-300 transition">← Voltar para Santos</a>

@@ -1,8 +1,10 @@
 ---
 // src/pages/livros/index.astro
 import Layout from '../../layouts/Base.astro';
+import { getEstimatedReadingTimeLabel } from '../../lib/reading-time';
 
 const base = import.meta.env.BASE_URL;
+const pageDescription = 'Seleção curada de livros católicos para aprofundar a fé, formação teológica e vida espiritual.';
 
 // All book recommendations — add new books here
 const books = [
@@ -35,7 +37,7 @@ const books = [
 const uniqueTags = [...new Set(books.flatMap((book) => book.tags))].sort((a, b) => a.localeCompare(b));
 ---
 
-<Layout title="Livros — Recomendações de Leitura">
+<Layout title="Livros — Recomendações de Leitura" description={pageDescription}>
     <div class="max-w-6xl mx-auto">
         <!-- Header -->
         <div class="mb-12">
@@ -134,7 +136,10 @@ const uniqueTags = [...new Set(books.flatMap((book) => book.tags))].sort((a, b) 
                                     </h2>
                                 </a>
                                 <p class="text-gray-400 font-serif italic mb-1">{book.subtitle}</p>
-                                <p class="text-sm text-gray-500 mb-4">por <span class="text-gray-300 font-semibold">{book.author}</span></p>
+                                <p class="text-sm text-gray-500 mb-4">
+                                    por <span class="text-gray-300 font-semibold">{book.author}</span>
+                                    <span class="ml-2 text-gray-600">• {getEstimatedReadingTimeLabel(`${book.title} ${book.subtitle} ${book.summary}`)}</span>
+                                </p>
 
                                 <!-- Summary -->
                                 <p class="text-gray-300 leading-relaxed mb-6">

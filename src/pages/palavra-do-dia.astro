@@ -3,6 +3,7 @@
 import Layout from '../layouts/Base.astro';
 
 const rssUrl = 'https://www.vaticannews.va/pt/palavra-do-dia.rss.xml';
+const pageDescription = 'Leituras diárias e Evangelho do dia com conteúdo do Vatican News para meditação e crescimento espiritual.';
 
 const fallbackHtml = '<p>Não foi possível carregar automaticamente. Use o botão abaixo para abrir a leitura completa no Vatican News.</p>';
 
@@ -95,7 +96,7 @@ try {
 }
 ---
 
-<Layout title="Palavra do Dia">
+<Layout title="Palavra do Dia" description={pageDescription}>
     <div class="max-w-4xl mx-auto">
         <!-- Header -->
         <div class="mb-12">

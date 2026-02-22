@@ -1,9 +1,25 @@
 ---
 // src/pages/livros/catholicism.astro
 import Layout from '../../layouts/Base.astro';
+import { getEstimatedReadingTimeLabel } from '../../lib/reading-time';
+
+const bookMeta = {
+    layoutTitle: 'Catholicism - Recomendação de Livro',
+    headingTitle: 'Catholicism',
+    subtitle: 'A Journey to the Heart of the Faith (Second Edition)',
+    description: 'Resenha do livro Catholicism, de Bishop Robert Barron, com visão geral da obra, principais temas e recomendações de leitura.',
+    readingSource: `
+Catholicism. A Journey to the Heart of the Faith.
+Sobre o Livro. Novidades na Segunda Edição.
+O Que Estão Dizendo. Índice.
+Sobre o Autor.
+`,
+};
+
+const bookReadTime = getEstimatedReadingTimeLabel(bookMeta.readingSource);
 ---
 
-<Layout title="Catholicism - Recomendação de Livro">
+<Layout title={bookMeta.layoutTitle} description={bookMeta.description}>
     <div class="max-w-5xl mx-auto">
         <!-- Book Header -->
         <div class="mb-12">
@@ -53,11 +69,12 @@ import Layout from '../../layouts/Base.astro';
             <div class="md:col-span-2">
                 <div class="mb-8">
                     <h1 class="text-4xl md:text-5xl font-serif font-bold text-white mb-4">
-                        Catholicism
+                        {bookMeta.headingTitle}
                     </h1>
                     <p class="text-2xl text-gray-300 font-serif italic mb-6">
-                        A Journey to the Heart of the Faith (Second Edition)
+                        {bookMeta.subtitle}
                     </p>
+                    <p class="text-sm text-gray-500 mb-6">{bookReadTime}</p>
                     <div class="border-l-4 border-blue-400 pl-6 py-4 bg-gray-900 rounded-r-lg">
                         <p class="text-gray-200 text-lg italic">
                             "What I propose to do in this book is to take you on a guided exploration of the Catholic world... conducting you ever deeper into the mystery of the Incarnation."

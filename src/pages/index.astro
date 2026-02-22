@@ -6,6 +6,7 @@ import LatestSection from '../components/LatestSection.astro';
 import SaintOfTheDay from '../components/SaintOfTheDay.astro';
 
 const base = import.meta.env.BASE_URL;
+const pageDescription = 'Curadoria católica com artigos, livros, santos do dia e leituras para aprofundar fé e conhecimento.';
 
 // Exemplo de dados. Você pode carregar do seu sistema de conteúdo depois
 const featuredItems = [
@@ -89,7 +90,7 @@ const saintOfTheDay = {
 };
 ---
 
-<Layout title="Página Inicial">
+<Layout title="Página Inicial" description={pageDescription}>
     <!-- Hero Section -->
     <Hero 
         title="Curadorias e Leituras Recomendadas" 

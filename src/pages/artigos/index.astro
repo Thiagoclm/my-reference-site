@@ -2,12 +2,14 @@
 // src/pages/artigos/index.astro
 import Layout from '../../layouts/Base.astro';
 import { articles } from '../../data/articles';
+import { getEstimatedReadingTimeLabel } from '../../lib/reading-time';
 
 const base = import.meta.env.BASE_URL;
+const pageDescription = 'Reflexões, biografias de santos e estudos da fé católica para aprofundar seu conhecimento e vida espiritual.';
 const uniqueTags = [...new Set(articles.flatMap((article) => article.tags))].sort((a, b) => a.localeCompare(b));
 ---
 
-<Layout title="Artigos — Reflexões e Estudos">
+<Layout title="Artigos — Reflexões e Estudos" description={pageDescription}>
     <div class="max-w-6xl mx-auto">
         <!-- Header -->
         <div class="mb-12">
@@ -111,6 +113,7 @@ const uniqueTags = [...new Set(articles.flatMap((article) => article.tags))].sor
                                     {article.date && (
                                         <span class="ml-2 text-gray-600">• Festa: {article.date}</span>
                                     )}
+                                    <span class="ml-2 text-gray-600">• {getEstimatedReadingTimeLabel(`${article.title} ${article.subtitle} ${article.summary}`)}</span>
                                 </p>
 
                                 <!-- Summary -->
