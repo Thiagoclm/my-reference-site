@@ -1,0 +1,110 @@
+---
+import Layout from '../../layouts/Base.astro';
+
+const base = import.meta.env.BASE_URL;
+const pageDescription = 'Perfis de cientistas católicos e pioneiros que contribuíram para a ciência e para a educação.';
+
+const scientists = [
+    {
+        name: 'Sister Mary Kenneth Keller',
+        subtitle: 'Primeira mulher a obter um PhD em Ciência da Computação nos EUA (1965)',
+        summary:
+            'Religiosa católica e pioneira da computação na educação, Sister Mary Kenneth Keller ajudou a ampliar o acesso ao conhecimento tecnológico e fundou um departamento de ciência da computação em uma universidade católica.',
+        image: 'assets/sister-mary-kenneth-keller.jpg',
+        link: 'cientistas/sister-mary-kenneth-keller',
+        tags: ['Computação', 'Educação', 'Pioneira']
+    },
+    {
+        name: 'Fr. Georges Lemaître',
+        subtitle: 'Perfil em preparação',
+        summary:
+            'Estamos preparando um perfil completo sobre o sacerdote e físico belga Georges Lemaître, conhecido por formular a hipótese do “átomo primordial”, base para o desenvolvimento da teoria do Big Bang.',
+        image: 'assets/cover-example.jpg',
+        tags: ['Cosmologia', 'Sacerdote', 'Em breve']
+    }
+];
+---
+
+<Layout title="Cientistas — Perfis e Legado" description={pageDescription}>
+    <div class="max-w-6xl mx-auto">
+        <div class="mb-12">
+            <div class="inline-block mb-6">
+                <h2 class="text-sm font-bold text-blue-400 uppercase tracking-wider">Publicações</h2>
+            </div>
+            <h1 class="text-4xl md:text-5xl font-serif font-bold text-white mb-4">Cientistas</h1>
+            <p class="text-xl text-gray-300 max-w-3xl">
+                Perfis de cientistas católicos e pioneiros da pesquisa, com foco em suas contribuições acadêmicas, humanas e espirituais.
+            </p>
+        </div>
+
+        <div class="space-y-8 mb-16">
+            {scientists.map((scientist) => (
+                <article class="bg-gray-900 border border-gray-800 rounded-xl overflow-hidden hover:border-gray-700 transition group">
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-0">
+                        <div class="md:col-span-1">
+                            {scientist.link ? (
+                                <a href={`${base}${scientist.link}`}>
+                                    <img
+                                        src={`${base}${scientist.image}`}
+                                        alt={scientist.name}
+                                        class="w-full h-64 md:h-full object-cover group-hover:scale-105 transition duration-500"
+                                    />
+                                </a>
+                            ) : (
+                                <img
+                                    src={`${base}${scientist.image}`}
+                                    alt={scientist.name}
+                                    class="w-full h-64 md:h-full object-cover"
+                                />
+                            )}
+                        </div>
+
+                        <div class="md:col-span-3 p-6 md:p-8 flex flex-col justify-between">
+                            <div>
+                                <div class="flex flex-wrap gap-2 mb-4">
+                                    {scientist.tags.map((tag) => (
+                                        <span class="bg-blue-900 text-blue-300 text-xs font-semibold px-3 py-1 rounded-full">
+                                            {tag}
+                                        </span>
+                                    ))}
+                                </div>
+
+                                {scientist.link ? (
+                                    <a href={`${base}${scientist.link}`} class="block">
+                                        <h2 class="text-2xl md:text-3xl font-serif font-bold text-white mb-2 group-hover:text-blue-400 transition">
+                                            {scientist.name}
+                                        </h2>
+                                    </a>
+                                ) : (
+                                    <h2 class="text-2xl md:text-3xl font-serif font-bold text-white mb-2">
+                                        {scientist.name}
+                                    </h2>
+                                )}
+                                <p class="text-gray-400 font-serif italic mb-4">{scientist.subtitle}</p>
+
+                                <p class="text-gray-300 leading-relaxed mb-6">
+                                    {scientist.summary}
+                                </p>
+                            </div>
+
+                            <div>
+                                {scientist.link ? (
+                                    <a
+                                        href={`${base}${scientist.link}`}
+                                        class="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition text-sm"
+                                    >
+                                        Ler Perfil Completo →
+                                    </a>
+                                ) : (
+                                    <span class="inline-block bg-gray-800 text-gray-300 px-6 py-3 rounded-lg font-semibold text-sm">
+                                        Em breve
+                                    </span>
+                                )}
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            ))}
+        </div>
+    </div>
+</Layout>

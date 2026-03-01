@@ -1,0 +1,123 @@
+---
+import Layout from '../../layouts/Base.astro';
+import { getEstimatedReadingTimeLabel } from '../../lib/reading-time';
+import SocialShare from '../../components/SocialShare.astro';
+
+const base = import.meta.env.BASE_URL;
+const profileMeta = {
+    layoutTitle: 'Sister Mary Kenneth Keller — Pioneira da Computação',
+    headingTitle: 'Sister Mary Kenneth Keller',
+    subtitle: 'Primeira mulher a obter um PhD em Ciência da Computação nos EUA (1965)',
+    description: 'Conheça a vida e o legado de Sister Mary Kenneth Keller, religiosa católica e pioneira da ciência da computação.',
+    readingSource: `
+Sister Mary Kenneth Keller foi religiosa católica e pioneira da computação.
+Nascida em Cleveland, entrou para a vida religiosa em 1932.
+Concluiu doutorado em Ciência da Computação na UW-Madison em 1965.
+Defendeu o uso da computação na educação para ampliar acesso ao conhecimento.
+Fundou o departamento de ciência da computação da Clarke University.
+Seu legado une fé, educação e inovação tecnológica.
+`,
+};
+
+const profileReadTime = getEstimatedReadingTimeLabel(profileMeta.readingSource);
+const shareUrl = Astro.url.href;
+---
+
+<Layout title={profileMeta.layoutTitle} description={profileMeta.description}>
+    <div class="max-w-4xl mx-auto">
+        <div class="mb-12">
+            <div class="inline-block mb-6">
+                <h2 class="text-sm font-bold text-blue-400 uppercase tracking-wider">Cientista</h2>
+            </div>
+            <h1 class="text-4xl md:text-5xl font-serif font-bold text-white mb-4">{profileMeta.headingTitle}</h1>
+            <p class="text-2xl text-gray-300 font-serif italic mb-6">{profileMeta.subtitle}</p>
+            <div class="flex items-center gap-4 text-sm text-gray-400 flex-wrap">
+                <span>Computação e Educação</span>
+                <span class="text-gray-600">•</span>
+                <span>Doutorado em 1965</span>
+                <span class="text-gray-600">•</span>
+                <span>{profileReadTime}</span>
+            </div>
+        </div>
+
+        <div class="mb-12 rounded-xl overflow-hidden border border-gray-800">
+            <img
+                src={`${base}assets/sister-mary-kenneth-keller.jpg`}
+                alt="Sister Mary Kenneth Keller"
+                class="w-full object-cover bg-gray-950"
+            />
+            <div class="bg-gray-900 px-6 py-3 border-t border-gray-800">
+                <p class="text-gray-500 text-xs italic">
+                    Sister Mary Kenneth Keller, em registro histórico de sua trajetória acadêmica.
+                </p>
+            </div>
+        </div>
+
+        <article class="prose-custom space-y-10">
+            <section>
+                <h2 class="text-2xl font-serif font-bold text-white mb-4">Uma vocação religiosa com olhar para o futuro</h2>
+                <div class="space-y-4 text-gray-300 leading-relaxed">
+                    <p>
+                        Nascida em Cleveland, Ohio, em 1913, Sister Mary Kenneth Keller ingressou na vida religiosa ainda jovem, entrando para a congregação Sisters of Charity of the Blessed Virgin Mary em 1932.
+                    </p>
+                    <p>
+                        Sua caminhada intelectual sempre andou junto com sua vocação: ela estudou Matemática e Física e, ao longo dos anos, desenvolveu uma visão clara de que a computação poderia servir ao bem comum, especialmente no campo educacional.
+                    </p>
+                </div>
+            </section>
+
+            <section>
+                <h2 class="text-2xl font-serif font-bold text-white mb-4">Pioneirismo no doutorado em Ciência da Computação</h2>
+                <div class="space-y-4 text-gray-300 leading-relaxed">
+                    <p>
+                        Em 1965, na University of Wisconsin–Madison, Sister Mary Kenneth Keller concluiu seu PhD em Ciência da Computação, tornando-se reconhecida como a primeira mulher a atingir esse marco nos Estados Unidos.
+                    </p>
+                    <p>
+                        Sua tese, orientada por Preston Hammer, abordou inferência indutiva em padrões gerados por computador, um tema avançado para a época e representativo da maturidade científica que ela já demonstrava.
+                    </p>
+                </div>
+            </section>
+
+            <div class="bg-blue-900 border border-blue-800 p-6 rounded-lg">
+                <h3 class="text-xl font-serif font-bold text-white mb-4">✦ Ciência para formar pessoas</h3>
+                <p class="text-gray-200 leading-relaxed">
+                    Keller defendia que informação só tem valor quando pode ser acessada por mais pessoas. Sua visão antecipou debates contemporâneos sobre inclusão digital, educação tecnológica e democratização do conhecimento.
+                </p>
+            </div>
+
+            <section>
+                <h2 class="text-2xl font-serif font-bold text-white mb-4">Legado na Clarke University</h2>
+                <div class="space-y-4 text-gray-300 leading-relaxed">
+                    <p>
+                        Após o doutorado, ela fundou o departamento de ciência da computação da Clarke University, em Iowa, onde lecionou e liderou o programa por muitos anos.
+                    </p>
+                    <p>
+                        Seu trabalho ajudou a consolidar a computação em instituições menores, mostrando que tecnologia de ponta e formação humanista podem caminhar juntas em ambientes católicos de ensino.
+                    </p>
+                </div>
+            </section>
+
+            <section class="bg-gray-900 border border-gray-800 rounded-lg p-8">
+                <h2 class="text-2xl font-serif font-bold text-white mb-4">Por que ela importa hoje</h2>
+                <div class="space-y-4 text-gray-300 leading-relaxed">
+                    <p>
+                        Sister Mary Kenneth Keller permanece como referência para mulheres na tecnologia, para educadores e para todos os que enxergam a ciência como serviço.
+                    </p>
+                    <p>
+                        Seu testemunho demonstra que fé, rigor acadêmico e compromisso social não são caminhos opostos: podem, ao contrário, fortalecer-se mutuamente.
+                    </p>
+                </div>
+            </section>
+        </article>
+
+        <div class="mt-12 pt-8 border-t border-gray-800">
+            <p class="text-gray-500 text-sm">
+                Fonte: <a href="https://www.cs.wisc.edu/2019/03/18/2759/" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:text-blue-300 transition">University of Wisconsin–Madison — Computer Sciences</a>
+            </p>
+        </div>
+
+        <div class="mt-8">
+            <SocialShare title={profileMeta.layoutTitle} url={shareUrl} />
+        </div>
+    </div>
+</Layout>
