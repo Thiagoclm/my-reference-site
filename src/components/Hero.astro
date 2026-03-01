@@ -1,10 +1,36 @@
 ---
-const {title, subtitle, image} = Astro.props
+const {
+    title,
+    subtitle,
+    image,
+    imageClass = 'w-full h-64 object-cover',
+    imageCredit,
+    imageCreditHref,
+    imageCreditLabel = 'Fonte',
+} = Astro.props
 ---
 <section class="mb-12">
     <div class="rounded-lg overflow-hidden shadow-lg">
-        <img src={image} alt="Hero" class="w-full h-64 object-cover" loading="lazy" />
+        <img src={image} alt="Hero" class={imageClass} loading="lazy" />
     </div>
+    {imageCredit && (
+        <p class="mt-2 text-right text-xs text-gray-500">
+            {imageCredit}
+            {imageCreditHref && (
+                <>
+                    {' '}
+                    <a
+                        href={imageCreditHref}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="underline decoration-gray-600 hover:text-gray-400"
+                    >
+                        {imageCreditLabel}
+                    </a>
+                </>
+            )}
+        </p>
+    )}
     <h1 class="mt-6 text-4xl font-serif text-white">{title}</h1>
     <p class="mt-2 text-lg text-gray-300">{subtitle}</p>
 </section>
