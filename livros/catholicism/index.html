@@ -165,7 +165,11 @@ const presetTracks = [{"label":"Salve Regina","url":"https://commons.wikimedia.o
         setCollapsed(!isCollapsed);
     });
 
-    const shouldPlay = localStorage.getItem(enabledKey) === 'true';
+    const savedEnabled = localStorage.getItem(enabledKey);
+    const shouldPlay = savedEnabled === null ? true : savedEnabled === 'true';
+    if (savedEnabled === null) {
+        localStorage.setItem(enabledKey, 'true');
+    }
 
     volumeInput?.addEventListener('input', () => {
         const currentVolume = normalizeVolume(volumeInput.value);
@@ -222,8 +226,7 @@ const presetTracks = [{"label":"Salve Regina","url":"https://commons.wikimedia.o
                 await audio.play();
                 setStatus('Reproduzindo.', 'ok');
             } catch {
-                localStorage.setItem(enabledKey, 'false');
-                setStatus('Não foi possível reproduzir este arquivo.', 'error');
+                setStatus('Autoplay bloqueado pelo navegador. Toque em "Tocar".', 'error');
             }
             updateButton();
         }
