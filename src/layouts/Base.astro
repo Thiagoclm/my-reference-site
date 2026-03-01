@@ -19,7 +19,7 @@ const relativeSegments = baseSegment && pathSegments[0] === baseSegment
 const relativePath = relativeSegments.join('/');
 const showBreadcrumbs = relativePath.length > 0;
 const metaDescription = description || 'Uma curadoria de artigos, livros e recursos para aprofundar sua fé e conhecimento.';
-const pageTitle = title ? `${title} - Katholikos` : 'Katholikos - Artigos, Livros e Recursos';
+const pageTitle = title ? `${title} - O Católico Cientista` : 'O Católico Cientista - Artigos, Livros e Recursos';
 const canonicalUrl = Astro.url.href;
 const fallbackImagePath = `${baseUrl}assets/cover-example.jpg`;
 const ogImageUrl = new URL(image || fallbackImagePath, Astro.url).href;
@@ -34,7 +34,7 @@ const ogImageUrl = new URL(image || fallbackImagePath, Astro.url).href;
         <link rel="canonical" href={canonicalUrl} />
 
         <meta property="og:type" content="website" />
-        <meta property="og:site_name" content="Katholikos" />
+        <meta property="og:site_name" content="O Católico Cientista" />
         <meta property="og:title" content={pageTitle} />
         <meta property="og:description" content={metaDescription} />
         <meta property="og:url" content={canonicalUrl} />

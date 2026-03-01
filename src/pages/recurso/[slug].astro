@@ -49,7 +49,7 @@ const file = findFile(slug);
 let html = '<p>Recurso não encontrado.</p>';
 let cover = '';
 let resourceTitle = slug || 'Recurso';
-let resourceDescription = 'Conteúdo do recurso no Katholikos.';
+let resourceDescription = 'Conteúdo do recurso no site O Católico Cientista.';
 const base = import.meta.env.BASE_URL;
 if (file){
     const fileContent = fs.readFileSync(file,'utf-8');
@@ -57,7 +57,7 @@ if (file){
     html = md.render(content);
     cover = data.cover || '';
     resourceTitle = data.title || resourceTitle;
-    resourceDescription = data.summary || data.description || `Leia o recurso ${resourceTitle} no Katholikos.`;
+    resourceDescription = data.summary || data.description || `Leia o recurso ${resourceTitle} no site O Católico Cientista.`;
 }
 ---
 

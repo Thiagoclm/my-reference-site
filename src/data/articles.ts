@@ -13,7 +13,7 @@ export const articles: ArticleItem[] = [
     {
         title: 'Santo Alberto Magno: Bispo e Doutor da Igreja',
         subtitle: 'O grande mestre dominicano e mentor de São Tomás de Aquino',
-        author: 'Katholikos',
+        author: 'O Católico Cientista',
         image: 'assets/st_albert_magnus.jpg',
         link: 'santo-alberto-magno',
         tags: ['Santos', 'Dominicanos', 'Doutores da Igreja'],

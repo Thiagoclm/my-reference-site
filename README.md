@@ -1,10 +1,10 @@
-# Katholikos
+# O Católico Cientista
 
 A Catholic curated content website built with Astro, featuring articles, books, resources, and daily saint reflections.
 
 ## 📋 Project Overview
 
-Katholikos is a dark-themed Catholic reference site similar to wordonfire.org, designed to share spiritual content, book recommendations, and daily reflections on the lives of saints.
+The O Católico Cientista site is a dark-themed Catholic reference site similar to wordonfire.org, designed to share spiritual content, book recommendations, and daily reflections on the lives of saints.
 
 ## 🎨 Features Implemented
 
@@ -255,7 +255,7 @@ This project is open source and available under the MIT License.
 
 ## 🙏 Spirituality Note
 
-Katholikos is dedicated to proclaiming Christ in culture through shared Catholic wisdom, spiritual resources, and devotional content.
+The O Católico Cientista site is dedicated to proclaiming Christ in culture through shared Catholic wisdom, spiritual resources, and devotional content.
 
 ---
 
