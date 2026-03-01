@@ -93,6 +93,39 @@
             .replace(/"/g, '&quot;')
             .replace(/'/g, '&#39;');
 
+    const stripHtmlTags = (value) =>
+        String(value ?? '')
+            .replace(/<[^>]*>/g, ' ')
+            .replace(/\s+/g, ' ')
+            .trim();
+
+    const escapeRegExp = (value) => String(value).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
+    const highlightTerms = (text, query) => {
+        const source = String(text ?? '');
+        const terms = String(query ?? '')
+            .trim()
+            .split(/\s+/)
+            .filter(Boolean)
+            .slice(0, 8);
+
+        if (!terms.length) {
+            return escapeHtml(source);
+        }
+
+        const pattern = new RegExp(`(${terms.map(escapeRegExp).join('|')})`, 'gi');
+        const parts = source.split(pattern);
+
+        return parts
+            .map((part, index) => {
+                if (index % 2 === 1) {
+                    return `<mark class="bg-blue-500/30 text-white px-0.5 rounded">${escapeHtml(part)}</mark>`;
+                }
+                return escapeHtml(part);
+            })
+            .join('');
+    };
+
     const normalizeUrl = (url) => {
         if (!url) return '#';
         const urlString = String(url).trim();
@@ -199,7 +232,7 @@
             const results = await pagefind.search(query);
             
             if (results.results.length === 0) {
-                searchResults!.innerHTML = '<div class="p-6 text-center text-gray-400"><p>Nenhum resultado encontrado para "<strong>' + query + '</strong>"</p></div>';
+                searchResults!.innerHTML = '<div class="p-6 text-center text-gray-400"><p>Nenhum resultado encontrado para "<strong>' + escapeHtml(query) + '</strong>"</p></div>';
                 return;
             }
 
@@ -208,11 +241,14 @@
                 const data = await result.data();
                 const title = data?.meta?.title || data?.title || 'Resultado';
                 const excerpt = data?.excerpt || data?.meta?.description || '';
+                const cleanExcerpt = stripHtmlTags(excerpt);
                 const url = normalizeUrl(data?.url);
+                const highlightedTitle = highlightTerms(title, query);
+                const highlightedExcerpt = highlightTerms(cleanExcerpt || 'Sem descrição disponível.', query);
                 html += `
                     <a href="${escapeHtml(url)}" class="block px-6 py-4 border-b border-gray-800 hover:bg-gray-800 transition">
-                        <h3 class="text-white font-semibold mb-1">${escapeHtml(title)}</h3>
-                        <p class="text-gray-400 text-sm line-clamp-2">${escapeHtml(excerpt || 'Sem descrição disponível.')}</p>
+                        <h3 class="text-white font-semibold mb-1">${highlightedTitle}</h3>
+                        <p class="text-gray-400 text-sm line-clamp-2">${highlightedExcerpt}</p>
                     </a>
                 `;
             }
