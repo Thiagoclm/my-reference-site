@@ -1,0 +1,107 @@
+---
+const { title = 'Confira este conteúdo', url = '' } = Astro.props;
+
+const shareUrl = encodeURIComponent(String(url || ''));
+const shareText = encodeURIComponent(String(title || 'Confira este conteúdo'));
+---
+
+<section class="bg-gray-900 border border-gray-800 rounded-xl p-4 md:p-5">
+    <div class="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+        <p class="text-sm text-gray-300">Compartilhar este conteúdo:</p>
+
+        <div class="flex flex-wrap gap-2">
+            <a
+                href={`https://wa.me/?text=${shareText}%20${shareUrl}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="px-3 py-1.5 text-xs font-medium rounded-lg bg-gray-800 text-gray-200 hover:bg-gray-700 transition"
+            >
+                WhatsApp
+            </a>
+            <a
+                href={`https://twitter.com/intent/tweet?text=${shareText}&url=${shareUrl}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="px-3 py-1.5 text-xs font-medium rounded-lg bg-gray-800 text-gray-200 hover:bg-gray-700 transition"
+            >
+                X
+            </a>
+            <a
+                href={`https://www.facebook.com/sharer/sharer.php?u=${shareUrl}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="px-3 py-1.5 text-xs font-medium rounded-lg bg-gray-800 text-gray-200 hover:bg-gray-700 transition"
+            >
+                Facebook
+            </a>
+            <a
+                href={`https://t.me/share/url?url=${shareUrl}&text=${shareText}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="px-3 py-1.5 text-xs font-medium rounded-lg bg-gray-800 text-gray-200 hover:bg-gray-700 transition"
+            >
+                Telegram
+            </a>
+            <button
+                type="button"
+                data-share-instagram
+                data-share-url={url}
+                class="px-3 py-1.5 text-xs font-medium rounded-lg bg-gray-800 text-gray-200 hover:bg-gray-700 transition"
+            >
+                Instagram
+            </button>
+            <button
+                type="button"
+                data-share-copy
+                data-share-url={url}
+                class="px-3 py-1.5 text-xs font-medium rounded-lg bg-blue-600 text-white hover:bg-blue-700 transition"
+            >
+                Copiar link
+            </button>
+        </div>
+    </div>
+</section>
+
+<script>
+    document.querySelectorAll('[data-share-copy]').forEach((button) => {
+        button.addEventListener('click', async () => {
+            const element = button;
+            const url = element.getAttribute('data-share-url') || window.location.href;
+            const originalText = element.textContent || 'Copiar link';
+
+            try {
+                await navigator.clipboard.writeText(url);
+                element.textContent = 'Link copiado!';
+                window.setTimeout(() => {
+                    element.textContent = originalText;
+                }, 1600);
+            } catch {
+                element.textContent = 'Não foi possível copiar';
+                window.setTimeout(() => {
+                    element.textContent = originalText;
+                }, 1600);
+            }
+        });
+    });
+
+    document.querySelectorAll('[data-share-instagram]').forEach((button) => {
+        button.addEventListener('click', async () => {
+            const element = button;
+            const url = element.getAttribute('data-share-url') || window.location.href;
+            const originalText = element.textContent || 'Instagram';
+
+            try {
+                await navigator.clipboard.writeText(url);
+                element.textContent = 'Copiado! Cole no Instagram';
+            } catch {
+                element.textContent = 'Abra o Instagram';
+            }
+
+            window.open('https://www.instagram.com/', '_blank', 'noopener,noreferrer');
+
+            window.setTimeout(() => {
+                element.textContent = originalText;
+            }, 1800);
+        });
+    });
+</script>

@@ -2,6 +2,7 @@
 // src/pages/artigos/santo-alberto-magno.astro
 import Layout from '../../layouts/Base.astro';
 import { getEstimatedReadingTimeLabel } from '../../lib/reading-time';
+import SocialShare from '../../components/SocialShare.astro';
 
 const base = import.meta.env.BASE_URL;
 const articleMeta = {
@@ -20,6 +21,7 @@ Sobre a Obra de Arte.
 };
 
 const articleReadTime = getEstimatedReadingTimeLabel(articleMeta.readingSource);
+const shareUrl = Astro.url.href;
 ---
 
 <Layout title={articleMeta.layoutTitle} description={articleMeta.description}>
@@ -171,6 +173,10 @@ const articleReadTime = getEstimatedReadingTimeLabel(articleMeta.readingSource);
             <p class="text-gray-500 text-sm">
                 Fonte: <a href="https://www.vaticannews.va/pt/santo-do-dia/11/15/s--alberto-magno--bispo-e-doutor-da-igreja--dominicano.html" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:text-blue-300 transition">Vatican News — Santo do Dia</a>
             </p>
+        </div>
+
+        <div class="mt-8">
+            <SocialShare title={articleMeta.layoutTitle} url={shareUrl} />
         </div>
     </div>
 </Layout>

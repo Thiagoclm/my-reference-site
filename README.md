@@ -36,15 +36,15 @@ The O Católico Cientista site is a dark-themed Catholic reference site similar 
 - [x] Create saint detail pages
 
 ### Search & Discovery
-- ✅ Implement Pagefind integration for full-text search
+- [x] Implement Pagefind integration for full-text search
 - [ ] Add search results page
 - [ ] Create archive by date/month
 - [x] Build topic/category browsing pages
 
 ### Pages to Create
 - [ ] About page (/sobre)
-- [ ] Contact page (/contato)
-- ✅ Articles listing page (/artigos)
+- [x] Contact page (/contato)
+- [x] Articles listing page (/artigos)
 - [ ] Resources listing page (/recursos)
 - [x] Privacy policy page
 - [ ] Terms and conditions page
@@ -73,12 +73,11 @@ The O Católico Cientista site is a dark-themed Catholic reference site similar 
 ### Features to Add
 - [ ] Newsletter email integration (backend)
 - [ ] Comment system for articles
-- [ ] Social sharing buttons
+- [x] Social sharing buttons
 - [x] Reading time calculation for articles
 - [ ] Table of contents for long articles
 - [ ] Related articles suggestions
 - [ ] RSS feed for articles/reflections
-- [ ] Testimonials section with rotating quotes
 - [ ] Featured products/books section with links
 
 ### Design Enhancements

@@ -1,9 +1,12 @@
 ---
 // src/pages/palavra-do-dia.astro
 import Layout from '../layouts/Base.astro';
+import SocialShare from '../components/SocialShare.astro';
 
 const rssUrl = 'https://www.vaticannews.va/pt/palavra-do-dia.rss.xml';
 const pageDescription = 'Leituras diárias e Evangelho do dia com conteúdo do Vatican News para meditação e crescimento espiritual.';
+const shareUrl = Astro.url.href;
+const shareTitle = 'Palavra do Dia — O Católico Cientista';
 
 const fallbackHtml = '<p>Não foi possível carregar automaticamente. Use o botão abaixo para abrir a leitura completa no Vatican News.</p>';
 
@@ -219,6 +222,10 @@ try {
                 </li>
             </ul>
         </section>
+
+        <div class="mt-10">
+            <SocialShare title={shareTitle} url={shareUrl} />
+        </div>
     </div>
 </Layout>
 
