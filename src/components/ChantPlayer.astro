@@ -180,7 +180,11 @@ const defaultAudioUrl = presetTracks[0].url || `${baseUrl}assets/audio/salve-reg
         setCollapsed(!isCollapsed);
     });
 
-    const shouldPlay = localStorage.getItem(enabledKey) === 'true';
+    const savedEnabled = localStorage.getItem(enabledKey);
+    const shouldPlay = savedEnabled === null ? true : savedEnabled === 'true';
+    if (savedEnabled === null) {
+        localStorage.setItem(enabledKey, 'true');
+    }
 
     volumeInput?.addEventListener('input', () => {
         const currentVolume = normalizeVolume(volumeInput.value);
@@ -237,8 +241,7 @@ const defaultAudioUrl = presetTracks[0].url || `${baseUrl}assets/audio/salve-reg
                 await audio.play();
                 setStatus('Reproduzindo.', 'ok');
             } catch {
-                localStorage.setItem(enabledKey, 'false');
-                setStatus('Não foi possível reproduzir este arquivo.', 'error');
+                setStatus('Autoplay bloqueado pelo navegador. Toque em "Tocar".', 'error');
             }
             updateButton();
         }
