@@ -32,6 +32,30 @@ const books = [
         originalPrice: "",
         buyLink: "https://www.amazon.com/gp/search?index=books&linkCode=qs&keywords=9786553501645",
     },
+    {
+        title: "Confissões",
+        subtitle: "Autobiografia espiritual de Santo Agostinho",
+        author: "Santo Agostinho",
+        image: "https://books.google.com/books/content?id=o4wwDwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+        link: "confissoes",
+        tags: ["Patrística", "Clássico", "Espiritualidade"],
+        summary: "Uma das obras mais influentes da história cristã, Confissões narra a conversão de Santo Agostinho e oferece uma reflexão profunda sobre pecado, graça, memória, desejo e encontro com Deus.",
+        price: "",
+        originalPrice: "",
+        buyLink: "https://play.google.com/store/books/details?id=o4wwDwAAQBAJ",
+    },
+    {
+        title: "A Fé Católica",
+        subtitle: "Manual completo da doutrina da Igreja",
+        author: "Peter Kreeft",
+        image: "https://books.google.com/books/content?id=KgqhEQAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+        link: "fe-catolica",
+        tags: ["Doutrina", "Apologética", "Fé Católica"],
+        summary: "Com linguagem clara e estrutura didática, Peter Kreeft apresenta os fundamentos da fé católica — credo, sacramentos, moral e oração — de modo acessível para estudo pessoal, catequese e formação contínua.",
+        price: "",
+        originalPrice: "",
+        buyLink: "https://play.google.com/store/books/details?id=KgqhEQAAQBAJ",
+    },
 ];
 
 const uniqueTags = [...new Set(books.flatMap((book) => book.tags))].sort((a, b) => a.localeCompare(b));

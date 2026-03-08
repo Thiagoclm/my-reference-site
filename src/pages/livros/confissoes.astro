@@ -1,0 +1,114 @@
+---
+import Layout from '../../layouts/Base.astro';
+import { getEstimatedReadingTimeLabel } from '../../lib/reading-time';
+
+const base = import.meta.env.BASE_URL;
+const bookMeta = {
+    layoutTitle: 'Confissões — Recomendação de Livro',
+    headingTitle: 'Confissões',
+    subtitle: 'Autobiografia espiritual de Santo Agostinho',
+    description: 'Resenha de Confissões, de Santo Agostinho, com temas centrais da obra e sua importância para a tradição cristã.',
+    readingSource: `
+Confissões. Autobiografia espiritual de Santo Agostinho.
+Sobre o Livro. Temas Centrais. Estrutura da Obra.
+Importância histórica e espiritual.
+`,
+};
+
+const bookReadTime = getEstimatedReadingTimeLabel(bookMeta.readingSource);
+---
+
+<Layout title={bookMeta.layoutTitle} description={bookMeta.description}>
+    <div class="max-w-5xl mx-auto">
+        <div class="mb-12">
+            <div class="inline-block mb-6">
+                <a href={`${base}livros`} class="text-sm text-blue-400 hover:text-blue-300 transition">
+                    ← Voltar para Livros
+                </a>
+            </div>
+            <div class="inline-block mb-6 ml-4">
+                <h2 class="text-sm font-bold text-blue-400 uppercase tracking-wider">Recomendação de Livro</h2>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+            <div class="md:col-span-1">
+                <div class="bg-gray-900 rounded-lg overflow-hidden border border-gray-800 sticky top-8">
+                    <img
+                        src="https://books.google.com/books/content?id=o4wwDwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+                        alt="Confissões — Santo Agostinho"
+                        class="w-full aspect-[3/4] object-cover"
+                    />
+                    <div class="p-6">
+                        <div class="mb-6">
+                            <p class="text-sm text-gray-400 mb-2">Autor</p>
+                            <p class="text-lg font-semibold text-white">Santo Agostinho</p>
+                        </div>
+                        <div class="mb-6">
+                            <p class="text-sm text-gray-400 mb-2">Categoria</p>
+                            <p class="text-white">Patrística / Espiritualidade</p>
+                        </div>
+                        <a
+                            href="https://play.google.com/store/books/details?id=o4wwDwAAQBAJ"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="w-full bg-blue-600 text-white px-4 py-3 rounded-lg font-semibold hover:bg-blue-700 transition block text-center"
+                        >
+                            Ver Edição Disponível
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="md:col-span-2">
+                <div class="mb-8">
+                    <h1 class="text-4xl md:text-5xl font-serif font-bold text-white mb-4">{bookMeta.headingTitle}</h1>
+                    <p class="text-2xl text-gray-300 font-serif italic mb-6">{bookMeta.subtitle}</p>
+                    <p class="text-sm text-gray-500 mb-6">{bookReadTime}</p>
+                    <div class="border-l-4 border-blue-400 pl-6 py-4 bg-gray-900 rounded-r-lg">
+                        <p class="text-gray-200 text-lg italic">
+                            “Fizeste-nos para Ti, e inquieto está o nosso coração enquanto não repousa em Ti.”
+                        </p>
+                        <p class="text-gray-400 text-sm mt-3">— Santo Agostinho, Confissões</p>
+                    </div>
+                </div>
+
+                <section class="mb-10">
+                    <h2 class="text-2xl font-serif font-bold text-white mb-4">Sobre o Livro</h2>
+                    <div class="space-y-4 text-gray-300 leading-relaxed">
+                        <p>
+                            <strong>Confissões</strong> é uma das obras mais importantes da tradição cristã e da literatura ocidental. Nela, Santo Agostinho narra sua própria história — da juventude marcada por inquietações à conversão e ao encontro profundo com Deus.
+                        </p>
+                        <p>
+                            A obra combina autobiografia, oração e reflexão filosófica. Não é apenas relato histórico, mas um exame da alma diante de Deus, tratando de memória, liberdade, pecado, graça, verdade e desejo de felicidade.
+                        </p>
+                        <p>
+                            Para quem busca crescimento espiritual e formação intelectual católica, o livro permanece atual: mostra como a razão e a fé podem caminhar juntas na busca sincera da verdade.
+                        </p>
+                    </div>
+                </section>
+
+                <section class="bg-blue-900 border border-blue-800 p-6 rounded-lg mb-10">
+                    <h2 class="text-xl font-serif font-bold text-white mb-4">✦ Temas Centrais</h2>
+                    <ul class="space-y-3 text-gray-200">
+                        <li class="flex items-start"><span class="text-blue-400 mr-3 mt-1">•</span><span>Conversão e misericórdia divina</span></li>
+                        <li class="flex items-start"><span class="text-blue-400 mr-3 mt-1">•</span><span>Interioridade e busca de Deus</span></li>
+                        <li class="flex items-start"><span class="text-blue-400 mr-3 mt-1">•</span><span>Memória, tempo e identidade pessoal</span></li>
+                        <li class="flex items-start"><span class="text-blue-400 mr-3 mt-1">•</span><span>Pecado, graça e liberdade</span></li>
+                        <li class="flex items-start"><span class="text-blue-400 mr-3 mt-1">•</span><span>Oração como caminho de transformação</span></li>
+                    </ul>
+                </section>
+
+                <section class="mb-10">
+                    <h2 class="text-2xl font-serif font-bold text-white mb-4">Estrutura da Obra</h2>
+                    <p class="text-gray-300 leading-relaxed mb-4">
+                        Em linhas gerais, os primeiros livros apresentam a trajetória biográfica de Agostinho, incluindo sua formação intelectual, os erros da juventude e o processo de conversão. Nos livros finais, a obra aprofunda temas teológicos e filosóficos, especialmente memória e criação.
+                    </p>
+                    <p class="text-gray-300 leading-relaxed">
+                        Esse formato torna <strong>Confissões</strong> ao mesmo tempo testemunho pessoal e síntese espiritual de grande profundidade.
+                    </p>
+                </section>
+            </div>
+        </div>
+    </div>
+</Layout>
