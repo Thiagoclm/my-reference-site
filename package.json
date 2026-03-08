@@ -6,7 +6,8 @@
         "dev": "astro dev",
         "build": "astro build && pagefind --site ./dist",
         "preview": "astro preview",
-        "format": "prettier --write ."
+        "format": "prettier --write .",
+        "generate:saints": "node scripts/generate-saints-content.mjs"
     },
     "devDependencies": {
         "@astrojs/mdx": "^3.0.0",
@@ -21,6 +22,7 @@
     "dependencies": {
         "@astrojs/check": "^0.9.6",
         "gray-matter": "^4.0.3",
+        "he": "^1.2.0",
         "markdown-it": "^14.1.1",
         "typescript": "^5.9.3"
     }

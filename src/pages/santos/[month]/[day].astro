@@ -18,9 +18,13 @@ const monthParam = Number(Astro.params.month);
 const dayParam = Number(Astro.params.day);
 const entry = getSaintForDay(monthParam, dayParam);
 
+const isAbsoluteUrl = /^https?:\/\//i.test(entry.saint.image);
+
 const saint = {
     ...entry.saint,
-    image: `${base}${entry.saint.image.startsWith('/') ? entry.saint.image.slice(1) : entry.saint.image}`,
+    image: isAbsoluteUrl
+        ? entry.saint.image
+        : `${base}${entry.saint.image.startsWith('/') ? entry.saint.image.slice(1) : entry.saint.image}`,
 };
 const pageDescription = `Conheça ${entry.saint.name}, celebrado em ${entry.saint.feastDay}, com biografia e devoção católica.`;
 ---

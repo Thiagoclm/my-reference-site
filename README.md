@@ -32,7 +32,7 @@ The O Católico Cientista site is a dark-themed Catholic reference site similar 
 ### Saint of the Day
 - [x] Create database/collection of saints with images and histories
 - [x] Implement dynamic saint selection (daily rotation)
-- [ ] Add more saint entries (currently only example with Saint Joseph)
+- [x] Add more saint entries (currently only example with Saint Joseph)
 - [x] Create saint detail pages
 
 ### Search & Discovery

@@ -3,6 +3,7 @@ export type SaintContent = {
     title: string;
     feastDay: string;
     image: string;
+    prayer?: string[];
     sourceLinks?: {
         label: string;
         url: string;
@@ -17,6 +18,7 @@ export type SaintContent = {
 };
 
 import { SAINT_NAMES_BY_DATE } from './saints-calendar';
+import { GENERATED_SAINTS_BY_DATE } from './saints-generated';
 
 export type SaintDayEntry = {
     key: string;
@@ -52,11 +54,87 @@ const buildSourceLinks = (saintName: string) => [
     },
 ];
 
+const isVaticanIntroLine = (text: string) => {
+    const normalized = text.trim().toLowerCase();
+    return (
+        normalized.startsWith('descubra no vatican news a história')
+        || normalized.startsWith('quem é o santo do dia? visite vatican news')
+    );
+};
+
+const normalizeSaintNamePtBr = (rawName: string): string => {
+    const name = rawName.trim();
+
+    if (/^SS\.\s+/i.test(name)) {
+        return name.replace(/^SS\.\s+/i, 'Santos ');
+    }
+
+    if (/^S\.\s+/i.test(name)) {
+        const rest = name.replace(/^S\.\s+/i, '').trim();
+        const feminineHints = [
+            /^Maria\b/i,
+            /^Teresa\b/i,
+            /^Inês\b/i,
+            /^Clara\b/i,
+            /^Mônica\b/i,
+            /^Ângela\b/i,
+            /^Joana\b/i,
+            /^Rosa\b/i,
+            /^Catarina\b/i,
+            /^Cecília\b/i,
+            /^Balbina\b/i,
+            /^Gemma\b/i,
+            /^Verônica\b/i,
+            /^Isabel\b/i,
+            /^Paulina\b/i,
+            /^Faustina\b/i,
+            /,\s*virgem\b/i,
+            /,\s*religiosa\b/i,
+            /,\s*mística\b/i,
+        ];
+        const isFeminine = feminineHints.some((pattern) => pattern.test(rest));
+        return `${isFeminine ? 'Santa' : 'São'} ${rest}`;
+    }
+
+    return name;
+};
+
+const buildSaintIntro = (saint: SaintContent) => {
+    const feast = saint.feastDay ? `${saint.feastDay}` : 'esta data';
+    return `Hoje, ${feast}, celebramos ${saint.name}. A seguir, você encontra um resumo breve da vida e da espiritualidade desta memória litúrgica.`;
+};
+
+const sanitizeSaintContent = (saint: SaintContent): SaintContent => {
+    const normalizedName = normalizeSaintNamePtBr(saint.name);
+    const filteredHistory = (saint.history || []).filter((paragraph) => !isVaticanIntroLine(paragraph));
+    const intro = buildSaintIntro({ ...saint, name: normalizedName });
+    const alreadyHasIntro = filteredHistory[0]?.toLowerCase().startsWith('hoje,');
+    const historyWithIntro = alreadyHasIntro ? filteredHistory : [intro, ...filteredHistory];
+    const normalizedPrayer = (saint.prayer || []).map((line) =>
+        line
+            .replace(/^Ó\s+S\.\s+/i, /^Santa\b/i.test(normalizedName) ? 'Ó Santa ' : 'Ó São ')
+            .replace(/^Ó\s+SS\.\s+/i, 'Ó Santos '),
+    );
+
+    return {
+        ...saint,
+        name: normalizedName,
+        prayer: normalizedPrayer,
+        history: historyWithIntro.length > 0
+            ? historyWithIntro
+            : [intro, `${normalizedName} é celebrado nesta data no calendário litúrgico da Igreja.`],
+    };
+};
+
 const buildGeneratedSaint = (month: number, day: number, saintName: string): SaintContent => ({
     name: saintName,
     title: 'Memória litúrgica do calendário católico',
     feastDay: formatFeastDay(month, day),
     image: 'assets/cover-example.jpg',
+    prayer: [
+        `Ó ${saintName}, intercede por nós para que caminhemos na fidelidade a Cristo e na caridade para com os irmãos.`,
+        'Concede-nos a graça da perseverança na oração e da santidade no cotidiano. Amém.',
+    ],
     sourceLinks: buildSourceLinks(saintName),
     history: [
         `${saintName} é lembrado pela Igreja nesta data no calendário litúrgico.`,
@@ -70,6 +148,7 @@ const defaultSaint = (month: number, day: number): SaintContent => ({
     title: 'Biografia em preparação',
     feastDay: formatFeastDay(month, day),
     image: 'assets/cover-example.jpg',
+    prayer: ['Senhor, por intercessão dos santos, fortalece-nos na fé e na caridade. Amém.'],
     sourceLinks: buildSourceLinks(`Santo do dia ${pad2(day)}-${pad2(month)}`),
     history: [
         'Estamos preparando o conteúdo completo deste santo para esta data. Em breve, esta página trará uma biografia detalhada e a espiritualidade própria do dia.',
@@ -110,14 +189,16 @@ const saintsByDate: Record<string, SaintContent> = {
 export const getSaintForDay = (month: number, day: number): SaintDayEntry => {
     const key = `${pad2(month)}-${pad2(day)}`;
     const saintName = SAINT_NAMES_BY_DATE[key];
-    const saint = saintsByDate[key] || (saintName ? buildGeneratedSaint(month, day, saintName) : defaultSaint(month, day));
+    const saint = saintsByDate[key]
+        || GENERATED_SAINTS_BY_DATE[key]
+        || (saintName ? buildGeneratedSaint(month, day, saintName) : defaultSaint(month, day));
 
     return {
         key,
         month,
         day,
-        isPlaceholder: !Boolean(saintsByDate[key] || saintName),
-        saint,
+        isPlaceholder: !Boolean(saintsByDate[key] || GENERATED_SAINTS_BY_DATE[key] || saintName),
+        saint: sanitizeSaintContent(saint),
     };
 };
 
