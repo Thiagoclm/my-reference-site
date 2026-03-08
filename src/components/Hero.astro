@@ -2,6 +2,7 @@
 const {
     title,
     subtitle,
+    secondarySubtitle,
     image,
     imageClass = 'w-full h-64 object-cover',
     imageCredit,
@@ -33,4 +34,5 @@ const {
     )}
     <h1 class="mt-6 text-4xl font-serif text-white">{title}</h1>
     <p class="mt-2 text-lg text-gray-300">{subtitle}</p>
+    {secondarySubtitle && <p class="mt-2 text-lg text-gray-300">{secondarySubtitle}</p>}
 </section>

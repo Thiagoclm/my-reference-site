@@ -6,7 +6,7 @@ import LatestSection from '../components/LatestSection.astro';
 import SaintOfTheDay from '../components/SaintOfTheDay.astro';
 
 const base = import.meta.env.BASE_URL;
-const pageDescription = 'Curadoria católica com artigos, livros, santos do dia e leituras para aprofundar fé e conhecimento.';
+const pageDescription = ' católica com artigos, livros, santos do dia e leituras para aprofundar fé e conhecimento.';
 
 // Exemplo de dados. Você pode carregar do seu sistema de conteúdo depois
 const featuredItems = [
@@ -95,8 +95,9 @@ const saintOfTheDay = {
 <Layout title="Página Inicial" description={pageDescription}>
     <!-- Hero Section -->
     <Hero 
-        title="Curadorias e Leituras Recomendadas" 
-        subtitle="Uma seleção cuidadosa de artigos, livros e vídeos para enriquecer seu conhecimento e fé." 
+        title="Curadoria para quem tem sede de verdade" 
+        subtitle="“Eu sou o Caminho, a Verdade, e a Vida.” - Evangelho de São João, 14:6." 
+        secondarySubtitle="“Para um apóstolo moderno, uma hora de estudo é uma hora de oração.” São Josemaria Escrivá, Caminho - 335."
         image={`${base}assets/cover-example.jpg`}
         imageClass="w-full h-64 md:h-[28rem] object-cover object-[center_44%] md:object-[center_50%]"
         imageCredit="Imagem: “A Visão de Santo Agostinho” — Vittore Carpaccio (c. 1502)."
