@@ -21,4 +21,15 @@ export const articles: ArticleItem[] = [
         summary:
             "Conheça a vida do grande mestre dominicano que recebeu o título de 'Magno'. Mentor de São Tomás de Aquino, foi canonizado em 1931 e declarado Padroeiro dos cultores de Ciências naturais por Pio XII.",
     },
+    {
+        title: 'Fides et Ratio: Fé e Razão em Diálogo',
+        subtitle: 'Encíclica de São João Paulo II sobre as relações entre fé e razão',
+        author: 'São João Paulo II',
+        image: 'assets/fides-et-ratio.jpg',
+        link: 'fides-et-ratio',
+        tags: ['Magistério', 'Filosofia', 'Fé e Razão'],
+        date: '14 de Setembro',
+        summary:
+            'Síntese da encíclica Fides et Ratio, que propõe a fé e a razão como caminhos complementares para buscar a verdade, rejeitando relativismo e ceticismo.',
+    },
 ];

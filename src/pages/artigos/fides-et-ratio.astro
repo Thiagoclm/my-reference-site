@@ -1,0 +1,119 @@
+---
+import Layout from '../../layouts/Base.astro';
+import { getEstimatedReadingTimeLabel } from '../../lib/reading-time';
+import SocialShare from '../../components/SocialShare.astro';
+
+const base = import.meta.env.BASE_URL;
+const articleMeta = {
+    layoutTitle: 'Fides et Ratio — Fé e Razão em Diálogo',
+    headingTitle: 'Fides et Ratio',
+    subtitle: 'Encíclica de São João Paulo II sobre as relações entre fé e razão (1998)',
+    description:
+        'Resumo da encíclica Fides et Ratio: a fé e a razão como caminhos complementares para a verdade, contra o relativismo e o ceticismo.',
+    readingSource: `
+Fides et Ratio, de São João Paulo II.
+A fé e a razão como duas asas para contemplar a verdade.
+Crítica ao relativismo, ceticismo e niilismo.
+Importância da filosofia para o conhecimento da verdade.
+Relação entre teologia e filosofia em diálogo.
+Chamado a recuperar a busca da verdade sobre Deus, o homem e o sentido da vida.
+`,
+};
+
+const articleReadTime = getEstimatedReadingTimeLabel(articleMeta.readingSource);
+const shareUrl = Astro.url.href;
+---
+
+<Layout title={articleMeta.layoutTitle} description={articleMeta.description}>
+    <div class="max-w-4xl mx-auto">
+        <div class="mb-12">
+            <div class="inline-block mb-6">
+                <h2 class="text-sm font-bold text-blue-400 uppercase tracking-wider">Artigo</h2>
+            </div>
+            <h1 class="text-4xl md:text-5xl font-serif font-bold text-white mb-4">{articleMeta.headingTitle}</h1>
+            <p class="text-2xl text-gray-300 font-serif italic mb-6">{articleMeta.subtitle}</p>
+            <div class="flex items-center gap-4 text-sm text-gray-400 flex-wrap">
+                <span>14 de setembro de 1998</span>
+                <span class="text-gray-600">•</span>
+                <span>Magistério de São João Paulo II</span>
+                <span class="text-gray-600">•</span>
+                <span>{articleReadTime}</span>
+            </div>
+        </div>
+
+        <div class="mb-12 rounded-xl overflow-hidden border border-gray-800">
+            <img
+                src={`${base}assets/fides-et-ratio.jpg`}
+                alt="Fides et ratio, pintura no teto da Basílica da Apresentação de Maria em Wadowice"
+                class="w-full object-contain bg-gray-950"
+            />
+            <div class="bg-gray-900 px-6 py-3 border-t border-gray-800">
+                <p class="text-gray-500 text-xs italic">
+                    "Fides et ratio" — pintura no teto da Basílica da Apresentação de Maria, Wadowice
+                </p>
+            </div>
+        </div>
+
+        <div class="border-l-4 border-blue-400 pl-6 py-4 bg-gray-900 rounded-r-lg mb-12">
+            <p class="text-gray-200 text-lg italic">
+                “A fé e a razão constituem como que as duas asas pelas quais o espírito humano se eleva para a contemplação da verdade.”
+            </p>
+            <p class="text-gray-400 text-sm mt-3">— Fides et Ratio, Introdução</p>
+        </div>
+
+        <article class="prose-custom space-y-10">
+            <section>
+                <h2 class="text-2xl font-serif font-bold text-white mb-4">Resumo da encíclica</h2>
+                <div class="space-y-4 text-gray-300 leading-relaxed">
+                    <p>
+                        Em <strong class="text-white">Fides et Ratio</strong>, São João Paulo II afirma que fé e razão não são rivais. Elas se completam na busca da verdade sobre Deus, o ser humano e o sentido da existência. A fé não anula a razão; ao contrário, purifica-a e amplia seu horizonte.
+                    </p>
+                    <p>
+                        O texto recorda que toda pessoa traz no coração perguntas fundamentais: quem sou, de onde venho, para onde vou, por que existe o mal e o que há após a morte. A filosofia tem papel essencial nesse caminho, pois ajuda a formular e investigar racionalmente tais questões.
+                    </p>
+                </div>
+            </section>
+
+            <section>
+                <h2 class="text-2xl font-serif font-bold text-white mb-4">Pontos centrais</h2>
+                <div class="space-y-4 text-gray-300 leading-relaxed">
+                    <p>
+                        A encíclica critica correntes que enfraquecem a confiança na verdade, como o relativismo, o ceticismo e o niilismo. Quando a razão se fecha no utilitarismo ou no puro tecnicismo, perde a capacidade de responder às grandes questões humanas.
+                    </p>
+                    <p>
+                        João Paulo II também alerta para o oposto: uma fé sem reflexão racional madura pode cair em reducionismos e perder força de diálogo com a cultura. Por isso, ele pede a recuperação de uma filosofia aberta ao ser, à verdade objetiva e à dimensão metafísica.
+                    </p>
+                </div>
+            </section>
+
+            <div class="bg-blue-900 border border-blue-800 p-6 rounded-lg">
+                <h3 class="text-xl font-serif font-bold text-white mb-4">✦ Núcleo da mensagem</h3>
+                <p class="text-gray-200 leading-relaxed">
+                    O encontro entre fé e razão permite ao homem viver com maior liberdade e esperança, porque o orienta para uma verdade que não é só opinião passageira, mas fundamento sólido para a vida pessoal e social.
+                </p>
+            </div>
+
+            <section>
+                <h2 class="text-2xl font-serif font-bold text-white mb-4">Atualidade para hoje</h2>
+                <div class="space-y-4 text-gray-300 leading-relaxed">
+                    <p>
+                        Num tempo marcado por excesso de informação e fragmentação do saber, <strong class="text-white">Fides et Ratio</strong> continua atual ao defender uma visão unificada do conhecimento, onde ciência, filosofia e teologia dialogam sem confusão nem separação.
+                    </p>
+                    <p>
+                        Para a vida cristã, a encíclica oferece um caminho claro: amar a verdade, cultivar o pensamento sério e unir vida intelectual e vida espiritual, para que o anúncio do Evangelho fale de modo inteligível ao mundo contemporâneo.
+                    </p>
+                </div>
+            </section>
+        </article>
+
+        <div class="mt-12 pt-8 border-t border-gray-800">
+            <p class="text-gray-500 text-sm">
+                Fonte: <a href="https://www.vatican.va/content/john-paul-ii/pt/encyclicals/documents/hf_jp-ii_enc_14091998_fides-et-ratio.html" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:text-blue-300 transition">Vaticano — Fides et Ratio (texto integral)</a>
+            </p>
+        </div>
+
+        <div class="mt-8">
+            <SocialShare title={articleMeta.layoutTitle} url={shareUrl} />
+        </div>
+    </div>
+</Layout>
