@@ -6,7 +6,6 @@ const base = import.meta.env.BASE_URL;
 const allDays = getAllSaintDays();
 const todaysDate = new Date();
 const today = getSaintForDay(todaysDate.getMonth() + 1, todaysDate.getDate());
-const joseph = getSaintForDay(3, 19);
 const monthNames = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
 const pageDescription = 'Calendário dos santos com páginas diárias para cada data do ano e destaques de devoção católica.';
 const daysByMonth = monthNames.map((name, monthIndex) => ({
@@ -23,24 +22,17 @@ const daysByMonth = monthNames.map((name, monthIndex) => ({
                 <h2 class="text-sm font-bold text-blue-400 uppercase tracking-wider">Devoção</h2>
             </div>
             <h1 class="text-4xl md:text-5xl font-serif font-bold text-white mb-4">Santos</h1>
-            <p class="text-xl text-gray-300 max-w-3xl">
+            <p class="text-xl text-gray-300 max-w-5xl">
                 Calendário diário com páginas dedicadas à vida dos santos. Cada data do ano possui uma rota própria.
             </p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+        <div class="grid grid-cols-1 gap-6 mb-12">
             <a href={`${base}santos/${String(today.month).padStart(2, '0')}/${String(today.day).padStart(2, '0')}`} class="bg-gray-900 border border-gray-800 rounded-xl p-6 hover:border-gray-700 transition">
                 <p class="text-sm uppercase tracking-wider text-blue-400 mb-2">Santo de hoje</p>
                 <h2 class="text-2xl font-serif font-bold text-white mb-2">{today.saint.name}</h2>
                 <p class="text-gray-400 mb-4">{today.saint.feastDay}</p>
                 <p class="text-blue-400 font-semibold text-sm">Abrir página do dia →</p>
-            </a>
-
-            <a href={`${base}santos/03/19`} class="bg-gray-900 border border-gray-800 rounded-xl p-6 hover:border-gray-700 transition">
-                <p class="text-sm uppercase tracking-wider text-blue-400 mb-2">Exemplo completo</p>
-                <h2 class="text-2xl font-serif font-bold text-white mb-2">{joseph.saint.name}</h2>
-                <p class="text-gray-400 mb-4">{joseph.saint.feastDay}</p>
-                <p class="text-blue-400 font-semibold text-sm">Ver biografia de São José →</p>
             </a>
         </div>
 
