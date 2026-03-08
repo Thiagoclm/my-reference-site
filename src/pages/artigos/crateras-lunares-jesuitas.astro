@@ -1,0 +1,125 @@
+---
+import Layout from '../../layouts/Base.astro';
+import { getEstimatedReadingTimeLabel } from '../../lib/reading-time';
+import SocialShare from '../../components/SocialShare.astro';
+
+const base = import.meta.env.BASE_URL;
+const articleMeta = {
+    layoutTitle: '35+ crateras da Lua com nomes de cientistas jesuítas',
+    headingTitle: '35+ crateras da Lua com nomes de cientistas jesuítas',
+    subtitle: 'Do mapa de Riccioli ao Observatório Vaticano: uma tradição científica que chegou à Lua',
+    description:
+        'Um panorama sobre as crateras lunares batizadas com nomes de cientistas jesuítas e um excerto sobre a importância histórica dos jesuítas para a astronomia.',
+    readingSource: `
+35+ crateras lunares ligadas a cientistas jesuítas.
+Exemplos como Clavius, Riccioli, Grimaldi, Scheiner, Kircher e Secchi.
+Contribuição jesuíta para observatórios, ensino matemático e astronomia de precisão.
+Importância da integração entre pesquisa científica, formação intelectual e serviço à Igreja.
+Referências: America Magazine (2019) e Aleteia (2019/2024).
+`,
+};
+
+const articleReadTime = getEstimatedReadingTimeLabel(articleMeta.readingSource);
+const shareUrl = Astro.url.href;
+---
+
+<Layout title={articleMeta.layoutTitle} description={articleMeta.description}>
+    <div class="max-w-4xl mx-auto">
+        <div class="mb-12">
+            <div class="inline-block mb-6">
+                <h2 class="text-sm font-bold text-blue-400 uppercase tracking-wider">Artigo</h2>
+            </div>
+            <h1 class="text-4xl md:text-5xl font-serif font-bold text-white mb-4">{articleMeta.headingTitle}</h1>
+            <p class="text-2xl text-gray-300 font-serif italic mb-6">{articleMeta.subtitle}</p>
+            <div class="flex items-center gap-4 text-sm text-gray-400 flex-wrap">
+                <span>Astronomia e História da Ciência</span>
+                <span class="text-gray-600">•</span>
+                <span>Tradição científica jesuíta</span>
+                <span class="text-gray-600">•</span>
+                <span>{articleReadTime}</span>
+            </div>
+        </div>
+
+        <div class="mb-12 rounded-xl overflow-hidden border border-gray-800">
+            <img
+                src={`${base}assets/clavius-crater.jpg`}
+                alt="Cratera Clavius na Lua"
+                class="w-full object-cover"
+            />
+            <div class="bg-gray-900 px-6 py-3 border-t border-gray-800">
+                <p class="text-gray-500 text-xs italic">
+                    Cratera Clavius — homenagem a Christopher Clavius, S.J. (Imagem: NASA/Wikimedia Commons)
+                </p>
+            </div>
+        </div>
+
+        <div class="border-l-4 border-blue-400 pl-6 py-4 bg-gray-900 rounded-r-lg mb-12">
+            <p class="text-gray-200 text-lg italic">
+                “Do ensino de matemática à observação do céu, os jesuítas ajudaram a consolidar uma cultura científica que uniu rigor intelectual, curiosidade e serviço à verdade.”
+            </p>
+        </div>
+
+        <article class="prose-custom space-y-10">
+            <section>
+                <h2 class="text-2xl font-serif font-bold text-white mb-4">Panorama objetivo</h2>
+                <div class="space-y-4 text-gray-300 leading-relaxed">
+                    <p>
+                        Há um número expressivo de crateras lunares com nomes de cientistas jesuítas. Conforme a fonte e o critério de contagem, aparecem <strong class="text-white">34 crateras</strong> ou <strong class="text-white">35+</strong>. Em ambos os casos, o dado confirma a força histórica da contribuição jesuíta para a astronomia.
+                    </p>
+                    <p>
+                        A origem dessa presença está na atuação contínua dos jesuítas em ensino e pesquisa científica: matemática, cartografia celeste, observação astronômica e direção de observatórios.
+                    </p>
+                </div>
+            </section>
+
+            <section>
+                <h2 class="text-2xl font-serif font-bold text-white mb-4">Nomes centrais</h2>
+                <div class="space-y-4 text-gray-300 leading-relaxed">
+                    <p>
+                        <strong class="text-white">Riccioli</strong> marcou a história ao publicar, em 1651, um mapa da Lua com nomenclatura que influenciou gerações. <strong class="text-white">Clavius</strong>, ligado à reforma do calendário gregoriano, dá nome a uma das maiores formações lunares.
+                    </p>
+                    <p>
+                        Outros exemplos relevantes são <strong class="text-white">Boscovich</strong>, com contribuições para astronomia matemática, e <strong class="text-white">Secchi</strong>, pioneiro na espectroscopia estelar. Juntos, esses nomes mostram uma contribuição ampla e consistente.
+                    </p>
+                </div>
+            </section>
+
+            <section class="bg-blue-900 border border-blue-800 p-6 rounded-lg">
+                <h3 class="text-xl font-serif font-bold text-white mb-4">Excerto — A importância dos jesuítas na astronomia</h3>
+                <p class="text-gray-200 leading-relaxed">
+                    A importância dos jesuítas na astronomia está em três frentes que caminham juntas: <strong class="text-white">pesquisa</strong>, <strong class="text-white">formação</strong> e <strong class="text-white">difusão</strong>. Eles não apenas produziram observações e modelos relevantes em seu tempo, mas também formaram gerações de estudantes em matemática e ciências naturais, criando redes internacionais de conhecimento. Em linguagem atual, ajudaram a construir uma “infraestrutura intelectual” para a ciência: métodos, escolas, observatórios e diálogo entre culturas científicas. Por isso, quando vemos tantos nomes jesuítas no mapa lunar, vemos também a memória de uma tradição que tratou o estudo do céu como parte da busca humana pela verdade.
+                </p>
+            </section>
+
+            <section>
+                <h2 class="text-2xl font-serif font-bold text-white mb-4">Legado atual</h2>
+                <div class="space-y-4 text-gray-300 leading-relaxed">
+                    <p>
+                        Esse legado permanece vivo no Observatório Vaticano, confiado aos jesuítas, e no trabalho de pesquisadores da Companhia em áreas como meteorítica, evolução estelar, asteroides e cosmologia.
+                    </p>
+                    <p>
+                        Em síntese: os nomes na Lua não são só homenagens históricas, mas sinais de uma tradição científica católica que continua ativa e relevante.
+                    </p>
+                </div>
+            </section>
+        </article>
+
+        <div class="mt-12 pt-8 border-t border-gray-800">
+            <div class="text-gray-500 text-sm space-y-2">
+                <p>
+                    Fonte 1: <a href="https://www.americamagazine.org/politics-society/2019/07/12/why-are-so-many-craters-moon-named-after-jesuits/" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:text-blue-300 transition">America Magazine — Why are so many craters on the moon named after Jesuits?</a>
+                </p>
+                <p>
+                    Fonte 2: <a href="https://aleteia.org/2019/07/19/jesuits-on-the-moon-why-so-many-craters-are-named-for-them/" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:text-blue-300 transition">Aleteia — Jesuits on the Moon: Why so many craters are named for them</a>
+                </p>
+                <p>
+                    Fonte complementar: <a href="https://www.vaticanobservatory.org/sacred-space-astronomy/the-35-moon-craters-named-after-jesuit-scientists/" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:text-blue-300 transition">Vatican Observatory — The 35+ Moon Craters Named after Jesuit Scientists</a>
+                </p>
+            </div>
+        </div>
+
+        <div class="mt-8">
+            <SocialShare title={articleMeta.layoutTitle} url={shareUrl} />
+        </div>
+    </div>
+</Layout>

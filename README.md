@@ -42,7 +42,7 @@ The O Católico Cientista site is a dark-themed Catholic reference site similar 
 - [x] Build topic/category browsing pages
 
 ### Pages to Create
-- [ ] About page (/sobre)
+- [x] About page (/sobre)
 - [x] Contact page (/contato)
 - [x] Articles listing page (/artigos)
 - [ ] Resources listing page (/recursos)

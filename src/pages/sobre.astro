@@ -1,0 +1,53 @@
+---
+import Layout from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
+
+const pageDescription = 'Conheça o criador do O Católico Cientista e a motivação por trás deste projeto.';
+---
+
+<Layout title="Sobre" description={pageDescription}>
+    <Hero
+        title="Sobre o Criador"
+        subtitle="Quem está por trás do O Católico Cientista"
+        image={`${import.meta.env.BASE_URL}assets/cover-example.jpg`}
+    />
+
+    <div class="max-w-3xl mx-auto">
+        <section class="mb-12">
+            <h2 class="text-3xl font-serif font-bold mb-4 text-white">Quem sou eu</h2>
+            <p class="text-gray-300 leading-relaxed mb-4">
+                Sou o criador do <strong class="text-white">O Católico Cientista</strong>, um projeto pessoal nascido do desejo de unir duas paixões: a fé católica e a busca intelectual pela verdade.
+            </p>
+            <p class="text-gray-300 leading-relaxed">
+                Neste site, compartilho conteúdos que me ajudam na caminhada espiritual e também no estudo da tradição católica, da filosofia e da ciência.
+            </p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-3xl font-serif font-bold mb-4 text-white">Por que criei este site</h2>
+            <p class="text-gray-300 leading-relaxed mb-4">
+                Criei este espaço para oferecer uma curadoria simples e útil de artigos, livros, santos e referências confiáveis para quem deseja aprofundar a fé com seriedade.
+            </p>
+            <p class="text-gray-300 leading-relaxed">
+                A proposta é mostrar, de forma prática, que fé e razão não competem entre si: elas se iluminam mutuamente.
+            </p>
+        </section>
+
+        <section class="bg-blue-900 border border-blue-800 p-8 rounded-xl mb-12">
+            <h2 class="text-3xl font-serif font-bold mb-4 text-white">O que você encontra aqui</h2>
+            <ul class="space-y-3 text-gray-200 leading-relaxed list-disc list-inside">
+                <li>Artigos sobre fé católica, filosofia e ciência</li>
+                <li>Indicações de livros e recursos de estudo</li>
+                <li>Conteúdos sobre santos e espiritualidade</li>
+                <li>Reflexões para estudo pessoal e formação contínua</li>
+            </ul>
+        </section>
+
+        <section class="mb-8">
+            <h2 class="text-3xl font-serif font-bold mb-4 text-white">Contato</h2>
+            <p class="text-gray-300 leading-relaxed">
+                Para sugestões, correções ou parcerias, visite a página de <a href={`${import.meta.env.BASE_URL}contato`} class="text-blue-400 hover:text-blue-300 transition">Contato</a>.
+            </p>
+        </section>
+    </div>
+</Layout>

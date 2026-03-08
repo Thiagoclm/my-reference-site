@@ -32,4 +32,14 @@ export const articles: ArticleItem[] = [
         summary:
             'Síntese da encíclica Fides et Ratio, que propõe a fé e a razão como caminhos complementares para buscar a verdade, rejeitando relativismo e ceticismo.',
     },
+    {
+        title: '35+ crateras da Lua com nomes de cientistas jesuítas',
+        subtitle: 'A presença histórica da Companhia de Jesus na astronomia lunar',
+        author: 'O Católico Cientista',
+        image: 'assets/clavius-crater.jpg',
+        link: 'crateras-lunares-jesuitas',
+        tags: ['Astronomia'],
+        summary:
+            'Síntese da tradição científica jesuíta na astronomia e das crateras lunares que homenageiam esses pesquisadores.',
+    },
 ];
