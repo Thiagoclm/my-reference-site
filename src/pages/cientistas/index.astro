@@ -1,28 +1,10 @@
 ---
 import Layout from '../../layouts/Base.astro';
+import { scientists } from '../../data/scientists';
 
 const base = import.meta.env.BASE_URL;
 const pageDescription = 'Perfis de cientistas católicos e pioneiros que contribuíram para a ciência e para a educação.';
-
-const scientists = [
-    {
-        name: 'Irmã Mary Kenneth Keller',
-        subtitle: 'Primeira mulher a obter um PhD em Ciência da Computação nos EUA (1965)',
-        summary:
-            'Religiosa católica e pioneira da computação na educação, Irmã Mary Kenneth Keller ajudou a ampliar o acesso ao conhecimento tecnológico e fundou um departamento de ciência da computação em uma universidade católica.',
-        image: 'assets/sister-mary-kenneth-keller.jpg',
-        link: 'cientistas/sister-mary-kenneth-keller',
-        tags: ['Computação', 'Educação', 'Pioneira']
-    },
-    {
-        name: 'Fr. Georges Lemaître',
-        subtitle: 'Perfil em preparação',
-        summary:
-            'Estamos preparando um perfil completo sobre o sacerdote e físico belga Georges Lemaître, conhecido por formular a hipótese do “átomo primordial”, base para o desenvolvimento da teoria do Big Bang.',
-        image: 'assets/cover-example.jpg',
-        tags: ['Cosmologia', 'Sacerdote', 'Em breve']
-    }
-];
+const uniqueTags = [...new Set(scientists.flatMap((scientist) => scientist.tags))].sort((a, b) => a.localeCompare(b));
 ---
 
 <Layout title="Cientistas — Perfis e Legado" description={pageDescription}>
@@ -37,9 +19,39 @@ const scientists = [
             </p>
         </div>
 
-        <div class="space-y-8 mb-16">
+        <section class="bg-gray-900 border border-gray-800 rounded-xl p-6 mb-8">
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-4">
+                <h2 class="text-lg font-bold text-white">Filtrar por Tags</h2>
+                <p id="scientist-filter-count" class="text-sm text-gray-400">Mostrando {scientists.length} de {scientists.length}</p>
+            </div>
+            <div class="flex flex-wrap gap-2" id="scientist-filters">
+                <button
+                    type="button"
+                    class="scientist-filter-btn bg-blue-600 text-white px-3 py-1.5 rounded-full text-sm font-semibold"
+                    data-tag="all"
+                    aria-pressed="true"
+                >
+                    Todos
+                </button>
+                {uniqueTags.map((tag) => (
+                    <button
+                        type="button"
+                        class="scientist-filter-btn bg-gray-800 text-gray-300 px-3 py-1.5 rounded-full text-sm font-semibold hover:bg-gray-700 transition"
+                        data-tag={tag.toLowerCase()}
+                        aria-pressed="false"
+                    >
+                        {tag}
+                    </button>
+                ))}
+            </div>
+        </section>
+
+        <div class="space-y-8 mb-16" id="scientist-list">
             {scientists.map((scientist) => (
-                <article class="bg-gray-900 border border-gray-800 rounded-xl overflow-hidden hover:border-gray-700 transition group">
+                <article
+                    class="scientist-item bg-gray-900 border border-gray-800 rounded-xl overflow-hidden hover:border-gray-700 transition group"
+                    data-tags={scientist.tags.map((tag) => tag.toLowerCase()).join('|')}
+                >
                     <div class="grid grid-cols-1 md:grid-cols-4 gap-0">
                         <div class="md:col-span-1">
                             {scientist.link ? (
@@ -106,5 +118,57 @@ const scientists = [
                 </article>
             ))}
         </div>
+        <p id="no-scientist-results" class="hidden text-gray-400 text-center mb-12">Nenhum cientista encontrado para este filtro.</p>
     </div>
 </Layout>
+
+<script>
+    const filterButtons = Array.from(document.querySelectorAll('.scientist-filter-btn'));
+    const scientistItems = Array.from(document.querySelectorAll('.scientist-item'));
+    const filterCount = document.getElementById('scientist-filter-count');
+    const noResults = document.getElementById('no-scientist-results');
+
+    const setActiveButton = (selectedTag) => {
+        filterButtons.forEach((button) => {
+            const isActive = button.getAttribute('data-tag') === selectedTag;
+            button.setAttribute('aria-pressed', String(isActive));
+
+            if (isActive) {
+                button.classList.remove('bg-gray-800', 'text-gray-300', 'hover:bg-gray-700');
+                button.classList.add('bg-blue-600', 'text-white');
+                return;
+            }
+
+            button.classList.remove('bg-blue-600', 'text-white');
+            button.classList.add('bg-gray-800', 'text-gray-300', 'hover:bg-gray-700');
+        });
+    };
+
+    const applyFilter = (selectedTag) => {
+        let visibleCount = 0;
+
+        scientistItems.forEach((scientist) => {
+            const tagList = (scientist.getAttribute('data-tags') || '').split('|').filter(Boolean);
+            const shouldShow = selectedTag === 'all' || tagList.includes(selectedTag);
+
+            scientist.classList.toggle('hidden', !shouldShow);
+            if (shouldShow) visibleCount += 1;
+        });
+
+        if (filterCount) {
+            filterCount.textContent = `Mostrando ${visibleCount} de ${scientistItems.length}`;
+        }
+
+        if (noResults) {
+            noResults.classList.toggle('hidden', visibleCount !== 0);
+        }
+    };
+
+    filterButtons.forEach((button) => {
+        button.addEventListener('click', () => {
+            const selectedTag = button.getAttribute('data-tag') || 'all';
+            setActiveButton(selectedTag);
+            applyFilter(selectedTag);
+        });
+    });
+</script>

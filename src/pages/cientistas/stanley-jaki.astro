@@ -1,0 +1,164 @@
+---
+import Layout from '../../layouts/Base.astro';
+import { getEstimatedReadingTimeLabel } from '../../lib/reading-time';
+import SocialShare from '../../components/SocialShare.astro';
+
+const base = import.meta.env.BASE_URL;
+const profileMeta = {
+    layoutTitle: 'Padre Stanley Jaki — Física, Filosofia e Fé Cristã',
+    headingTitle: 'Padre Stanley Jaki',
+    subtitle: 'Monge beneditino, físico e historiador da ciência (1924–2009)',
+    description: 'Conheça a trajetória de Padre Stanley Jaki, sacerdote católico com doutorados em teologia e física, conhecido por sua reflexão sobre os limites da ciência e sua relação com a fé.',
+    readingSource: `
+Stanley Jaki nasceu em 1924, na Hungria, e ingressou na Ordem de São Bento durante a juventude.
+Foi ordenado sacerdote, estudou filosofia e teologia em profundidade e concluiu doutorado em teologia em Roma.
+Depois, obteve doutorado em física na Fordham University, sob orientação de Victor Hess, Nobel de Física.
+Essa dupla formação permitiu que articulasse com rigor temas na fronteira entre cosmologia, história da ciência e filosofia.
+Em Seton Hall University, consolidou carreira docente e produziu dezenas de livros influentes ao longo de várias décadas.
+Entre suas obras mais conhecidas estão The Relevance of Physics, Science and Creation e God and the Cosmologists.
+Jaki argumentava que teorias científicas amplas têm limites epistemológicos e não sustentam, por si, pretensões totalizantes.
+Sua crítica ao cientificismo vinha acompanhada de defesa firme da autonomia metodológica da ciência experimental.
+Ao mesmo tempo, insistia na legitimidade de questões filosóficas e teológicas sobre fundamento, inteligibilidade e sentido.
+Recebeu o Templeton Prize em 1987, foi membro da Pontifícia Academia de Ciências e segue referência no diálogo fé-razão.
+`,
+};
+
+const profileReadTime = getEstimatedReadingTimeLabel(profileMeta.readingSource);
+const shareUrl = Astro.url.href;
+---
+
+<Layout title={profileMeta.layoutTitle} description={profileMeta.description}>
+    <div class="max-w-4xl mx-auto">
+        <div class="mb-12">
+            <div class="inline-block mb-6">
+                <h2 class="text-sm font-bold text-blue-400 uppercase tracking-wider">Cientista</h2>
+            </div>
+            <h1 class="text-4xl md:text-5xl font-serif font-bold text-white mb-4">{profileMeta.headingTitle}</h1>
+            <p class="text-2xl text-gray-300 font-serif italic mb-6">{profileMeta.subtitle}</p>
+            <div class="flex items-center gap-4 text-sm text-gray-400 flex-wrap">
+                <span>Física e Filosofia da Ciência</span>
+                <span class="text-gray-600">•</span>
+                <span>Templeton Prize (1987)</span>
+                <span class="text-gray-600">•</span>
+                <span>{profileReadTime}</span>
+            </div>
+        </div>
+
+        <div class="mb-12 rounded-xl overflow-hidden border border-gray-800">
+            <img
+                src={`${base}assets/stanley-jaki.jpg`}
+                alt="Padre Stanley Jaki"
+                class="w-full object-cover bg-gray-950"
+            />
+            <div class="bg-gray-900 px-6 py-3 border-t border-gray-800">
+                <p class="text-gray-500 text-xs italic">
+                    Padre Stanley Jaki em 2007 (imagem derivada de arquivo do Wikimedia Commons).
+                </p>
+            </div>
+        </div>
+
+        <article class="prose-custom space-y-10">
+            <section>
+                <h2 class="text-2xl font-serif font-bold text-white mb-4">Formação entre mosteiro, teologia e física</h2>
+                <div class="space-y-4 text-gray-300 leading-relaxed">
+                    <p>
+                        Stanley Ladislas Jaki nasceu em Győr, na Hungria, em 1924. Entrou na Ordem de São Bento em 1942 e foi ordenado sacerdote em 1948. Sua trajetória acadêmica incluiu formação sólida em filosofia, teologia e matemática.
+                    </p>
+                    <p>
+                        Obteve doutorado em teologia no Pontifício Ateneu de Santo Anselmo (Roma) e, posteriormente, doutorado em física na Fordham University, onde estudou sob orientação de Victor Hess, Nobel de Física e cocriador da pesquisa sobre raios cósmicos.
+                    </p>
+                    <p>
+                        Essa combinação de formação humanística e científica marcou toda a sua produção. Em vez de tratar fé e ciência como blocos isolados, Jaki procurou compreender como cada disciplina contribui para uma visão intelectualmente coerente da realidade.
+                    </p>
+                </div>
+            </section>
+
+            <section>
+                <h2 class="text-2xl font-serif font-bold text-white mb-4">Produção intelectual e diálogo fé-ciência</h2>
+                <div class="space-y-4 text-gray-300 leading-relaxed">
+                    <p>
+                        Jaki foi professor em Seton Hall University e autor de dezenas de livros sobre cosmologia, história da ciência, epistemologia e teologia natural. Entre suas obras de maior impacto estão <em>The Relevance of Physics</em>, <em>Science and Creation</em> e <em>God and the Cosmologists</em>.
+                    </p>
+                    <p>
+                        Sua abordagem não buscava reduzir uma área à outra: ele argumentava que a ciência possui autonomia metodológica, mas também limites internos, o que abre espaço para uma reflexão filosófica mais ampla sobre verdade, racionalidade e sentido.
+                    </p>
+                    <p>
+                        Outro aspecto relevante de sua obra é a leitura histórica da ciência ocidental, com atenção ao papel de tradições intelectuais cristãs na formação de uma ideia de universo ordenado e inteligível. Mesmo quando contestado, seu trabalho permaneceu influente por enfrentar questões de fundamento pouco discutidas no debate técnico cotidiano.
+                    </p>
+                </div>
+            </section>
+
+            <div class="bg-blue-900 border border-blue-800 p-6 rounded-lg">
+                <h3 class="text-xl font-serif font-bold text-white mb-4">✦ Limites de teorias totalizantes</h3>
+                <div class="space-y-4 text-gray-200 leading-relaxed">
+                    <p>
+                        Um tema recorrente em Jaki é que a própria estrutura lógica de teorias matemáticas impede pretensões simplistas de completude absoluta. Com isso, ele criticou leituras cientificistas e insistiu na necessidade de humildade epistemológica.
+                    </p>
+                    <p>
+                        Para ele, reconhecer limites não enfraquece a ciência: ao contrário, protege seu método e evita extrapolações indevidas. Essa perspectiva ajudou a qualificar discussões sobre teorias finais e sobre o estatuto filosófico da cosmologia.
+                    </p>
+                </div>
+            </div>
+
+            <section>
+                <h2 class="text-2xl font-serif font-bold text-white mb-4">Reconhecimento internacional</h2>
+                <div class="space-y-4 text-gray-300 leading-relaxed">
+                    <p>
+                        Em 1987, recebeu o Templeton Prize, um dos principais reconhecimentos internacionais para contribuições ao diálogo entre ciência e religião. Também atuou como conferencista em instituições de destaque, incluindo as Gifford Lectures.
+                    </p>
+                    <p>
+                        Em 1990, foi nomeado para a Pontifícia Academia de Ciências. Até o fim da vida, manteve intensa atividade intelectual, com conferências e publicações em várias áreas fronteiriças entre física, filosofia e teologia.
+                    </p>
+                    <p>
+                        Sua presença em fóruns acadêmicos de alto nível, somada à produção escrita contínua, fez de Jaki uma referência singular para pesquisadores interessados em integrar história da ciência, fundamentos epistemológicos e tradição filosófica clássica.
+                    </p>
+                </div>
+            </section>
+
+            <section class="bg-gray-900 border border-gray-800 rounded-lg p-8">
+                <h2 class="text-2xl font-serif font-bold text-white mb-4">Legado</h2>
+                <div class="space-y-4 text-gray-300 leading-relaxed">
+                    <p>
+                        Padre Stanley Jaki permanece referência para quem deseja pensar a ciência sem reducionismos, valorizando simultaneamente método experimental, coerência filosófica e visão teológica do real.
+                    </p>
+                    <p>
+                        Seu legado reforça que fé e razão podem dialogar de forma intelectualmente exigente, sem confundir os planos, mas também sem isolá-los artificialmente.
+                    </p>
+                    <p>
+                        Em um contexto cultural marcado por polarizações, sua obra continua relevante por oferecer uma via de diálogo exigente: respeitar a autonomia da ciência, reconhecer seus limites e manter abertas as perguntas filosóficas sobre verdade e significado.
+                    </p>
+                </div>
+            </section>
+        </article>
+
+        <div class="mt-12 pt-8 border-t border-gray-800 space-y-2">
+            <p class="text-gray-500 text-sm">Fontes confiáveis:</p>
+            <ul class="space-y-1 text-sm">
+                <li>
+                    <a href="https://www.pas.va/en/academicians/deceased/jaki.html" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:text-blue-300 transition">
+                        Pontifícia Academia de Ciências — Stanley L. Jaki, OSB
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.shu.edu/physics/jaki.html" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:text-blue-300 transition">
+                        Seton Hall University — Father Stanley L. Jaki, O.S.B.
+                    </a>
+                </li>
+                <li>
+                    <a href="https://en.wikipedia.org/wiki/Stanley_Jaki" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:text-blue-300 transition">
+                        Wikipédia (en) — Stanley Jaki
+                    </a>
+                </li>
+                <li>
+                    <a href="https://commons.wikimedia.org/wiki/File:Father_Jaki_June_2007.jpg" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:text-blue-300 transition">
+                        Imagem utilizada no perfil (Wikimedia Commons)
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="mt-8">
+            <SocialShare title={profileMeta.layoutTitle} url={shareUrl} />
+        </div>
+    </div>
+</Layout>

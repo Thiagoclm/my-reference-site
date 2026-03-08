@@ -2,10 +2,12 @@ import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
 import { articles } from '../data/articles';
+import { scientists } from '../data/scientists';
 
 export type BrowseEntry = {
     title: string;
     slug: string;
+    href: string;
     summary: string;
     cover: string;
     tags: string[];
@@ -61,6 +63,7 @@ export const getBrowseEntries = (): BrowseEntry[] => {
         return {
             title: data.title || path.basename(file, '.md'),
             slug: path.basename(file, '.md'),
+            href: `recurso/${path.basename(file, '.md')}`,
             summary: data.summary || '',
             cover: data.cover || '',
             tags: Array.isArray(data.tags) ? data.tags : [],
@@ -72,6 +75,7 @@ export const getBrowseEntries = (): BrowseEntry[] => {
     const articleEntries: BrowseEntry[] = articles.map((article) => ({
         title: article.title,
         slug: article.link,
+        href: `artigos/${article.link}`,
         summary: article.summary,
         cover: article.image,
         tags: article.tags,
@@ -79,7 +83,18 @@ export const getBrowseEntries = (): BrowseEntry[] => {
         subcategory: 'estudos',
     }));
 
-    return [...markdownEntries, ...articleEntries];
+    const scientistEntries: BrowseEntry[] = scientists.map((scientist) => ({
+        title: scientist.name,
+        slug: scientist.link.split('/').pop() || scientist.link,
+        href: scientist.link,
+        summary: scientist.summary,
+        cover: scientist.image,
+        tags: scientist.tags,
+        category: 'cientistas',
+        subcategory: 'perfis',
+    }));
+
+    return [...markdownEntries, ...articleEntries, ...scientistEntries];
 };
 
 export const getCategoryGroups = (): BrowseGroup[] => {

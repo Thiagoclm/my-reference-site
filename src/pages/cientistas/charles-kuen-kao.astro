@@ -1,0 +1,174 @@
+---
+import Layout from '../../layouts/Base.astro';
+import { getEstimatedReadingTimeLabel } from '../../lib/reading-time';
+import SocialShare from '../../components/SocialShare.astro';
+
+const base = import.meta.env.BASE_URL;
+const profileMeta = {
+    layoutTitle: 'Sir Charles Kuen Kao — O Pai da Fibra Óptica',
+    headingTitle: 'Sir Charles Kuen Kao',
+    subtitle: 'Engenheiro e físico (1933–2018), Nobel de Física por revolucionar as telecomunicações',
+    description: 'Conheça a trajetória de Sir Charles Kuen Kao, cientista católico conhecido como pai da comunicação por fibra óptica e laureado com o Nobel de Física em 2009.',
+    readingSource: `
+Sir Charles Kuen Kao nasceu em 1933, em Xangai, e teve formação escolar em Hong Kong antes de seguir para o Reino Unido.
+Estudou engenharia elétrica e iniciou pesquisa em comunicações ópticas quando a transmissão de longa distância por luz era considerada inviável.
+Nos anos 1960, demonstrou que a alta perda de sinal em fibras era causada sobretudo por impurezas no vidro, e não por limites físicos incontornáveis.
+A partir dessa conclusão, indicou que fibras de sílica de alta pureza poderiam alcançar baixíssima atenuação e viabilizar redes ópticas extensas.
+Seu trabalho foi decisivo para a criação da base material da internet moderna, da telefonia global e dos cabos submarinos de alta capacidade.
+Além da pesquisa fundamental, atuou em liderança acadêmica e tecnológica, contribuindo para a transição entre descoberta científica e aplicação industrial.
+Em 2009, recebeu o Nobel de Física por contribuições pioneiras à transmissão de luz em fibras para comunicação óptica.
+Também recebeu diversas honrarias internacionais e foi nomeado cavaleiro por seus serviços à engenharia de telecomunicações.
+Convertido ao catolicismo ainda jovem, via a busca científica como parte de uma vocação maior de serviço humano.
+Mesmo diante da fama, foi descrito como pesquisador humilde, perseverante e comprometido com o bem comum.
+`,
+};
+
+const profileReadTime = getEstimatedReadingTimeLabel(profileMeta.readingSource);
+const shareUrl = Astro.url.href;
+---
+
+<Layout title={profileMeta.layoutTitle} description={profileMeta.description}>
+    <div class="max-w-4xl mx-auto">
+        <div class="mb-12">
+            <div class="inline-block mb-6">
+                <h2 class="text-sm font-bold text-blue-400 uppercase tracking-wider">Cientista</h2>
+            </div>
+            <h1 class="text-4xl md:text-5xl font-serif font-bold text-white mb-4">{profileMeta.headingTitle}</h1>
+            <p class="text-2xl text-gray-300 font-serif italic mb-6">{profileMeta.subtitle}</p>
+            <div class="flex items-center gap-4 text-sm text-gray-400 flex-wrap">
+                <span>Fibras Ópticas e Telecomunicações</span>
+                <span class="text-gray-600">•</span>
+                <span>Nobel de Física (2009)</span>
+                <span class="text-gray-600">•</span>
+                <span>{profileReadTime}</span>
+            </div>
+        </div>
+
+        <div class="mb-12 rounded-xl overflow-hidden border border-gray-800">
+            <img
+                src={`${base}assets/charles-kuen-kao.jpg`}
+                alt="Sir Charles Kuen Kao"
+                class="w-full object-cover bg-gray-950"
+            />
+            <div class="bg-gray-900 px-6 py-3 border-t border-gray-800">
+                <p class="text-gray-500 text-xs italic">
+                    Sir Charles Kuen Kao em retrato histórico (imagem da Society of Catholic Scientists, com crédito ao Wikimedia Commons).
+                </p>
+            </div>
+        </div>
+
+        <article class="prose-custom space-y-10">
+            <section>
+                <h2 class="text-2xl font-serif font-bold text-white mb-4">Formação e início de carreira</h2>
+                <div class="space-y-4 text-gray-300 leading-relaxed">
+                    <p>
+                        Charles Kuen Kao nasceu em Xangai, em 1933, e mudou-se para Hong Kong ainda adolescente. Concluiu o ensino médio no St. Joseph’s College, instituição católica que marcou profundamente sua formação pessoal e religiosa.
+                    </p>
+                    <p>
+                        Depois, seguiu para o Reino Unido, onde estudou engenharia elétrica e desenvolveu sua carreira inicial em pesquisa. Seu ambiente acadêmico combinava matemática aplicada, física e engenharia de comunicações.
+                    </p>
+                    <p>
+                        Essa trajetória multicultural — entre China, Hong Kong, Reino Unido e posteriormente Estados Unidos — contribuiu para um perfil intelectual aberto à cooperação internacional. Kao se destacou por unir visão de longo prazo com atenção aos detalhes técnicos que tornam uma teoria realmente aplicável.
+                    </p>
+                </div>
+            </section>
+
+            <section>
+                <h2 class="text-2xl font-serif font-bold text-white mb-4">A descoberta que mudou as telecomunicações</h2>
+                <div class="space-y-4 text-gray-300 leading-relaxed">
+                    <p>
+                        Na década de 1960, enquanto trabalhava no Standard Telecommunication Laboratories (Harlow, Reino Unido), Kao enfrentou um problema central: os sinais luminosos se perdiam muito rapidamente nas fibras disponíveis na época.
+                    </p>
+                    <p>
+                        Sua contribuição decisiva foi demonstrar que essa atenuação extrema não era uma barreira física inevitável, mas consequência de impurezas no vidro. Em outras palavras, com material de alta pureza seria possível transmitir luz por longas distâncias.
+                    </p>
+                    <p>
+                        Essa visão abriu uma corrida tecnológica para fabricar fibras de sílica ultra puras e lançou os fundamentos da comunicação óptica moderna, base técnica da internet de alta velocidade e de redes globais de dados.
+                    </p>
+                    <p>
+                        Um ponto técnico marcante de sua proposta foi indicar limiares de atenuação que tornariam o sistema economicamente viável em escala real. Essa combinação entre teoria física, engenharia de materiais e análise de viabilidade prática foi crucial para acelerar a adoção industrial da fibra óptica.
+                    </p>
+                </div>
+            </section>
+
+            <section>
+                <h2 class="text-2xl font-serif font-bold text-white mb-4">Da pesquisa à infraestrutura global</h2>
+                <div class="space-y-4 text-gray-300 leading-relaxed">
+                    <p>
+                        A contribuição de Kao não se limitou à formulação inicial. Ele também teve papel relevante na difusão técnica da área, no diálogo com laboratórios e fabricantes e na consolidação de uma visão de futuro para redes ópticas de grande capacidade.
+                    </p>
+                    <p>
+                        Com a evolução tecnológica, o princípio que ele ajudou a estabelecer tornou-se o núcleo das redes contemporâneas: links de backbone, conexões internacionais e cabos submarinos que conectam continentes e sustentam serviços digitais em tempo real.
+                    </p>
+                </div>
+            </section>
+
+            <div class="bg-blue-900 border border-blue-800 p-6 rounded-lg">
+                <h3 class="text-xl font-serif font-bold text-white mb-4">✦ Um legado presente no cotidiano</h3>
+                <p class="text-gray-200 leading-relaxed">
+                    Das chamadas internacionais aos cabos submarinos e ao tráfego de dados da web, a infraestrutura digital contemporânea depende diretamente da ideia de Kao de usar fibras ópticas de baixíssima perda para comunicação em grande escala.
+                </p>
+            </div>
+
+            <section>
+                <h2 class="text-2xl font-serif font-bold text-white mb-4">Reconhecimento internacional</h2>
+                <div class="space-y-4 text-gray-300 leading-relaxed">
+                    <p>
+                        Em 2009, recebeu o Nobel de Física por “realizações inovadoras relativas à transmissão de luz em fibras para comunicação óptica”. Também recebeu diversas outras distinções e foi posteriormente nomeado cavaleiro pela Rainha Elizabeth II.
+                    </p>
+                    <p>
+                        A comunidade científica passou a reconhecê-lo amplamente como “pai da fibra óptica”, título que expressa o impacto estrutural de suas contribuições na engenharia e na sociedade.
+                    </p>
+                    <p>
+                        Esse reconhecimento internacional reflete não apenas uma descoberta pontual, mas uma transformação duradoura da infraestrutura tecnológica do mundo. A obra de Kao é exemplo de ciência que atravessa laboratório, indústria e vida cotidiana em escala planetária.
+                    </p>
+                </div>
+            </section>
+
+            <section class="bg-gray-900 border border-gray-800 rounded-lg p-8">
+                <h2 class="text-2xl font-serif font-bold text-white mb-4">Fé e vida pessoal</h2>
+                <div class="space-y-4 text-gray-300 leading-relaxed">
+                    <p>
+                        Segundo relatos biográficos, Kao se converteu ao catolicismo ainda jovem, influenciado pelo ambiente escolar e por grupos católicos universitários. Ele descreveu essa experiência como parte importante de sua formação interior.
+                    </p>
+                    <p>
+                        Mesmo após alcançar fama mundial, foi lembrado como uma pessoa humilde, discreta e acessível — traços que reforçam o testemunho de serviço ao bem comum por meio da ciência.
+                    </p>
+                    <p>
+                        Nos últimos anos de vida, enfrentou a doença de Alzheimer, e sua família também atuou na conscientização pública sobre o tema. Essa dimensão humana de sua história amplia seu legado: excelência científica, sim, mas sempre ligada à dignidade da pessoa e ao cuidado com os mais frágeis.
+                    </p>
+                </div>
+            </section>
+        </article>
+
+        <div class="mt-12 pt-8 border-t border-gray-800 space-y-2">
+            <p class="text-gray-500 text-sm">Fontes confiáveis:</p>
+            <ul class="space-y-1 text-sm">
+                <li>
+                    <a href="https://catholicscientists.org/scientists-of-the-past/sir-charles-kuen-kao/" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:text-blue-300 transition">
+                        Society of Catholic Scientists — Sir Charles Kuen Kao
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.nobelprize.org/prizes/physics/2009/kao/facts/" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:text-blue-300 transition">
+                        Nobel Prize — Charles K. Kao (Facts)
+                    </a>
+                </li>
+                <li>
+                    <a href="https://en.wikipedia.org/wiki/Charles_K._Kao" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:text-blue-300 transition">
+                        Wikipédia (en) — Charles K. Kao
+                    </a>
+                </li>
+                <li>
+                    <a href="https://commons.wikimedia.org/wiki/File:Charles_K._Kao_cropped_2.jpg" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:text-blue-300 transition">
+                        Imagem utilizada no perfil (Wikimedia Commons)
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="mt-8">
+            <SocialShare title={profileMeta.layoutTitle} url={shareUrl} />
+        </div>
+    </div>
+</Layout>

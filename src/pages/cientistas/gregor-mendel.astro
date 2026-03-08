@@ -1,0 +1,171 @@
+---
+import Layout from '../../layouts/Base.astro';
+import { getEstimatedReadingTimeLabel } from '../../lib/reading-time';
+import SocialShare from '../../components/SocialShare.astro';
+
+const base = import.meta.env.BASE_URL;
+const profileMeta = {
+    layoutTitle: 'Gregor Mendel — O Monge que Fundou a Genética Moderna',
+    headingTitle: 'Gregor Mendel',
+    subtitle: 'Monge agostiniano e cientista (1822–1884), fundador da genética clássica',
+    description: 'Conheça a vida e o legado de Gregor Mendel, religioso católico que formulou as leis fundamentais da hereditariedade a partir de experimentos com ervilhas.',
+    readingSource: `
+Gregor Mendel nasceu em 1822 e ingressou na Ordem de Santo Agostinho em Brno, ambiente que oferecia condições para estudo sério da natureza.
+No mosteiro, conciliou vida religiosa, docência e investigação científica com rara disciplina experimental.
+Entre 1856 e 1863, conduziu milhares de cruzamentos de ervilhas para analisar padrões de herança de características.
+Seu método envolveu escolha criteriosa de traços, contagem sistemática de descendentes e comparação quantitativa entre gerações.
+A partir desses dados, formulou princípios hoje chamados Lei da Segregação e Lei da Distribuição Independente.
+Publicou os resultados em 1866, mas não obteve reconhecimento imediato na comunidade científica de sua época.
+Somente no início do século XX, com a redescoberta de seus textos, sua prioridade histórica foi reconhecida amplamente.
+Desde então, Mendel é considerado fundador da genética clássica e referência de método científico aplicado à biologia.
+Além dos experimentos com ervilhas, também se dedicou a meteorologia, apicultura e atividades administrativas como abade.
+Seu legado mostra que fé, paciência intelectual e rigor empírico podem formar uma síntese fecunda para a ciência.
+`,
+};
+
+const profileReadTime = getEstimatedReadingTimeLabel(profileMeta.readingSource);
+const shareUrl = Astro.url.href;
+---
+
+<Layout title={profileMeta.layoutTitle} description={profileMeta.description}>
+    <div class="max-w-4xl mx-auto">
+        <div class="mb-12">
+            <div class="inline-block mb-6">
+                <h2 class="text-sm font-bold text-blue-400 uppercase tracking-wider">Cientista</h2>
+            </div>
+            <h1 class="text-4xl md:text-5xl font-serif font-bold text-white mb-4">{profileMeta.headingTitle}</h1>
+            <p class="text-2xl text-gray-300 font-serif italic mb-6">{profileMeta.subtitle}</p>
+            <div class="flex items-center gap-4 text-sm text-gray-400 flex-wrap">
+                <span>Genética e Biologia</span>
+                <span class="text-gray-600">•</span>
+                <span>Leis da Hereditariedade</span>
+                <span class="text-gray-600">•</span>
+                <span>{profileReadTime}</span>
+            </div>
+        </div>
+
+        <div class="mb-12 rounded-xl overflow-hidden border border-gray-800">
+            <img
+                src={`${base}assets/gregor-mendel.jpg`}
+                alt="Gregor Mendel"
+                class="w-full object-cover bg-gray-950"
+            />
+            <div class="bg-gray-900 px-6 py-3 border-t border-gray-800">
+                <p class="text-gray-500 text-xs italic">
+                    Retrato histórico de Gregor Mendel (imagem utilizada pela Society of Catholic Scientists).
+                </p>
+            </div>
+        </div>
+
+        <article class="prose-custom space-y-10">
+            <section>
+                <h2 class="text-2xl font-serif font-bold text-white mb-4">Vocação religiosa e formação científica</h2>
+                <div class="space-y-4 text-gray-300 leading-relaxed">
+                    <p>
+                        Nascido em 1822, em uma região então pertencente ao Império Austríaco, Mendel entrou para o mosteiro agostiniano de São Tomás, em Brno, adotando o nome Gregor. O ambiente monástico oferecia biblioteca, jardim experimental e uma cultura intelectual que favorecia a investigação científica.
+                    </p>
+                    <p>
+                        Além da formação teológica, ele estudou ciências naturais e matemática, incluindo período na Universidade de Viena. Essa combinação de observação empírica e rigor quantitativo seria decisiva para a qualidade de seus experimentos.
+                    </p>
+                    <p>
+                        Para um jovem de origem rural e recursos limitados, a vida monástica representou também acesso estável a formação e pesquisa. Nesse sentido, sua história mostra como instituições educativas e religiosas podem criar condições concretas para inovação científica de longo prazo.
+                    </p>
+                </div>
+            </section>
+
+            <section>
+                <h2 class="text-2xl font-serif font-bold text-white mb-4">Os experimentos com ervilhas</h2>
+                <div class="space-y-4 text-gray-300 leading-relaxed">
+                    <p>
+                        Entre 1856 e 1863, Mendel conduziu milhares de cruzamentos controlados de <em>Pisum sativum</em>, analisando sete características observáveis das plantas. Ele escolheu traços que podiam ser distinguidos com clareza e realizou contagens sistemáticas em gerações sucessivas.
+                    </p>
+                    <p>
+                        A partir dos resultados, descreveu padrões numéricos estáveis de transmissão hereditária e formulou princípios hoje ensinados em toda introdução à genética: a segregação dos fatores hereditários e a distribuição independente entre diferentes características.
+                    </p>
+                    <p>
+                        O aspecto mais inovador de seu trabalho foi a combinação entre biologia experimental e raciocínio quantitativo. Em vez de depender apenas de descrições qualitativas, Mendel tratou os resultados como séries comparáveis e testáveis, antecipando práticas que se tornariam padrão na genética moderna.
+                    </p>
+                </div>
+            </section>
+
+            <section>
+                <h2 class="text-2xl font-serif font-bold text-white mb-4">Além das ervilhas: ciência cotidiana no mosteiro</h2>
+                <div class="space-y-4 text-gray-300 leading-relaxed">
+                    <p>
+                        Mendel não se limitou à hereditariedade vegetal. Ele também se interessou por meteorologia e por práticas de apicultura, mostrando curiosidade ampla sobre fenômenos naturais e atenção às aplicações práticas do conhecimento.
+                    </p>
+                    <p>
+                        Quando assumiu responsabilidades administrativas como abade, teve menos tempo para pesquisa contínua, mas permaneceu uma referência intelectual no ambiente local. Essa fase reforça o caráter integral de sua vocação: cientista, educador e religioso.
+                    </p>
+                </div>
+            </section>
+
+            <div class="bg-blue-900 border border-blue-800 p-6 rounded-lg">
+                <h3 class="text-xl font-serif font-bold text-white mb-4">✦ Método e humildade intelectual</h3>
+                <p class="text-gray-200 leading-relaxed">
+                    Mendel não buscava fama. Seu trabalho nasce de anos de observação paciente, registros consistentes e disposição para deixar os dados falarem. Essa postura continua sendo referência para a boa prática científica.
+                </p>
+            </div>
+
+            <section>
+                <h2 class="text-2xl font-serif font-bold text-white mb-4">Reconhecimento tardio e impacto duradouro</h2>
+                <div class="space-y-4 text-gray-300 leading-relaxed">
+                    <p>
+                        Quando apresentou seus resultados em 1865 e os publicou em 1866, sua descoberta não recebeu a atenção merecida. Apenas por volta de 1900, pesquisadores europeus redescobriram seus textos e reconheceram sua prioridade.
+                    </p>
+                    <p>
+                        Desde então, Mendel passou a ser considerado o “pai da genética”. Seu legado sustenta áreas como melhoramento genético, medicina molecular, biotecnologia e pesquisa biomédica contemporânea.
+                    </p>
+                    <p>
+                        A redescoberta de sua obra foi decisiva para integrar estudos de herança ao desenvolvimento da biologia evolutiva no século XX. O impacto de suas ideias ultrapassou a botânica e se tornou base para práticas científicas e tecnológicas em escala global.
+                    </p>
+                </div>
+            </section>
+
+            <section class="bg-gray-900 border border-gray-800 rounded-lg p-8">
+                <h2 class="text-2xl font-serif font-bold text-white mb-4">Fé e razão no mesmo horizonte</h2>
+                <div class="space-y-4 text-gray-300 leading-relaxed">
+                    <p>
+                        A vida de Mendel mostra que o trabalho científico de alto nível pode florescer em um contexto religioso autêntico. Sua história contradiz a ideia de oposição necessária entre fé cristã e investigação racional.
+                    </p>
+                    <p>
+                        Ele permanece como exemplo de pesquisador que uniu vida espiritual, educação e busca paciente pela verdade da natureza.
+                    </p>
+                    <p>
+                        Mais do que um ícone histórico, Mendel continua inspirando uma ética da pesquisa baseada em precisão, honestidade com os dados e abertura à complexidade do real — virtudes científicas profundamente compatíveis com uma visão cristã da verdade.
+                    </p>
+                </div>
+            </section>
+        </article>
+
+        <div class="mt-12 pt-8 border-t border-gray-800 space-y-2">
+            <p class="text-gray-500 text-sm">Fontes confiáveis:</p>
+            <ul class="space-y-1 text-sm">
+                <li>
+                    <a href="https://catholicscientists.org/scientists-of-the-past/gregor-mendel/" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:text-blue-300 transition">
+                        Society of Catholic Scientists — Gregor Mendel
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.britannica.com/biography/Gregor-Mendel" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:text-blue-300 transition">
+                        Encyclopaedia Britannica — Gregor Mendel
+                    </a>
+                </li>
+                <li>
+                    <a href="https://en.wikipedia.org/wiki/Gregor_Mendel" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:text-blue-300 transition">
+                        Wikipédia (en) — Gregor Mendel
+                    </a>
+                </li>
+                <li>
+                    <a href="https://catholicscientists.org/content/uploads/2022/03/Mendel.jpg" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:text-blue-300 transition">
+                        Imagem utilizada no perfil (Society of Catholic Scientists)
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="mt-8">
+            <SocialShare title={profileMeta.layoutTitle} url={shareUrl} />
+        </div>
+    </div>
+</Layout>

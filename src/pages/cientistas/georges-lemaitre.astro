@@ -1,0 +1,169 @@
+---
+import Layout from '../../layouts/Base.astro';
+import { getEstimatedReadingTimeLabel } from '../../lib/reading-time';
+import SocialShare from '../../components/SocialShare.astro';
+
+const base = import.meta.env.BASE_URL;
+const profileMeta = {
+    layoutTitle: 'Padre Georges Lemaître — Fé, Razão e Cosmologia Moderna',
+    headingTitle: 'Padre Georges Lemaître',
+    subtitle: 'Sacerdote católico e físico belga (1894–1966), pioneiro da teoria do universo em expansão',
+    description: 'Conheça a vida e a contribuição científica de Georges Lemaître, sacerdote católico que formulou a hipótese do átomo primordial, base da cosmologia moderna.',
+    readingSource: `
+Georges Lemaître foi sacerdote católico, matemático e físico belga, uma das figuras centrais da cosmologia do século XX.
+Nascido em 1894, viveu a tensão entre grandes transformações históricas e avanços científicos que mudaram a compreensão do universo.
+Após formação em Louvain, Cambridge e MIT, desenvolveu forte domínio da relatividade geral e da matemática aplicada à cosmologia.
+Em 1927, publicou um modelo de universo em expansão, relacionando recessão das galáxias e estrutura dinâmica do cosmos.
+Em 1931, apresentou a hipótese do átomo primordial, base conceitual do que mais tarde ficaria conhecido como teoria do Big Bang.
+Também antecipou a relação entre distância e velocidade de afastamento das galáxias, hoje reconhecida na nomenclatura Hubble–Lemaître.
+Além de suas contribuições técnicas, destacou-se por sua lucidez filosófica ao distinguir método científico e linguagem teológica.
+Lemaître rejeitava o uso apologético simplista de teorias físicas e defendia a autonomia de cada campo do saber.
+Seu pensamento ajudou a consolidar uma tradição intelectual em que fé e razão não competem, mas dialogam com rigor.
+O legado de Lemaître permanece vivo em pesquisas contemporâneas sobre origem e evolução do universo.
+`,
+};
+
+const profileReadTime = getEstimatedReadingTimeLabel(profileMeta.readingSource);
+const shareUrl = Astro.url.href;
+---
+
+<Layout title={profileMeta.layoutTitle} description={profileMeta.description}>
+    <div class="max-w-4xl mx-auto">
+        <div class="mb-12">
+            <div class="inline-block mb-6">
+                <h2 class="text-sm font-bold text-blue-400 uppercase tracking-wider">Cientista</h2>
+            </div>
+            <h1 class="text-4xl md:text-5xl font-serif font-bold text-white mb-4">{profileMeta.headingTitle}</h1>
+            <p class="text-2xl text-gray-300 font-serif italic mb-6">{profileMeta.subtitle}</p>
+            <div class="flex items-center gap-4 text-sm text-gray-400 flex-wrap">
+                <span>Cosmologia e Relatividade</span>
+                <span class="text-gray-600">•</span>
+                <span>Big Bang (Átomo Primordial)</span>
+                <span class="text-gray-600">•</span>
+                <span>{profileReadTime}</span>
+            </div>
+        </div>
+
+        <div class="mb-12 rounded-xl overflow-hidden border border-gray-800">
+            <img
+                src={`${base}assets/georges-lemaitre.jpg`}
+                alt="Padre Georges Lemaître"
+                class="w-full object-cover bg-gray-950"
+            />
+            <div class="bg-gray-900 px-6 py-3 border-t border-gray-800">
+                <p class="text-gray-500 text-xs italic">
+                    Georges Lemaître em retrato histórico (imagem usada pela Society of Catholic Scientists, com referência ao Wikimedia Commons).
+                </p>
+            </div>
+        </div>
+
+        <article class="prose-custom space-y-10">
+            <section>
+                <h2 class="text-2xl font-serif font-bold text-white mb-4">Quem foi Georges Lemaître</h2>
+                <div class="space-y-4 text-gray-300 leading-relaxed">
+                    <p>
+                        Georges Henri Joseph Édouard Lemaître nasceu na Bélgica, em 1894. Foi sacerdote católico, matemático e físico teórico, com formação acadêmica sólida em Louvain, Cambridge e no MIT.
+                    </p>
+                    <p>
+                        Ordenado padre em 1923, ele desenvolveu sua pesquisa científica com alto rigor, tornando-se uma das figuras mais importantes da cosmologia do século XX.
+                    </p>
+                    <p>
+                        Sua biografia também é marcada pelo contexto europeu do início do século XX, incluindo os efeitos da Primeira Guerra Mundial. Esse cenário reforçou nele a busca por uma compreensão racional e ordenada da realidade, sem reduzir as perguntas últimas a respostas simplistas.
+                    </p>
+                </div>
+            </section>
+
+            <section>
+                <h2 class="text-2xl font-serif font-bold text-white mb-4">Universo em expansão e o “átomo primordial”</h2>
+                <div class="space-y-4 text-gray-300 leading-relaxed">
+                    <p>
+                        Em 1927, Lemaître publicou um modelo relativístico no qual o universo está em expansão. Ele também calculou a relação entre distância e velocidade de recessão das galáxias, resultado que mais tarde ficaria popularmente associado ao nome de Hubble.
+                    </p>
+                    <p>
+                        Em 1931, propôs a hipótese do “átomo primordial”: a ideia de que o universo teve um início físico em um estado extremamente denso e quente. Essa formulação está na base do que hoje chamamos de teoria do Big Bang.
+                    </p>
+                    <p>
+                        À época, essas ideias não eram consenso. Lemaître precisou defender suas conclusões com argumentação matemática robusta e diálogo constante com a comunidade internacional, contribuindo para mudar gradualmente o horizonte da cosmologia teórica.
+                    </p>
+                </div>
+            </section>
+
+            <section>
+                <h2 class="text-2xl font-serif font-bold text-white mb-4">Rigor acadêmico e reconhecimento histórico</h2>
+                <div class="space-y-4 text-gray-300 leading-relaxed">
+                    <p>
+                        Lemaître teve formação internacional e transitou entre ambientes científicos de alto nível, o que fortaleceu a recepção técnica de suas ideias. Seu trabalho foi levado a sério por parte relevante da comunidade científica, mesmo quando as implicações cosmológicas ainda eram debatidas.
+                    </p>
+                    <p>
+                        Ao longo do tempo, historiadores da ciência reconheceram de forma mais clara a prioridade de suas contribuições para a expansão do universo. Esse processo culminou, entre outros marcos, no uso da designação “Hubble–Lemaître”.
+                    </p>
+                    <p>
+                        Ele também teve papel importante em evitar leituras indevidas de suas teorias em contextos religiosos, insistindo que uma hipótese cosmológica não deve ser confundida com demonstração teológica. Essa posição continua exemplar para o debate contemporâneo entre ciência, filosofia e fé.
+                    </p>
+                </div>
+            </section>
+
+            <div class="bg-blue-900 border border-blue-800 p-6 rounded-lg">
+                <h3 class="text-xl font-serif font-bold text-white mb-4">✦ Fé e ciência com métodos próprios</h3>
+                <p class="text-gray-200 leading-relaxed">
+                    Lemaître insistia que não se deve usar uma teoria científica como “prova” teológica. Para ele, ciência e fé são compatíveis, mas cada uma tem método, linguagem e campo de competência próprios.
+                </p>
+            </div>
+
+            <section>
+                <h2 class="text-2xl font-serif font-bold text-white mb-4">Legado para a cosmologia moderna</h2>
+                <div class="space-y-4 text-gray-300 leading-relaxed">
+                    <p>
+                        O reconhecimento histórico da contribuição de Lemaître cresceu ao longo do tempo. Em 2018, a União Astronômica Internacional recomendou que a chamada “Lei de Hubble” fosse nomeada “Lei de Hubble–Lemaître”.
+                    </p>
+                    <p>
+                        Hoje, ele é lembrado como um dos grandes exemplos de síntese entre vida intelectual profunda, humildade sacerdotal e serviço à verdade. Sua trajetória segue inspirando pesquisadores que rejeitam falsos conflitos entre investigação científica e fé cristã.
+                    </p>
+                    <p>
+                        Em cursos de cosmologia, história da ciência e filosofia da natureza, Lemaître é cada vez mais estudado como autor completo: matemático rigoroso, cientista criativo e pensador prudente quanto aos limites e alcances de cada discurso sobre o real.
+                    </p>
+                </div>
+            </section>
+        </article>
+
+        <div class="mt-12 pt-8 border-t border-gray-800 space-y-2">
+            <p class="text-gray-500 text-sm">Fontes confiáveis:</p>
+            <ul class="space-y-1 text-sm">
+                <li>
+                    <a href="https://catholicscientists.org/scientists-of-the-past/georges-lemaitre/" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:text-blue-300 transition">
+                        Society of Catholic Scientists — Georges Lemaître
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.catholicscientists.org/idea/monsignor-georges-lemaitre-originator-of-big-bang-theory" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:text-blue-300 transition">
+                        Society of Catholic Scientists — Monsignor Georges Lemaître: Originator of Big Bang Theory
+                    </a>
+                </li>
+                <li>
+                    <a href="https://pt.wikipedia.org/wiki/Georges_Lema%C3%AEtre" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:text-blue-300 transition">
+                        Wikipédia (pt-BR) — Georges Lemaître
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.britannica.com/biography/Georges-Lemaitre" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:text-blue-300 transition">
+                        Encyclopaedia Britannica — Georges Lemaître
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.pas.va/en/academicians/deceased/lemaitre.html" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:text-blue-300 transition">
+                        Pontifícia Academia de Ciências — Georges Lemaître
+                    </a>
+                </li>
+                <li>
+                    <a href="https://catholicscientists.org/content/uploads/2022/03/Lemaitre-2.jpg" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:text-blue-300 transition">
+                        Imagem utilizada no perfil (Society of Catholic Scientists)
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="mt-8">
+            <SocialShare title={profileMeta.layoutTitle} url={shareUrl} />
+        </div>
+    </div>
+</Layout>
