@@ -4,13 +4,14 @@ import { getEstimatedReadingTimeLabel } from '../../lib/reading-time';
 
 const base = import.meta.env.BASE_URL;
 const bookMeta = {
-    layoutTitle: 'A Fé Católica — Recomendação de Livro',
-    headingTitle: 'A Fé Católica',
-    subtitle: 'Manual completo da doutrina da Igreja',
-    description: 'Resenha de A Fé Católica, de Peter Kreeft, com visão geral da estrutura da obra e sua utilidade para formação doutrinal.',
+    layoutTitle: 'Castelo Interior — Recomendação de Livro',
+    headingTitle: 'Castelo Interior',
+    subtitle: 'As moradas da alma no caminho da união com Deus',
+    description: 'Resenha de Castelo Interior, de Santa Teresa d\'Ávila, clássico da espiritualidade cristã sobre oração e vida interior.',
     readingSource: `
-A Fé Católica. Manual completo da doutrina da Igreja.
-Sobre o Livro. Estrutura Doutrinal. Aplicação pastoral.
+Castelo Interior. As moradas da alma no caminho da união com Deus.
+Sobre o Livro. As Sete Moradas. Vida de oração.
+Importância para a espiritualidade católica.
 `,
 };
 
@@ -34,21 +35,21 @@ const bookReadTime = getEstimatedReadingTimeLabel(bookMeta.readingSource);
             <div class="md:col-span-1">
                 <div class="bg-gray-900 rounded-lg overflow-hidden border border-gray-800 sticky top-8">
                     <img
-                        src={`${base}assets/fe-catolica.jpg`}
-                        alt="A Fé Católica — Peter Kreeft"
+                        src={`${base}assets/castelo-interior.jpg`}
+                        alt="Castelo Interior — Santa Teresa d'Ávila"
                         class="w-full aspect-[3/4] object-cover"
                     />
                     <div class="p-6">
                         <div class="mb-6">
-                            <p class="text-sm text-gray-400 mb-2">Autor</p>
-                            <p class="text-lg font-semibold text-white">Peter Kreeft</p>
+                            <p class="text-sm text-gray-400 mb-2">Autora</p>
+                            <p class="text-lg font-semibold text-white">Santa Teresa d'Ávila</p>
                         </div>
                         <div class="mb-6">
                             <p class="text-sm text-gray-400 mb-2">Categoria</p>
-                            <p class="text-white">Doutrina / Apologética</p>
+                            <p class="text-white">Espiritualidade / Mística</p>
                         </div>
                         <a
-                            href="https://play.google.com/store/books/details?id=KgqhEQAAQBAJ"
+                            href="https://play.google.com/store/books/details?id=XRBEEQAAQBAJ"
                             target="_blank"
                             rel="noopener noreferrer"
                             class="w-full bg-blue-600 text-white px-4 py-3 rounded-lg font-semibold hover:bg-blue-700 transition block text-center"
@@ -66,7 +67,7 @@ const bookReadTime = getEstimatedReadingTimeLabel(bookMeta.readingSource);
                     <p class="text-sm text-gray-500 mb-6">{bookReadTime}</p>
                     <div class="border-l-4 border-blue-400 pl-6 py-4 bg-gray-900 rounded-r-lg">
                         <p class="text-gray-200 text-lg italic">
-                            Uma apresentação clara e sistemática da fé católica para quem deseja compreender, ensinar e viver a doutrina da Igreja.
+                            A alma é como um castelo de diamante, com muitas moradas, e Deus chama cada pessoa a entrar mais profundamente em Sua presença.
                         </p>
                     </div>
                 </div>
@@ -75,36 +76,36 @@ const bookReadTime = getEstimatedReadingTimeLabel(bookMeta.readingSource);
                     <h2 class="text-2xl font-serif font-bold text-white mb-4">Sobre o Livro</h2>
                     <div class="space-y-4 text-gray-300 leading-relaxed">
                         <p>
-                            <strong>A Fé Católica</strong>, de Peter Kreeft, organiza os principais conteúdos da doutrina cristã com linguagem acessível e estrutura pedagógica. É um livro indicado tanto para iniciantes quanto para leitores que desejam revisão sólida dos fundamentos da fé.
+                            <strong>Castelo Interior</strong> (também conhecido como <em>As Moradas</em>) é uma das obras mais importantes da espiritualidade católica. Santa Teresa descreve a vida interior como um percurso de aprofundamento na oração, da conversão inicial até a união íntima com Deus.
                         </p>
                         <p>
-                            A obra percorre os grandes pilares da formação católica: credo, sacramentos, moral e oração, articulando teologia, filosofia e vida prática.
+                            Com linguagem simbólica e ao mesmo tempo prática, a santa mostra os desafios e as graças de cada etapa da vida espiritual, oferecendo orientação segura para quem deseja crescer na oração e no amor de Deus.
                         </p>
                         <p>
-                            Por seu caráter didático, o livro também se torna útil em catequese de adultos, grupos de estudo, formação paroquial e preparo pessoal para apologética.
+                            A obra continua sendo leitura essencial para formação espiritual, direção de oração e aprofundamento da tradição mística cristã.
                         </p>
                     </div>
                 </section>
 
                 <section class="bg-blue-900 border border-blue-800 p-6 rounded-lg mb-10">
-                    <h2 class="text-xl font-serif font-bold text-white mb-4">✦ O que você encontra</h2>
+                    <h2 class="text-xl font-serif font-bold text-white mb-4">✦ Temas Centrais</h2>
                     <ul class="space-y-3 text-gray-200">
-                        <li class="flex items-start"><span class="text-blue-400 mr-3 mt-1">•</span><span>Resumo completo dos artigos da fé</span></li>
-                        <li class="flex items-start"><span class="text-blue-400 mr-3 mt-1">•</span><span>Explicação objetiva dos sacramentos</span></li>
-                        <li class="flex items-start"><span class="text-blue-400 mr-3 mt-1">•</span><span>Fundamentos da moral cristã</span></li>
-                        <li class="flex items-start"><span class="text-blue-400 mr-3 mt-1">•</span><span>Roteiro de oração e vida espiritual</span></li>
-                        <li class="flex items-start"><span class="text-blue-400 mr-3 mt-1">•</span><span>Base útil para evangelização e diálogo</span></li>
+                        <li class="flex items-start"><span class="text-blue-400 mr-3 mt-1">•</span><span>As sete moradas da alma</span></li>
+                        <li class="flex items-start"><span class="text-blue-400 mr-3 mt-1">•</span><span>Discernimento espiritual e humildade</span></li>
+                        <li class="flex items-start"><span class="text-blue-400 mr-3 mt-1">•</span><span>Oração mental e contemplação</span></li>
+                        <li class="flex items-start"><span class="text-blue-400 mr-3 mt-1">•</span><span>Purificação interior e virtudes cristãs</span></li>
+                        <li class="flex items-start"><span class="text-blue-400 mr-3 mt-1">•</span><span>União transformante com Deus</span></li>
                     </ul>
                 </section>
 
                 <section class="mb-10">
-                    <h2 class="text-2xl font-serif font-bold text-white mb-4">Para quem é recomendado</h2>
+                    <h2 class="text-2xl font-serif font-bold text-white mb-4">Por que ler hoje</h2>
                     <div class="space-y-4 text-gray-300 leading-relaxed">
                         <p>
-                            Este livro é especialmente útil para quem está retomando a fé, para catequistas e para leitores que desejam uma visão ampla e organizada da doutrina católica sem abrir mão de profundidade.
+                            Em um contexto de distração constante, <strong>Castelo Interior</strong> convida à vida recolhida, à escuta de Deus e à maturidade espiritual. É uma leitura exigente, mas profundamente frutífera para quem busca santidade concreta no cotidiano.
                         </p>
                         <p>
-                            Também é um bom complemento para quem já lê documentos do Magistério e quer uma síntese clara para estudo contínuo.
+                            A obra ilumina tanto iniciantes quanto leitores mais experientes, porque une profundidade teológica, experiência prática de oração e linguagem acessível.
                         </p>
                     </div>
                 </section>
